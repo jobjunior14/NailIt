@@ -15,9 +15,9 @@ import ContentDisplay from "./contentsDisplay";
 SplashScreen.preventAutoHideAsync();
 
 interface PublicationProps {
-  className: string;
+  screen: "service" | "product";
 }
-export default function Publication({ className }: PublicationProps) {
+export default function Publication({ screen }: PublicationProps) {
   //diplay or  details
   const [seeMore, setSeeMore] = useState<boolean>(false);
   //font loader
@@ -117,7 +117,7 @@ export default function Publication({ className }: PublicationProps) {
       </View>
 
       {/* image or video content  */}
-      <ContentDisplay />
+      <ContentDisplay screen={screen} />
     </View>
   );
 }

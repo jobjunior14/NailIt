@@ -13,8 +13,8 @@ const ProductScreen: any = ({ route }: categorieProps) => {
     >
       <ProfilPresentation custom="flex-row justify-between items-center w-full mx-2 mt-4" />
 
-      {/* no className used  */}
-      <Publication className="flex-row justify-between items-center w-full mx-2 mt-4" />
+      {/* no className used, it provide but not used in the component cause of nativewind compiler  */}
+      <Publication screen="product" />
     </ScrollView>
   );
 };

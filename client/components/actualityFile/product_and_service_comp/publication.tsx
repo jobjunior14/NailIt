@@ -3,9 +3,7 @@ import {
   Text,
   Image,
   View,
-  TouchableHighlight,
   TouchableOpacity,
-  TouchableHighlightBase,
   TouchableNativeFeedback,
 } from "react-native";
 import { useFonts } from "expo-font";

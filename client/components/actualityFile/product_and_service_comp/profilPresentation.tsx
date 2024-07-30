@@ -85,14 +85,14 @@ export default function ProfilPresentation({
           onPress={handleLinkBtn}
           className="w-[25%] flex justify-center items-center pr-3"
         >
-          <View className="h-[3vh] w-[20vw] flex justify-center items-center border border-mainBlack rounded-full">
+          <View className="h-[2.6vh] w-[18vw] flex justify-center items-center border border-mainBlack rounded-full">
             <View className=" flex-row items-center justify-stretch">
               <Plus
                 className={`w-5 h-5 ${
                   linkBtn ? "" : "rotate-45"
                 }  text-mainBlack`}
               />
-              <Text className=" text-mainBlack">
+              <Text className=" text-mainBlack text-[12px]">
                 {linkBtn ? "Lier" : "Délier"}
               </Text>
             </View>

@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Image, View, Dimensions, StyleSheet, ScrollView } from "react-native";
+import {
+  Image,
+  View,
+  Dimensions,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+  Text,
+} from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { man1, man2, man3 } from "@/constants/image";
@@ -9,12 +17,9 @@ import ProgressBar from "./ProgressBar";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function DailyPlucation() {
+export default function DailyPlublication() {
   const content = [
     { type: "image", source: man1 },
-    { type: "image", source: man2 },
-    { type: "image", source: man2 },
-    { type: "image", source: man2 },
     { type: "image", source: man2 },
     { type: "image", source: man3 },
     { type: "video", source: video },
@@ -49,9 +54,11 @@ export default function DailyPlucation() {
   };
 
   return (
-    <View className="flex-1 flex-col mt-5">
+    <View className="flex-1 flex-col mt-5  mx-2 h-fit">
+      {/* ProgressBar to show the number of items */}
       <ProgressBar count={content.length} currentIndex={currentIndex} />
 
+      {/* the publication contents  */}
       <View style={style.container}>
         <ScrollView
           horizontal
@@ -69,7 +76,7 @@ export default function DailyPlucation() {
               key={index}
               style={{
                 width: screenWidth,
-                aspectRatio: 3 / 4,
+                aspectRatio: 4 / 4,
               }}
             >
               {item.type === "image" ? (
@@ -87,6 +94,13 @@ export default function DailyPlucation() {
             </View>
           ))}
         </ScrollView>
+
+        {/* detail about the content  */}
+        <View className="flex-row w-full justify-between absolute ">
+          <ScrollView className="w-full bg-textGray   aspect-[4/5]">
+            <Text></Text>
+          </ScrollView>
+        </View>
       </View>
     </View>
   );
@@ -98,6 +112,7 @@ const style = StyleSheet.create({
     position: "relative",
 
     overflow: "hidden",
+    marginTop: 5,
   },
   scrollView: {
     flexDirection: "row",

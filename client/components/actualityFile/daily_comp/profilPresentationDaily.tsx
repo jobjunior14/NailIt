@@ -1,10 +1,17 @@
-import { View, Image, Text, Pressable, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  Pressable,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+} from "react-native";
 import { rango } from "@/constants/image";
 import { Star, World, Plus } from "@/assets/svg/home/mySvg";
 import { useState, useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-
+import { Ellips } from "@/assets/svg/home/mySvg";
 SplashScreen.preventAutoHideAsync();
 
 export default function ProfilPresentationDaily() {
@@ -44,15 +51,17 @@ export default function ProfilPresentationDaily() {
           />
         </TouchableOpacity>
 
-        {/* name, date, categorie */}
+        {/* name, date, rating */}
         <TouchableOpacity
           activeOpacity={0.5}
           className=" flex-col gap-y-[1px] w-[70%] justify-start"
         >
+          {/* name of the profil  */}
           <View>
             <Text className=" font-interBold text-[12px]">Job Junior</Text>
           </View>
 
+          {/* elapsed time of the post and profil rating */}
           <View className="flex-row gap-x-4  items-center">
             <Text className=" text-mainBlack text-[10px] font-interRegular">
               24 minutes
@@ -71,6 +80,11 @@ export default function ProfilPresentationDaily() {
           </View>
         </TouchableOpacity>
       </View>
+
+      {/* more options */}
+      <TouchableNativeFeedback>
+        <Ellips className="w-6 h-6 text-mainBlack mr-4" />
+      </TouchableNativeFeedback>
     </View>
   );
 }

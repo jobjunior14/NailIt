@@ -15,7 +15,7 @@ const ProgressBar = ({ count, currentIndex }: ProgressBarProps) => {
           style={[
             styles.segment,
             {
-              backgroundColor: index <= currentIndex ? "blue" : "gray",
+              backgroundColor: index <= currentIndex ? "black" : "gray",
               width: `${100 / count}%`,
             },
           ]}
@@ -28,13 +28,17 @@ const ProgressBar = ({ count, currentIndex }: ProgressBarProps) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    height: 4,
+    height: 2,
     width: "100%",
     backgroundColor: "transparent",
+    opacity: 0.6,
+    rowGap: 4,
+    paddingRight: 6,
   },
   segment: {
     height: "100%",
     borderRadius: 2,
+    marginLeft: 1,
   },
 });
 

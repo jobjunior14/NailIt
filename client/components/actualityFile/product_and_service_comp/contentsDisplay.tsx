@@ -204,7 +204,7 @@ const style = StyleSheet.create({
   contenair: {
     flex: 1,
     position: "relative",
-    borderRadius: 15,
+    borderRadius: 10,
     overflow: "hidden",
   },
   scrollView: {
@@ -215,12 +215,12 @@ const style = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
-    borderRadius: 15,
+    borderRadius: 10,
   },
   video: {
     width: "100%",
     height: "100%",
-    borderRadius: 15,
+    borderRadius: 10,
   },
   labelContenairCounter: {
     position: "absolute",

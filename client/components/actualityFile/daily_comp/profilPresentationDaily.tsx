@@ -7,12 +7,7 @@ import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 
-interface ProfilPresentationPorps {
-  custom: string;
-}
-export default function ProfilPresentation({
-  custom,
-}: ProfilPresentationPorps) {
+export default function ProfilPresentationDaily() {
   const [linkBtn, setLinkBtn] = useState<boolean>(false);
   //Custom font, follow the link to see them
   const [loaded, error] = useFonts({
@@ -37,66 +32,45 @@ export default function ProfilPresentation({
     setLinkBtn((prev: boolean) => !prev);
   };
   return (
-    <View className={"flex-row justify-between items-center w-full mx-2 mt-4"}>
+    <View className={"flex-row justify-between items-center w-full mx-2 mt-2"}>
       {/* profil and publication info */}
       <View className="flex-row justify-start items-center w-[75%] gap-x-2 ">
         {/* profil image  */}
         <TouchableOpacity onPress={() => console.log("hey")}>
           <Image
-            className="w-20 h-20 rounded-full"
+            className="w-10 h-10 rounded-full"
             resizeMode="cover"
             source={rango}
           />
         </TouchableOpacity>
 
         {/* name, date, categorie */}
-        <View className=" flex-col gap-y-[1px] w-[70%]">
-          <TouchableOpacity>
-            <Text className=" font-interBold ">Job Junior</Text>
-          </TouchableOpacity>
-
-          <Text className="font-interRegular text-[13px]">
-            Make-up & Beauté & Tendance
-          </Text>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          className=" flex-col gap-y-[1px] w-[70%] justify-start"
+        >
+          <View>
+            <Text className=" font-interBold text-[12px]">Job Junior</Text>
+          </View>
 
           <View className="flex-row gap-x-4  items-center">
-            <Text className=" text-mainBlack text-[13px] font-interRegular">
+            <Text className=" text-mainBlack text-[10px] font-interRegular">
               24 minutes
             </Text>
 
+            {/* profil rating */}
             <View className="flex-row  justify-center items-center">
               <View className="flex-row justify-center items-center ">
-                <View className="w-2 h-2 mr-[2px] rounded-full bg-textGray"></View>
+                <View className="w-[6px] h-[6px] mr-[2px] rounded-full bg-textGray"></View>
                 <Star className="w-4 h-4 text-mainGray " />
-                <Text className=" text-mainBlack ml-1 text-[13px] font-interRegular">
+                <Text className=" text-mainBlack ml-1 text-[10px] font-interRegular">
                   4/5
                 </Text>
               </View>
             </View>
-
-            <World className="w-5 h-5 text-mainBlack" />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
-
-      {/* link or unlink button  */}
-      <TouchableOpacity
-        onPress={handleLinkBtn}
-        className="w-[25%] flex justify-center items-center pr-3"
-      >
-        <View className="h-[3.5vh] w-[20vw] flex justify-center items-center border border-mainBlack rounded-full">
-          <View className=" flex-row items-center justify-stretch">
-            <Plus
-              className={`w-5 h-5 ${
-                linkBtn ? "" : "rotate-45"
-              }  text-mainBlack`}
-            />
-            <Text className=" text-mainBlack">
-              {linkBtn ? "Lier" : "Délier"}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
     </View>
   );
 }

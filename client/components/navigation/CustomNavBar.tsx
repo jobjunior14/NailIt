@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Button,
+  Animated,
 } from "react-native";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -53,9 +55,31 @@ const CustomNavBar: React.FC = () => {
     "Electricite",
   ]);
 
+  //state to filter the screen categories
   const [activeCategorie, setActiveCategorie] = useState<categorieInterface>(
     {}
   );
+
+  /// annimation to hide suggestions on screen layout
+  const suggestionHeightAnnim = useRef(new Animated.Value(47)).current; // Initial height is 100
+
+  //fucntion to show the suggestions
+  const showSuggestion = () => {
+    Animated.timing(suggestionHeightAnnim, {
+      toValue: 47, // Target height
+      duration: 200, // Duration of the animation
+      useNativeDriver: false, // `false` because we're animating layout properties
+    }).start();
+  };
+
+  //function to hide the seggestion
+  const hideSuggestion = () => {
+    Animated.timing(suggestionHeightAnnim, {
+      toValue: 0, // Target height
+      duration: 200, // Duration of the animation
+      useNativeDriver: false, // `false` because we're animating layout properties
+    }).start();
+  };
 
   useEffect(() => {
     if (error) throw error;
@@ -65,6 +89,7 @@ const CustomNavBar: React.FC = () => {
     }
   }, [loaded, error]);
 
+  //use effect to load the categorie at the first rundering
   useEffect(() => {
     setActiveCategorie(handleCategorieState(false) as categorieInterface);
   }, []);
@@ -186,10 +211,16 @@ const CustomNavBar: React.FC = () => {
       </View>
 
       {/* suggestion  */}
-      <ScrollView
+      <Animated.ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ flexDirection: "row", paddingVertical: 10 }}
+        style={{
+          height: suggestionHeightAnnim,
+        }}
+        contentContainerStyle={{
+          flexDirection: "row",
+          paddingVertical: 5,
+        }}
       >
         {categories.map((li) => (
           <TouchableOpacity
@@ -214,7 +245,7 @@ const CustomNavBar: React.FC = () => {
             </View>
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </Animated.ScrollView>
     </SafeAreaView>
   );
 };

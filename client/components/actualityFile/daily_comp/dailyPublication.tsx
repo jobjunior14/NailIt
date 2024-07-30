@@ -96,10 +96,29 @@ export default function DailyPlublication() {
         </ScrollView>
 
         {/* detail about the content  */}
-        <View className="flex-row w-full justify-between absolute ">
-          <ScrollView className="w-full bg-textGray   aspect-[4/5]">
-            <Text></Text>
-          </ScrollView>
+        <View className="flex-row w-full justify-between absolute bottom-0">
+          {/* This View is for the background color with opacity */}
+          <View
+            className="w-full h-full bg-mainBlack absolute"
+            style={{ opacity: 0.8 }}
+          ></View>
+          <View className="w-full h-full px-2">
+            <ScrollView className="w-full h-full">
+              {/* price and */}
+              <View className="flex-row items-center w-[90%]">
+                <View className="flex-row items-end pb-0 gap-x-2">
+                  <Text className="font-bold text-white text-xl">9.99 $</Text>
+                  <Text className="font-light mb-[3px] text-white line-through">
+                    15.9$
+                  </Text>
+                </View>
+
+                <Text className="font-interRegular text-white text-xs pl-4 text-ellipsis">
+                  + livraison gratuite
+                </Text>
+              </View>
+            </ScrollView>
+          </View>
         </View>
       </View>
     </View>

@@ -13,6 +13,8 @@ module.exports = {
       'dailyColor': 'rgba(90, 89, 94, 0.7)',
       'dailyStatus': 'rgba(74, 77, 82, 1)',
       'mainGreen': 'rgba(90, 89, 94, 0.7)',
+      'transparentBlack': "rgba(0,0,0,0.7)",
+      'transparentBlack1': "rgba(0,0,0,0.6)",
       "white": '#ffff'
     },
     extend: {},

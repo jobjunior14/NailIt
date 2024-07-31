@@ -7,6 +7,8 @@ import {
   ScrollView,
   TextInput,
   Text,
+  TouchableOpacity,
+  Animated,
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -14,10 +16,14 @@ import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
 import { Video } from "expo-av";
 import ProgressBar from "./ProgressBar";
-
+import { ArrowUp, MapPin } from "@/assets/svg/home/mySvg";
+import ContentDetails from "./contentDetails";
 SplashScreen.preventAutoHideAsync();
 
 export default function DailyPlublication() {
+  //state to show or hide details
+  const [detailheight, setDetailHeight] = useState<number>(40);
+
   const content = [
     { type: "image", source: man1 },
     { type: "image", source: man2 },
@@ -43,10 +49,22 @@ export default function DailyPlublication() {
     return null;
   }
 
+  //handle the show or hide details text
+  const handleShowDetails = (): any => {
+    setShowDetails((prev) => !prev);
+  };
+
+  //
+  const onlayoutDetailHeight = (event: any) => {
+    const { height } = event.nativeEvent.layout;
+    setDetailHeight(height);
+  };
+
   const screenWidth: number = Dimensions.get("window").width;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const player = useRef<any>(null);
 
+  //handle the horizontal scroll
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.floor(contentOffsetX / screenWidth);
@@ -61,6 +79,7 @@ export default function DailyPlublication() {
       {/* the publication contents  */}
       <View style={style.container}>
         <ScrollView
+          onLayout={onlayoutDetailHeight}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
@@ -91,34 +110,15 @@ export default function DailyPlublication() {
                   isLooping
                 />
               )}
+
+              <ContentDetails maxHeight={detailheight} />
             </View>
           ))}
         </ScrollView>
 
-        {/* detail about the content  */}
-        <View className="flex-row w-full justify-between absolute bottom-0">
-          {/* This View is for the background color with opacity */}
-          <View
-            className="w-full h-full bg-mainBlack absolute"
-            style={{ opacity: 0.8 }}
-          ></View>
-          <View className="w-full h-full px-2">
-            <ScrollView className="w-full h-full">
-              {/* price and */}
-              <View className="flex-row items-center w-[90%]">
-                <View className="flex-row items-end pb-0 gap-x-2">
-                  <Text className="font-bold text-white text-xl">9.99 $</Text>
-                  <Text className="font-light mb-[3px] text-white line-through">
-                    15.9$
-                  </Text>
-                </View>
-
-                <Text className="font-interRegular text-white text-xs pl-4 text-ellipsis">
-                  + livraison gratuite
-                </Text>
-              </View>
-            </ScrollView>
-          </View>
+        {/* map pin  */}
+        <View className=" absolute right-1 h-7 w-7 rounded-full bg-transparentBlack1 top-1 flex-row justify-center items-center">
+          <MapPin className=" text-white w-5 h-5" />
         </View>
       </View>
     </View>

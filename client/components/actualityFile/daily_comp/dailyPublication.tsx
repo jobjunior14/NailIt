@@ -9,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   Animated,
+  TouchableNativeFeedback,
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -16,13 +17,20 @@ import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
 import { Video } from "expo-av";
 import ProgressBar from "./ProgressBar";
-import { ArrowUp, MapPin } from "@/assets/svg/home/mySvg";
+import {
+  MapPin,
+  InBoxSvg,
+  SmileEmojiSvg,
+  PaperPlanSvg,
+} from "@/assets/svg/home/mySvg";
 import ContentDetails from "./contentDetails";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function DailyPlublication() {
   //state to show or hide details
   const [detailheight, setDetailHeight] = useState<number>(40);
+  const [text, SetText] = useState<string>("");
 
   const content = [
     { type: "image", source: man1 },
@@ -49,11 +57,6 @@ export default function DailyPlublication() {
     return null;
   }
 
-  //handle the show or hide details text
-  const handleShowDetails = (): any => {
-    setShowDetails((prev) => !prev);
-  };
-
   //
   const onlayoutDetailHeight = (event: any) => {
     const { height } = event.nativeEvent.layout;
@@ -61,6 +64,7 @@ export default function DailyPlublication() {
   };
 
   const screenWidth: number = Dimensions.get("window").width;
+  const screenHeight: number = Dimensions.get("window").height;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const player = useRef<any>(null);
 
@@ -71,8 +75,10 @@ export default function DailyPlublication() {
     setCurrentIndex(index);
   };
 
+  //handle input text
+
   return (
-    <View className="flex-1 flex-col mt-5  mx-2 h-fit">
+    <View className="flex-1 flex-col mt-5  mx-2 mb-10">
       {/* ProgressBar to show the number of items */}
       <ProgressBar count={content.length} currentIndex={currentIndex} />
 
@@ -95,7 +101,7 @@ export default function DailyPlublication() {
               key={index}
               style={{
                 width: screenWidth,
-                aspectRatio: 4 / 4,
+                aspectRatio: 4 / 4.7,
               }}
             >
               {item.type === "image" ? (
@@ -116,9 +122,44 @@ export default function DailyPlublication() {
           ))}
         </ScrollView>
 
-        {/* map pin  */}
+        {/* map pin to see the place where the product or service are provide */}
         <View className=" absolute right-1 h-7 w-7 rounded-full bg-transparentBlack1 top-1 flex-row justify-center items-center">
           <MapPin className=" text-white w-5 h-5" />
+        </View>
+
+        {/* text Input  */}
+        <View className="w-full flex-row justify-between mt-5">
+          {/* text input to discuss the price  */}
+          {/* a travailler  */}
+
+          <View className="w-[85%] min-h-10 max-h-14 relative flex-row">
+            <TextInput
+              onChangeText={SetText}
+              multiline
+              keyboardType="default"
+              className=" font-interRegular w-full h-full border border-mainGray rounded-lg pl-3"
+              placeholder="Envoyer un message"
+            ></TextInput>
+
+            {/* emoji  */}
+            <View className="absolute right-0 top-2 w-8 h-8 rounded-full">
+              <TouchableNativeFeedback className="">
+                <SmileEmojiSvg className=" text-mainBlack w-6 h-6 " />
+              </TouchableNativeFeedback>
+            </View>
+          </View>
+
+          {/* send a message or add to baskette depend on a current state the input text  */}
+          <TouchableOpacity
+            activeOpacity={0.8}
+            className="h-10 w-10 bg-mainBlack rounded-full flex justify-center items-center"
+          >
+            {text === "" ? (
+              <InBoxSvg className="w-5 h-5 text-white" />
+            ) : (
+              <PaperPlanSvg className="w-5 h-5 text-white" />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
     </View>

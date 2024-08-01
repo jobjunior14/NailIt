@@ -5,11 +5,13 @@ import {
   SafeAreaView,
   TextInput,
   Text,
+  TouchableOpacity,
 } from "react-native";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
-import { Link } from "expo-router";
+import { router } from "expo-router";
+
 const logo = require("@/assets/images/adaptive-icon.png");
 import {
   BellSvg,
@@ -44,7 +46,10 @@ export default function SearchBar() {
         {/* search bar, my space and notification view  */}
         <View className=" flex-row justify-between items-center ">
           {/* my space  */}
-          <View className="relative w-[10%]">
+          <TouchableOpacity
+            onPress={() => router.push("/mySpace/home")}
+            className="relative w-[10%]"
+          >
             <MySpaceSvg className=" text-mainGray w-[10vw] h-[35px] mt-5" />
             <View className="bg-mainRed left-6 top-5 z-50 rounded-full flex justify-center items-center absolute w-[20px] h-[20px]">
               <View className="flex justify-center  items-center relative">
@@ -53,7 +58,7 @@ export default function SearchBar() {
                 </Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
 
           {/* search bar  */}
           <View className="w-[75%] pl-3 mb-2 relative">

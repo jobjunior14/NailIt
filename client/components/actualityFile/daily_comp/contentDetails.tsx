@@ -5,8 +5,12 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { ArrowUp } from "@/assets/svg/home/mySvg";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 interface ContentDetailsProps {
   maxHeight: number;
@@ -15,6 +19,24 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
   const [detailheight, setDetailHeight] = useState<number>(40);
   const detailHeightAnim = useRef(new Animated.Value(40)).current; // Initial height is 100
   const [showDetails, setShowDetails] = useState<boolean>(false);
+
+  const [loaded, error] = useFonts({
+    "Inter-Black": require("@/assets/fonts/Inter-Black.ttf"),
+    "Inter-Bold": require("@/assets/fonts/Inter-Bold.ttf"),
+    "Inter-Regular": require("@/assets/fonts/Inter-Regular.ttf"),
+    "Inter-Medium": require("@/assets/fonts/Inter-Medium.ttf"),
+    "Inter-SemiBold": require("@/assets/fonts/Inter-SemiBold.ttf"),
+  });
+
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   //handle the show or hide details text
   const handleShowDetails = (): any => {
@@ -50,7 +72,7 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
     >
       {/* the price, the advantage and the details  */}
       <View className="w-full h-full px-2">
-        <ScrollView className="w-full h-full flex-col">
+        <ScrollView nestedScrollEnabled className="w-full h-full flex-col">
           {/* price and */}
           <View className="flex-row items-center w-[90%]">
             <View className="flex-row items-end pb-0 gap-x-2">
@@ -66,7 +88,7 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
           </View>
 
           <View className={` pb-6 mt-3`}>
-            <Text className=" font-interRegular  text-white">
+            <Text className=" font-interRegular  text-white leading-5">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facere
               excepturi vero placeat quibusdam. Ad asperiores corporis, eaque
               amet fuga, eius repellat incidunt vel et nihil vero,
@@ -100,7 +122,11 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
         }}
         className=" absolute right-4 h-6 w-6 rounded-full bg-white bottom-2 flex-row justify-center items-center"
       >
-        <ArrowUp className=" text-mainBlack w-5 h-5" />
+        <ArrowUp
+          className={`${
+            showDetails ? "rotate-180" : ""
+          } text-mainBlack w-5 h-5`}
+        />
       </TouchableOpacity>
     </Animated.View>
   );

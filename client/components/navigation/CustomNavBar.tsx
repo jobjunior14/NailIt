@@ -4,20 +4,13 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  ScrollView,
-  Button,
   Animated,
 } from "react-native";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import {
-  BellSvg,
-  MySpaceSvg,
-  SearchSvg,
-  TimeSvg,
-} from "@/assets/svg/home/mySvg";
+import { TimeSvg } from "@/assets/svg/home/mySvg";
 
 type RootStackParamList = {
   Service: { categorie: string | undefined };

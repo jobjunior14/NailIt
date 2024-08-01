@@ -77,6 +77,16 @@ export default function ProfilPresentationDaily() {
                 </Text>
               </View>
             </View>
+
+            {/* //product or service  */}
+            <View className="flex-row  justify-center items-center">
+              <View className="flex-row justify-center items-center ">
+                <View className="w-[6px] h-[6px] mr-[2px] rounded-full bg-textGray"></View>
+                <Text className=" text-mainBlack ml-1 text-[10px] font-interRegular">
+                  Produit
+                </Text>
+              </View>
+            </View>
           </View>
         </TouchableOpacity>
       </View>

@@ -5,9 +5,9 @@ import { View, Text, SafeAreaView } from "react-native";
 import CustomNavBar from "../components/navigation/CustomNavBar";
 import SearchBar from "../components/navigation/searchBar";
 import { useState } from "react";
-import ServiceScreen from "./screens/serviceScreen";
-import ProductScreen from "./screens/productScreen";
-import DailyScreen from "./screens/dailyScreen";
+import ServiceScreen from "../components/screens/serviceScreen";
+import ProductScreen from "../components/screens/productScreen";
+import DailyScreen from "../components/screens/dailyScreen";
 import SeparationLine from "@/components/navigation/sepationLine";
 
 type RootStackParamList = {

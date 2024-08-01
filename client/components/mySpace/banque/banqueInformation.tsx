@@ -32,7 +32,7 @@ export default function BanqueInformation() {
   }, [loaded, error]);
 
   return (
-    <View className="flex-col">
+    <View className="flex-col bg-banqueSpaceBg rounded-lg">
       {/* profil presentation  */}
       <MySpaceProfilPresentation />
 
@@ -57,7 +57,10 @@ export default function BanqueInformation() {
       </View>
 
       {/* serapted line  */}
-      <View className="w-full bg-textGray h-[0.5px] mt-4"></View>
+      <View
+        style={{ opacity: 0.4 }}
+        className="w-full bg-textGray h-[0.5px] mt-4"
+      ></View>
 
       {/* banque's options  */}
       <View className="w-full flex-row justify-between items-center px-3 py-2 mt-4">

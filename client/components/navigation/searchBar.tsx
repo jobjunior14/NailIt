@@ -47,7 +47,8 @@ export default function SearchBar() {
         <View className=" flex-row justify-between items-center ">
           {/* my space  */}
           <TouchableOpacity
-            onPress={() => router.push("/mySpace/home")}
+            activeOpacity={0.7}
+            onPress={() => router.push("/mySpace")}
             className="relative w-[10%]"
           >
             <MySpaceSvg className=" text-mainGray w-[10vw] h-[35px] mt-5" />

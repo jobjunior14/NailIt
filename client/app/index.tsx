@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { View, SafeAreaView } from "react-native";
 import CustomNavBar from "../components/navigation/CustomNavBar";
 import SearchBar from "../components/navigation/searchBar";
@@ -9,7 +9,7 @@ import ProductScreen from "@/components/screens/productScreen";
 import ServiceScreen from "@/components/screens/serviceScreen";
 import SeparationLine from "@/components/navigation/sepationLine";
 
-const Drawer = createDrawerNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const App: React.FC = () => {
   return (
@@ -18,17 +18,23 @@ const App: React.FC = () => {
         <SearchBar />
         <CustomNavBar />
         <SeparationLine />
-        <Drawer.Navigator
-          initialRouteName="Service"
+        <Tab.Navigator
+          // initialRouteName="Service"
+          backBehavior="order"
           screenOptions={{
-            headerShown: false, // hide header if needed
-            gestureEnabled: true, // enable swipe gestures
+            swipeEnabled: false,
+            tabBarShowLabel: false,
+            tabBarStyle: {
+              height: 0,
+            },
           }}
         >
-          <Drawer.Screen name="Service" component={ServiceScreen} />
-          <Drawer.Screen name="Product" component={ProductScreen} />
-          <Drawer.Screen name="Daily" component={DailyScreen} />
-        </Drawer.Navigator>
+          <Tab.Group>
+            <Tab.Screen name="Service" component={ServiceScreen} />
+            <Tab.Screen name="Product" component={ProductScreen} />
+            <Tab.Screen name="Daily" component={DailyScreen} />
+          </Tab.Group>
+        </Tab.Navigator>
       </SafeAreaView>
     </NavigationContainer>
   );

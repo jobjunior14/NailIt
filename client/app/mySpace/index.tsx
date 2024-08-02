@@ -20,6 +20,7 @@ export default function Home() {
         </TouchableNativeFeedback>
         <Text className="text-xl font-InterSemiBold">My space</Text>
       </View>
+
       <ScrollView
         contentContainerStyle={{
           paddingTop: 20,
@@ -27,10 +28,12 @@ export default function Home() {
           flexDirection: "column",
         }}
       >
+        {/* //information about your banque account  */}
         <View className="px-3">
           <BanqueSpace />
         </View>
 
+        {/* //the items in your basket and all the historique */}
         <Basket />
       </ScrollView>
     </SafeAreaView>

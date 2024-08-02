@@ -7,12 +7,12 @@ import {
   Animated,
 } from "react-native";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { TimeSvg } from "@/assets/svg/home/mySvg";
 
-type RootStackParamList = {
+type RootDrawerParamList = {
   Service: { categorie: string | undefined };
   Product: { categorie: string | undefined };
   Daily: { categorie: string | undefined };
@@ -32,8 +32,7 @@ const CustomNavBar: React.FC = () => {
     "Inter-Medium": require("@/assets/fonts/Inter-Medium.ttf"),
   });
 
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
   const currentRoute = useNavigationState(
     (state) => state?.routes[state.index]?.name ?? "Service"
@@ -48,58 +47,45 @@ const CustomNavBar: React.FC = () => {
     "Electricite",
   ]);
 
-  //state to filter the screen categories
   const [activeCategorie, setActiveCategorie] = useState<categorieInterface>(
     {}
   );
 
-  /// annimation to hide suggestions on screen layout
-  const suggestionHeightAnnim = useRef(new Animated.Value(47)).current; // Initial height is 100
+  const suggestionHeightAnnim = useRef(new Animated.Value(47)).current;
 
-  //fucntion to show the suggestions
   const showSuggestion = () => {
     Animated.timing(suggestionHeightAnnim, {
-      toValue: 47, // Target height
-      duration: 200, // Duration of the animation
-      useNativeDriver: false, // `false` because we're animating layout properties
+      toValue: 47,
+      duration: 200,
+      useNativeDriver: false,
     }).start();
   };
 
-  //function to hide the seggestion
   const hideSuggestion = () => {
     Animated.timing(suggestionHeightAnnim, {
-      toValue: 0, // Target height
-      duration: 200, // Duration of the animation
-      useNativeDriver: false, // `false` because we're animating layout properties
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: false,
     }).start();
   };
 
   useEffect(() => {
     if (error) throw error;
-
     if (loaded) {
       SplashScreen.hideAsync();
     }
   }, [loaded, error]);
 
-  //use effect to load the categorie at the first rundering
   useEffect(() => {
     setActiveCategorie(handleCategorieState(false) as categorieInterface);
   }, []);
 
   const handleCategorieState = (index: boolean, categorie?: string): object => {
     let obj: categorieInterface = {};
-
     for (let i = 0; i < categories.length; i++) {
-      if (i === 0 && !index) {
-        obj[categories[i]] = true;
-      } else {
-        obj[categories[i]] = false;
-      }
+      obj[categories[i]] = i === 0 && !index;
     }
-
     if (categorie) obj[categorie] = true;
-
     return obj;
   };
 
@@ -107,11 +93,6 @@ const CustomNavBar: React.FC = () => {
     setActiveCategorie(handleCategorieState(true, el) as categorieInterface);
   };
 
-  if (!loaded && !error) {
-    return null;
-  }
-
-  //searche the active categorie
   const searchActiveCategorie = (obj: object): string | undefined => {
     for (const key in obj) {
       if (obj[key as keyof object] === true) {
@@ -120,13 +101,15 @@ const CustomNavBar: React.FC = () => {
     }
   };
 
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
     <SafeAreaView className="flex-col mt-14 justify-between items-center bg-white py-2 px-3">
-      {/* navBar screen */}
       <View className="flex-row justify-between items-center bg-white py-2 px-3 w-full">
-        {/* Service  */}
         <TouchableOpacity
-          className={`w-[30%] h-6  rounded-full lex justify-center items-center ${
+          className={`w-[30%] h-6 rounded-full flex justify-center items-center ${
             currentRoute === "Service"
               ? "bg-selectRed"
               : "border border-textGray"
@@ -148,7 +131,6 @@ const CustomNavBar: React.FC = () => {
           </Text>
         </TouchableOpacity>
 
-        {/* produit  */}
         <TouchableOpacity
           className={`w-[30%] h-6 rounded-full flex justify-center items-center ${
             currentRoute === "Product"
@@ -173,7 +155,6 @@ const CustomNavBar: React.FC = () => {
           </Text>
         </TouchableOpacity>
 
-        {/* daily  */}
         <TouchableOpacity
           className={`w-[30%] h-6 rounded-full flex justify-center items-center ${
             currentRoute === "Daily" ? "bg-selectRed" : "border border-textGray"
@@ -203,17 +184,11 @@ const CustomNavBar: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      {/* suggestion  */}
       <Animated.ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{
-          height: suggestionHeightAnnim,
-        }}
-        contentContainerStyle={{
-          flexDirection: "row",
-          paddingVertical: 5,
-        }}
+        style={{ height: suggestionHeightAnnim }}
+        contentContainerStyle={{ flexDirection: "row", paddingVertical: 5 }}
       >
         {categories.map((li) => (
           <TouchableOpacity
@@ -221,19 +196,19 @@ const CustomNavBar: React.FC = () => {
             className="flex-row "
             onPress={() => {
               handleCategorie(li);
-              navigation.navigate(currentRoute as keyof RootStackParamList, {
+              navigation.navigate(currentRoute as keyof RootDrawerParamList, {
                 categorie: li,
               });
             }}
           >
-            <View className=" px-2 flex-col justify-center items-center ">
-              <Text className=" font-interRegular text-[14px]">{li}</Text>
+            <View className="px-2 flex-col justify-center items-center ">
+              <Text className="font-interRegular text-[14px]">{li}</Text>
               <View
-                className={`w-full duration-200  mt-1 h-[1.5px] ${
+                className={`w-full duration-200 mt-1 h-[1.5px] ${
                   activeCategorie[li]
                     ? "bg-mainBlack translate-x-0"
-                    : " translate-x-14"
-                }  rounded-full `}
+                    : "translate-x-14"
+                } rounded-full`}
               ></View>
             </View>
           </TouchableOpacity>

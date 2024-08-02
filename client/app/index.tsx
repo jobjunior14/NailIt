@@ -1,22 +1,15 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { View, Text, SafeAreaView } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { View, SafeAreaView } from "react-native";
 import CustomNavBar from "../components/navigation/CustomNavBar";
 import SearchBar from "../components/navigation/searchBar";
-import { useState } from "react";
-import ServiceScreen from "../components/screens/serviceScreen";
-import ProductScreen from "../components/screens/productScreen";
-import DailyScreen from "../components/screens/dailyScreen";
+import DailyScreen from "@/components/screens/dailyScreen";
+import ProductScreen from "@/components/screens/productScreen";
+import ServiceScreen from "@/components/screens/serviceScreen";
 import SeparationLine from "@/components/navigation/sepationLine";
 
-type RootStackParamList = {
-  Service: { screen: string };
-  Product: { screen: string };
-  Daily: { screen: string };
-};
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Drawer = createDrawerNavigator();
 
 const App: React.FC = () => {
   return (
@@ -25,19 +18,17 @@ const App: React.FC = () => {
         <SearchBar />
         <CustomNavBar />
         <SeparationLine />
-        <Stack.Navigator
+        <Drawer.Navigator
           initialRouteName="Service"
           screenOptions={{
             headerShown: false, // hide header if needed
             gestureEnabled: true, // enable swipe gestures
-            animation: "fade",
-            animationDuration: 0,
           }}
         >
-          <Stack.Screen name="Service" component={ServiceScreen} />
-          <Stack.Screen name="Product" component={ProductScreen} />
-          <Stack.Screen name="Daily" component={DailyScreen} />
-        </Stack.Navigator>
+          <Drawer.Screen name="Service" component={ServiceScreen} />
+          <Drawer.Screen name="Product" component={ProductScreen} />
+          <Drawer.Screen name="Daily" component={DailyScreen} />
+        </Drawer.Navigator>
       </SafeAreaView>
     </NavigationContainer>
   );

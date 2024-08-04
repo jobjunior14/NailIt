@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useEffect } from "react";
 import { router } from "expo-router";
-import FontsLoader from "../FontLoader/fontLoader";
+import FontsLoader from "@/components/FontLoader/fontLoader";
 
 import { BellSvg, MySpaceSvg, SearchSvg } from "@/assets/svg/home/mySvg";
 

@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, Dimensions } from "react-native";
-import ProfilPresentation from "@/components/actualityFile/product_and_service_comp/profilPresentation";
-import ProfilPresentationDaily from "@/components/actualityFile/daily_comp/profilPresentationDaily";
-import DailyPlublication from "@/components/actualityFile/daily_comp/dailyPublication";
+import ProfilPresentation from "@/components/mainScreens/actualityFile/product_and_service_comp/profilPresentation";
+import ProfilPresentationDaily from "@/components/mainScreens/actualityFile/daily_comp/profilPresentationDaily";
+import DailyPlublication from "@/components/mainScreens/actualityFile/daily_comp/dailyPublication";
 import { useState } from "react";
 interface categorieProps {
   route: object;

@@ -2,12 +2,12 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { View, SafeAreaView } from "react-native";
-import CustomNavBar from "../components/navigation/CustomNavBar";
-import SearchBar from "../components/navigation/searchBar";
-import DailyScreen from "@/components/screens/dailyScreen";
-import ProductScreen from "@/components/screens/productScreen";
-import ServiceScreen from "@/components/screens/serviceScreen";
-import SeparationLine from "@/components/navigation/sepationLine";
+import CustomNavBar from "@/components/mainScreens/actualityFile/navigation/CustomNavBar";
+import SearchBar from "@/components/mainScreens/actualityFile/navigation/searchBar";
+import DailyScreen from "@/components/mainScreens/dailyScreen";
+import ProductScreen from "@/components/mainScreens/productScreen";
+import ServiceScreen from "@/components/mainScreens/serviceScreen";
+import SeparationLine from "@/components/mainScreens/actualityFile/navigation/sepationLine";
 
 const Tab = createMaterialTopTabNavigator();
 

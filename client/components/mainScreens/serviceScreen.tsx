@@ -1,6 +1,6 @@
 import { View, Text, ScrollView } from "react-native";
-import ProfilPresentation from "@/components/actualityFile/product_and_service_comp/profilPresentation";
-import Publication from "@/components/actualityFile/product_and_service_comp/publication";
+import ProfilPresentation from "@/components/mainScreens/actualityFile/product_and_service_comp/profilPresentation";
+import Publication from "@/components/mainScreens/actualityFile/product_and_service_comp/publication";
 interface categorieProps {
   route: object;
 }

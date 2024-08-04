@@ -9,7 +9,7 @@ import {
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { TimeSvg } from "@/assets/svg/home/mySvg";
-import FontsLoader from "../FontLoader/fontLoader";
+import FontsLoader from "@/components/FontLoader/fontLoader";
 
 type RootDrawerParamList = {
   Service: { categorie: string | undefined };

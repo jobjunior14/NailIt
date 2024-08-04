@@ -15,7 +15,7 @@ import {
   AdjustmentHorizontalSvg,
 } from "@/assets/svg/mySpace/mySpaceSvg";
 import FontsLoader from "@/components/FontLoader/fontLoader";
-import Publication from "../actualityFile/product_and_service_comp/publication";
+import Publication from "../mainScreens/actualityFile/product_and_service_comp/publication";
 
 export default function MySpaceProfilPresentation() {
   const [linkBtn, setLinkBtn] = useState<boolean>(false);

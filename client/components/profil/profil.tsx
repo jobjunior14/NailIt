@@ -4,9 +4,9 @@ import ProfilPresentationProfil from "./profilPresentationProfil";
 export default function Profil() {
   return (
     <FontsLoader>
-      <ScrollView>
+      <View className="flex-1">
         <ProfilPresentationProfil />
-      </ScrollView>
+      </View>
     </FontsLoader>
   );
 }

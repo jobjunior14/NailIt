@@ -17,9 +17,9 @@ const ProductScreen: any = ({ route }: categorieProps) => {
       className="flex-1 bg-white"
       contentContainerStyle={{ paddingBottom: 10 }}
     >
-      <ProfilPresentation screen="product" />
-
       {/* no className used, it provide but not used in the component cause of nativewind compiler  */}
+      <Publication screen="product" />
+      <Publication screen="product" />
       <Publication screen="product" />
     </ScrollView>
   );

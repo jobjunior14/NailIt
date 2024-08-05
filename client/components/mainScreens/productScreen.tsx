@@ -1,6 +1,5 @@
 import { View, Text, ScrollView } from "react-native";
-import ProfilPresentation from "@/components/mainScreens/actualityFile/product_and_service_comp/profilPresentation";
-import Publication from "@/components/mainScreens/actualityFile/product_and_service_comp/publication";
+import Publication from "./actualityFile/product_and_service_comp/publication";
 interface categorieProps {
   route: object;
 }
@@ -15,12 +14,29 @@ const ProductScreen: any = ({ route }: categorieProps) => {
       onScroll={handleScroll}
       showsVerticalScrollIndicator={false}
       className="flex-1 bg-white"
-      contentContainerStyle={{ paddingBottom: 10 }}
+      contentContainerStyle={{ paddingBottom: 10, width: "100%" }}
     >
-      {/* no className used, it provide but not used in the component cause of nativewind compiler  */}
-      <Publication screen="product" />
-      <Publication screen="product" />
-      <Publication screen="product" />
+      <View className="w-full mt-2">
+        <View className="h-fit flex-1">
+          <Publication screen="product" />
+        </View>
+
+        <View className="h-fit flex-1">
+          <Publication screen="product" />
+        </View>
+        <View className="h-fit flex-1">
+          <Publication screen="product" />
+        </View>
+        <View className="h-fit flex-1">
+          <Publication screen="product" />
+        </View>
+        <View className="h-fit flex-1">
+          <Publication screen="product" />
+        </View>
+        <View className="h-fit flex-1">
+          <Publication screen="product" />
+        </View>
+      </View>
     </ScrollView>
   );
 };

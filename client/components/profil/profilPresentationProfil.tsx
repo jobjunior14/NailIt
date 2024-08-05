@@ -191,11 +191,25 @@ export default function MySpaceProfilPresentation() {
         </View>
 
         <View className="w-full mt-2">
-          <Publication screen="service" />
-          <Publication screen="product" />
-          <Publication screen="product" />
-          <Publication screen="product" />
-          <Publication screen="service" />
+          <View className="h-fit flex-1">
+            <Publication screen="service" />
+          </View>
+
+          <View className="h-fit flex-1">
+            <Publication screen="service" />
+          </View>
+          <View className="h-fit flex-1">
+            <Publication screen="service" />
+          </View>
+          <View className="h-fit flex-1">
+            <Publication screen="service" />
+          </View>
+          <View className="h-fit flex-1">
+            <Publication screen="service" />
+          </View>
+          <View className="h-fit flex-1">
+            <Publication screen="service" />
+          </View>
         </View>
       </ScrollView>
     </FontsLoader>

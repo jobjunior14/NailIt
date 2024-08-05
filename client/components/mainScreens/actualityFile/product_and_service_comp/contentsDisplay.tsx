@@ -1,16 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import {
   Image,
   View,
   Dimensions,
   ScrollView,
   Text,
-  Button,
-  StyleSheet,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 import FontsLoader from "@/components/FontLoader/fontLoader";
-
 import { Video } from "expo-av";
 import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
@@ -34,14 +32,10 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
     { type: "video", source: video },
   ];
 
-  // getting the screen width
   const screenWidth: number = Dimensions.get("window").width;
-
-  //the state to track the current displayed picture
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const player = useRef<any>(null);
 
-  //function for updating the index tracker (the state to track the current displayed picture)
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
     const index = Math.floor(contentOffsetX / screenWidth);
@@ -50,16 +44,13 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
 
   return (
     <FontsLoader>
-      <View className="flex-1 flex-col">
-        {/* contents publicaiton's display  */}
-        <View style={style.contenair}>
-          {/*Display  Content  for product and service publicsation*/}
-          {/* depending on a type of file, video or photo  */}
+      <View style={styles.container}>
+        <View style={styles.contentContainer}>
           <ScrollView
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={style.scrollView}
+            contentContainerStyle={styles.scrollView}
             snapToInterval={screenWidth}
             snapToAlignment="center"
             onScroll={handleScroll}
@@ -67,20 +58,20 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
           >
             {content.map((item, index) => (
               <View
-                className="bg-mainBlack"
                 key={index}
                 style={{
                   width: screenWidth,
                   aspectRatio: 3 / 4,
+                  backgroundColor: "black",
                 }}
               >
                 {item.type === "image" ? (
-                  <Image source={item.source} style={style.image} />
+                  <Image source={item.source} style={styles.image} />
                 ) : (
                   <Video
                     ref={player}
                     source={item.source}
-                    style={style.video}
+                    style={styles.video}
                     useNativeControls
                     resizeMode="contain"
                     isLooping
@@ -89,56 +80,31 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
               </View>
             ))}
           </ScrollView>
-          {/* Counter */}
-          {/* label to show the number of picture  */}
-          <View style={style.labelContenairCounter}>
-            <Text className=" text-[10px] text-white font-interRegular">
+          <View style={styles.counterContainer}>
+            <Text style={styles.counterText}>
               {`${currentIndex + 1} / ${content.length}`}
             </Text>
           </View>
-          {/* test btn for video player  */}
-          {/* <Button
-          title="fullScree"
-          onPress={() => player?.current?._setFullscreen(true)}
-        />
-        <Button
-          title="mute"
-          onPress={() => player?.current?.setIsMutedAsync(false)}
-        /> */}
         </View>
-
-        {/* number of publication's views  */}
-        <View className="flex-row w-full items-center pl-1 pt-[2px] gap-x-1">
-          <View className="w-[3px] h-[3px] bg-mainBlack rounded-full"></View>
-          <Text className=" text-[10px] font-interRegular">124</Text>
-          <Text className=" text-[10px] font-interRegular text-textGray">
-            Vues
-          </Text>
+        <View style={styles.viewsContainer}>
+          <View style={styles.dot} />
+          <Text style={styles.viewsText}>124</Text>
+          <Text style={styles.viewsLabel}>Vues</Text>
         </View>
-
-        {/* validete, comment add to basket (my space) */}
-        <View className="w-full flex-row justify-between items-center mt-1">
-          {/* comment, validate and bookMark a publication  */}
-          <View className="flex-row justify-start items-center gap-x-6">
-            {/* comments  */}
-            <View className="flex-row gap-x-[2px] items-center">
-              <CommentSvg className="w-6 h-6 text-mainBlack" />
-              <Text className=" text-[14px] font-interRegular">10</Text>
+        <View style={styles.actionsContainer}>
+          <View style={styles.actionsLeft}>
+            <View style={styles.actionItem}>
+              <CommentSvg style={styles.icon} />
+              <Text style={styles.actionText}>10</Text>
             </View>
-
-            {/* Validate  */}
-            <View className="flex-row gap-x-[2px] items-center">
-              <ValidateSvg className="w-6 h-6 text-mainBlack" />
-              <Text className=" text-[14px] font-interRegular">244</Text>
+            <View style={styles.actionItem}>
+              <ValidateSvg style={styles.icon} />
+              <Text style={styles.actionText}>244</Text>
             </View>
-
-            {/* BookMark  */}
-            <View className="flex-row gap-x-[2px] items-center">
-              <BookMarkSvg className="w-6 h-6 text-mainBlack" />
+            <View style={styles.actionItem}>
+              <BookMarkSvg style={styles.icon} />
             </View>
           </View>
-
-          {/* Add to basket (my space)  */}
           {screen === "product" && (
             <TouchableOpacity
               activeOpacity={0.8}
@@ -157,8 +123,6 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
               </View>
             </TouchableOpacity>
           )}
-
-          {/* contact btn if it's a service publication  */}
           {screen === "service" && (
             <TouchableOpacity
               activeOpacity={0.8}
@@ -179,10 +143,12 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
   );
 }
 
-// if u try using the same style in nativewind it'll not work
-//so don't try to do the same thing as i do
-const style = StyleSheet.create({
-  contenair: {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  contentContainer: {
     flex: 1,
     position: "relative",
     borderRadius: 10,
@@ -203,12 +169,120 @@ const style = StyleSheet.create({
     height: "100%",
     borderRadius: 10,
   },
-  labelContenairCounter: {
+  counterContainer: {
     position: "absolute",
     bottom: 10,
     left: "50%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 4,
     borderRadius: 5,
+  },
+  counterText: {
+    color: "white",
+    fontSize: 10,
+    fontFamily: "Inter-Regular",
+  },
+  viewsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingLeft: 4,
+    paddingTop: 2,
+    gap: 1,
+  },
+  dot: {
+    width: 3,
+    height: 3,
+    backgroundColor: "black",
+    borderRadius: 1.5,
+  },
+  viewsText: {
+    fontSize: 10,
+    fontFamily: "Inter-Regular",
+  },
+  viewsLabel: {
+    fontSize: 10,
+    fontFamily: "Inter-Regular",
+    color: "gray",
+  },
+  actionsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 4,
+  },
+  actionsLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 24,
+  },
+  actionItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+  },
+  icon: {
+    width: 24,
+    height: 24,
+    color: "black",
+  },
+  actionText: {
+    fontSize: 14,
+    fontFamily: "Inter-Regular",
+  },
+  basketButton: {
+    flexDirection: "row",
+    backgroundColor: "black",
+    borderRadius: 8,
+    overflow: "hidden",
+    alignItems: "center",
+  },
+  basketContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    gap: 4,
+  },
+  basketIcon: {
+    width: 24,
+    height: 24,
+    color: "white",
+  },
+  basketText: {
+    fontSize: 14,
+    color: "white",
+    fontFamily: "Inter-Regular",
+  },
+  basketDiscount: {
+    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+  discountText: {
+    fontSize: 14,
+    color: "white",
+  },
+  contactButton: {
+    flexDirection: "row",
+    backgroundColor: "black",
+    borderRadius: 8,
+  },
+  contactContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    gap: 4,
+  },
+  contactIcon: {
+    width: 24,
+    height: 24,
+    color: "red",
+  },
+  contactText: {
+    fontSize: 14,
+    color: "white",
+    fontFamily: "Inter-Regular",
   },
 });

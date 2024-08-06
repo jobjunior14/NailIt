@@ -42,11 +42,11 @@ export default function MySpaceProfilPresentation() {
             </Text>
 
             <View className="flex-row gap-x-1  items-center">
-              <Text className=" text-textGray text-[13px] font-interRegular">
+              <Text className=" text-textGray text-[12px] font-interRegular">
                 Abonnement:
               </Text>
 
-              <Text className=" text-mainBlack text-[13px] font-interRegular">
+              <Text className=" text-mainBlack text-[12px] font-interRegular">
                 - 1 mois et 12 jours
               </Text>
             </View>

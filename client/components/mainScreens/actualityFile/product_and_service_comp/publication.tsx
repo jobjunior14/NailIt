@@ -30,7 +30,7 @@ export default function Publication({ screen }: PublicationProps) {
                 <Text className="font-bold text-mainBlack text-xl">9.99 $</Text>
                 <Text className="font-light line-through mb-1">15.9$</Text>
               </View>
-              <Text className="font-interRegular text-xs pl-4">
+              <Text className="font-interRegular text-[12px] pl-4">
                 + livraison gratuite
               </Text>
             </View>

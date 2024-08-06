@@ -108,7 +108,7 @@ export default function MySpaceProfilPresentation() {
               <Text className=" font-InterMedium ">23k</Text>
             </View>
 
-            <Text className=" text-xl text-textGray opacity-70"> | </Text>
+            <Text className=" text-[12px]l text-textGray opacity-70"> | </Text>
 
             {/* rating  */}
             <View className="flex-row items-center gap-x-1">

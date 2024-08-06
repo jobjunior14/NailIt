@@ -55,13 +55,15 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
             {/* price and */}
             <View className="flex-row items-center w-[90%]">
               <View className="flex-row items-end pb-0 gap-x-2">
-                <Text className="font-bold text-white text-xl">9.99 $</Text>
+                <Text className="font-bold text-white text-[12px]l">
+                  9.99 $
+                </Text>
                 <Text className="font-light mb-[3px] text-white line-through">
                   15.9$
                 </Text>
               </View>
 
-              <Text className="font-interRegular text-white text-xs pl-4 text-ellipsis">
+              <Text className="font-interRegular text-white text-[12px]s pl-4 text-ellipsis">
                 + livraison gratuite
               </Text>
             </View>

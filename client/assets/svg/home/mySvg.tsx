@@ -96,7 +96,7 @@ export const Ellips = (props: SvgProps) => (
   <Svg
     fill="none"
     viewBox="0 0 24 24"
-    stroke-width="1.5"
+    stroke-width="2.5"
     stroke="currentColor"
     {...props}
   >

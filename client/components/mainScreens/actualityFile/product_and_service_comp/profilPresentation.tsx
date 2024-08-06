@@ -35,15 +35,15 @@ export default function ProfilPresentation({
           {/* name, date, categorie */}
           <View className=" flex-col gap-y-[1px] w-[70%]">
             <TouchableOpacity>
-              <Text className=" font-interBold text-[14dp] ">Job Junior</Text>
+              <Text className=" font-interBold ">Job Junior</Text>
             </TouchableOpacity>
 
-            <Text className="font-interRegular text-[13px]">
+            <Text className="font-interRegular text-[12px]">
               Make-up & Beauté & Tendance
             </Text>
 
             <View className="flex-row gap-x-4  items-center">
-              <Text className=" text-mainBlack text-[13px] font-interRegular">
+              <Text className=" text-mainBlack text-[12px] font-interRegular">
                 24 minutes
               </Text>
 
@@ -51,7 +51,7 @@ export default function ProfilPresentation({
                 <View className="flex-row justify-center items-center ">
                   <View className="w-2 h-2 mr-[2px] rounded-full bg-textGray"></View>
                   <Star className="w-4 h-4 text-mainGray " />
-                  <Text className=" text-mainBlack ml-1 text-[13px] font-interRegular">
+                  <Text className=" text-mainBlack ml-1 text-[12px] font-interRegular">
                     4/5
                   </Text>
                 </View>

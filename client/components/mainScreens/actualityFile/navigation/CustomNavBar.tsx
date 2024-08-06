@@ -184,7 +184,7 @@ const CustomNavBar: React.FC = () => {
               }}
             >
               <View className="px-2 flex-col justify-center items-center ">
-                <Text className="font-interRegular text-[14px]">{li}</Text>
+                <Text className="font-interRegular text-[12px]">{li}</Text>
                 <View
                   className={`w-full duration-200 mt-1 h-[1.5px] ${
                     activeCategorie[li]

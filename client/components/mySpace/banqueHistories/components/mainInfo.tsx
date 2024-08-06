@@ -10,7 +10,7 @@ import FontsLoader from "@/components/FontLoader/fontLoader";
 
 export default function MainInfo() {
   return (
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <FontsLoader>
         <View className="w-full flex-col">
           {/* banque information  */}

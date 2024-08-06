@@ -30,7 +30,7 @@ export default function SearchBar() {
               <MySpaceSvg className=" text-mainGray w-[10vw] h-[35px] mt-5" />
               <View className="bg-mainRed left-6 top-5 z-50 rounded-full flex justify-center items-center absolute w-[20px] h-[20px]">
                 <View className="flex justify-center  items-center relative">
-                  <Text className="text-center font-interRegular text-xs relative text-white ">
+                  <Text className="text-center font-interRegular text-[10px] relative text-white ">
                     20
                   </Text>
                 </View>
@@ -52,7 +52,7 @@ export default function SearchBar() {
               <BellSvg className=" text-mainGray w-[10vw] h-[35px] mt-5" />
               <View className="bg-mainRed left-6 top-5 z-50 rounded-full flex justify-center items-center absolute w-[20px] h-[20px]">
                 <View className="flex justify-center  items-center relative">
-                  <Text className="text-center text-xs font-interRegular relative text-white ">
+                  <Text className="text-center text-[10px] font-interRegular relative text-white ">
                     12
                   </Text>
                 </View>

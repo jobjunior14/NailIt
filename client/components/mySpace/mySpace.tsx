@@ -18,7 +18,7 @@ export default function MySpace() {
         <TouchableNativeFeedback onPress={() => router.push("../")}>
           <ChevroLeftSvg className="w-6 h-6 text-mainBlack" />
         </TouchableNativeFeedback>
-        <Text className="text-xl font-InterSemiBold">My space</Text>
+        <Text className="text-[12px]l font-InterSemiBold">My space</Text>
       </View>
 
       <ScrollView

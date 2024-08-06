@@ -28,7 +28,7 @@ export default function BanqueInformation() {
             <View className="flex-col items-start justify-start">
               <Text className=" font-interRegular">Balance:</Text>
               <View className="flex-row items-center gap-x-2">
-                <Text className="font-black text-xl">22.5 $</Text>
+                <Text className="font-black text-[12px]l">22.5 $</Text>
                 <EyeSlahSvg className="w-5 h-4 text-textGray" />
               </View>
             </View>

@@ -17,7 +17,8 @@ module.exports = {
       'transparentBlack1': "rgba(0,0,0,0.6)",
       'banqueSpaceBg': "rgb(249,247,247)",
       'basketBg': "rgb(240,240,240)",
-      "white": '#ffff'
+      "white": '#ffff',
+      "green": "#2BAD7F"
     },
     extend: {},
     fontFamily: {

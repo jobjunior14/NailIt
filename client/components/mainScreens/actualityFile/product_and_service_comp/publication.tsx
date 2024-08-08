@@ -34,7 +34,13 @@ export default function Publication({ screen }: PublicationProps) {
                 + livraison gratuite
               </Text>
             </View>
-            <TouchableNativeFeedback>
+            <TouchableNativeFeedback
+              background={TouchableNativeFeedback.Ripple(
+                "rgba(0,0,0,0.1)",
+                true,
+                20
+              )}
+            >
               <Ellips className="w-5 h-5 text-mainBlack" />
             </TouchableNativeFeedback>
           </View>

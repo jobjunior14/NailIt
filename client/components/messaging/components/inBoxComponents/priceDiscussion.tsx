@@ -12,12 +12,11 @@ import {
   ChevronDownAndUp,
   ArrowLongRight,
 } from "@/assets/svg/messaging/messagingSvg";
-import { ArrowLeftSvg } from "@/assets/svg/messaging/messagingSvg";
 import { MapPin } from "@/assets/svg/home/mySvg";
 import Message from "./message";
 
 export default function PriceDiscussion() {
-  const messageHeightAnim = useRef(new Animated.Value(50)).current;
+  const messageHeightAnim = useRef(new Animated.Value(70)).current;
   const [toggleAllMessage, seToggleAllMessage] = useState<boolean>(false);
 
   //handle the show or hide details text
@@ -27,7 +26,7 @@ export default function PriceDiscussion() {
   const showAllMessageAnim = () => {
     Animated.timing(messageHeightAnim, {
       toValue: 10000, // Target height
-      duration: 1000, // Duration of the animation
+      duration: 1500, // Duration of the animation
       useNativeDriver: false, // `false` because we're animating layout properties
     }).start();
   };
@@ -35,8 +34,8 @@ export default function PriceDiscussion() {
   //function to hide the seggestion
   const hideMessageAnim = () => {
     Animated.timing(messageHeightAnim, {
-      toValue: 50, // Target height
-      duration: 1000, // Duration of the animation
+      toValue: 70, // Target height
+      duration: 500, // Duration of the animation
       useNativeDriver: false, // `false` because we're animating layout properties
     }).start();
   };
@@ -44,94 +43,103 @@ export default function PriceDiscussion() {
   return (
     <Animated.View
       style={{ maxHeight: messageHeightAnim, overflow: "hidden" }}
-      className="w-full flex-col p-1 border border-mainBlack rounded-lg"
+      className="w-full flex-col p-1 pb-4 border border-mainBlack rounded-lg mt-4"
     >
-      {/* title, toogleBtn, items, initial price  */}
-      <View className="w-full flex-col">
-        {/* //title, toogleBtn */}
-        <View className="w-full justify-between flex-row items-center">
-          {/* title  */}
-          <View className="w-90%">
-            <Text className="font-InterSemiBold text-mainBlack">
-              Bijoux en acier inoxydable
-            </Text>
+      <View className="w-full flex-col gap-y-4">
+        {/* title, toogleBtn, items, initial price  */}
+        <View className="w-full flex-col gap-y-2">
+          {/* //title, toogleBtn */}
+          <View className="w-full justify-between flex-row items-center">
+            {/* title  */}
+            <View className="w-90%">
+              <Text className="font-InterSemiBold text-mainBlack">
+                Bijoux en acier inoxydable
+              </Text>
+            </View>
+
+            {/* toggle btn  */}
+            <View className="w-[10%] flex justify-center items-center">
+              <TouchableNativeFeedback
+                background={TouchableNativeFeedback.Ripple(
+                  "rgba(0,0,0,0.1)",
+                  true,
+                  15
+                )}
+                onPress={() => {
+                  handleToggleMessage();
+
+                  !toggleAllMessage ? showAllMessageAnim() : hideMessageAnim();
+                }}
+              >
+                <ChevronDownAndUp
+                  className={` w-5 h-5 text-mainBlack ${
+                    toggleAllMessage ? "rotate-180" : ""
+                  }`}
+                />
+              </TouchableNativeFeedback>
+            </View>
           </View>
 
-          {/* toggle btn  */}
-          <View className="w-[10%] flex justify-center items-center">
-            <TouchableNativeFeedback
-              onPress={() => {
-                handleToggleMessage();
+          {/* number of items, total initial price  */}
+          <View className="flex-row w-[50%] justify-between">
+            {/* items  */}
+            <View className="flex-row gap-x-1">
+              <Text className="font-interRegular text-[12px]">Items:</Text>
+              <Text className="font-InterSemiBold text-[12px]">3</Text>
+            </View>
 
-                !toggleAllMessage ? showAllMessageAnim() : hideMessageAnim();
-              }}
-            >
-              <ChevronDownAndUp
-                className={` w-6 h-6 text-mainBlack ${
-                  toggleAllMessage ? "rotate-180" : ""
-                }`}
-              />
-            </TouchableNativeFeedback>
-          </View>
-        </View>
-
-        {/* number of items, total initial price  */}
-        <View className="flex-row w-[50%] justify-between">
-          {/* items  */}
-          <View className="flex-row">
-            <Text>Items:</Text>
-            <Text>3</Text>
-          </View>
-
-          {/* total inital price */}
-          <View className="flex-row">
-            <Text>Total:</Text>
-            <Text>3</Text>
+            {/* total inital price */}
+            <View className="flex-row gap-x-1">
+              <Text className="font-interRegular text-[12px]">Total:</Text>
+              <Text className="font-InterSemiBold text-[12px]">40$</Text>
+            </View>
           </View>
         </View>
 
         {/* // stuff about messages  */}
-        <View className="w-full"></View>
+        <View className="w-full flex-col gap-y-2">
+          <Message from_me={true} priceDiscussion={true} />
+          <Message from_me={false} priceDiscussion={true} />
+        </View>
 
         {/* // stuff about transfering the bill, payement confirmation, localisation.... */}
-        <View className="w-full flex-col">
+        <View className="w-full flex-col gap-y-4 ">
           {/* //transfering bill  */}
-          <View className="w-full justify-center items-center flex-row">
-            <Text>Transferer la facture</Text>
-            <ArrowLongRight className=" w-6 h-6 text-mainBlack" />
-          </View>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            className="w-full justify-center gap-x-2 items-center flex-row"
+          >
+            <Text className="font-interRegular">Transferer la facture</Text>
+            <ArrowLongRight className=" w-5 h-5 text-mainBlack" />
+          </TouchableOpacity>
 
-          <View className="w-full flex-row justify-between">
-            <View className="flex-col">
-              <Text className="font-interRegular">
+          {/* confirmation and advices before doing anything  */}
+          <View className="w-full flex-row justify-between pl-2 items-center">
+            <View className="flex-col gap-y-1">
+              <Text className="font-interRegular text-[10px] text-mainRed">
                 Confirmer une fois apres la reception du produit
               </Text>
               <TouchableOpacity
                 activeOpacity={0.7}
-                className="px-2 py-1 bg-mainBlack"
+                className="w-24 flex items-center justify-center rounded-full py-1 bg-mainBlack"
               >
-                <Text className=" font-InterSemiBold text-white">
-                  Confirmer
-                </Text>
+                <Text className=" font-interRegular text-white">Confirmer</Text>
               </TouchableOpacity>
             </View>
 
             {/* localisation  */}
-            <MapPin className=" w-6 h-6 text-mainBlack" />
+            <TouchableNativeFeedback
+              background={TouchableNativeFeedback.Ripple(
+                "rgba(0,0,0,0.1)",
+                true,
+                15
+              )}
+            >
+              <MapPin className=" w-5 h-5 text-mainBlack" />
+            </TouchableNativeFeedback>
           </View>
         </View>
       </View>
     </Animated.View>
   );
-}
-
-{
-  /* <Button
-  title="Press me"
-  onPress={() => {
-    handleToggleMessage();
-
-    !toggleAllMessage ? showAllMessageAnim() : hideMessageAnim();
-  }}
-></Button> */
 }

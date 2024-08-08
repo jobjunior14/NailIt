@@ -52,7 +52,7 @@ export const ChevronDownAndUp = (props: SvgProps) => (
   <Svg
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
+    strokeWidth={2}
     stroke="currentColor"
     {...props}
   >
@@ -68,7 +68,7 @@ export const ArrowLongRight = (props: SvgProps) => (
   <Svg
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
+    strokeWidth={2}
     stroke="currentColor"
     {...props}
   >

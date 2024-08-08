@@ -15,6 +15,7 @@ module.exports = {
       'mainGreen': 'rgba(90, 89, 94, 0.7)',
       'transparentBlack': "rgba(0,0,0,0.7)",
       'transparentBlack1': "rgba(0,0,0,0.6)",
+      'transpGray': "rgba(238,238,238, 1)",
       'banqueSpaceBg': "rgb(249,247,247)",
       'basketBg': "rgb(240,240,240)",
       "white": '#ffff',

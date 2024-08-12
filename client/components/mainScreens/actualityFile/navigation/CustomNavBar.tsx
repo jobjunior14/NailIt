@@ -1,11 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Animated,
-} from "react-native";
+import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { TimeSvg } from "@/assets/svg/home/mySvg";
@@ -86,7 +80,7 @@ const CustomNavBar: React.FC = () => {
 
   return (
     <FontsLoader>
-      <SafeAreaView className="flex-col mt-14 justify-between items-center bg-white py-2 px-3">
+      <View className="flex-col justify-between items-center bg-white py-2 px-3">
         <View className="flex-row justify-between items-center bg-white py-2 px-3 w-full">
           <TouchableOpacity
             className={`w-[30%] h-6 rounded-full flex justify-center items-center ${
@@ -105,7 +99,7 @@ const CustomNavBar: React.FC = () => {
                 currentRoute === "Service"
                   ? "text-textRed font-InterMedium"
                   : "text-mainBlack font-interRegular"
-              } text-center text-sm`}
+              } text-center text-[14px]`}
             >
               Service
             </Text>
@@ -129,7 +123,7 @@ const CustomNavBar: React.FC = () => {
                 currentRoute === "Product"
                   ? "text-textRed font-InterMedium"
                   : "text-mainBlack font-interRegular"
-              } text-center text-sm`}
+              } text-center text-[14px]`}
             >
               Product
             </Text>
@@ -158,7 +152,7 @@ const CustomNavBar: React.FC = () => {
                   currentRoute === "Daily"
                     ? "text-textRed font-InterMedium"
                     : "text-mainBlack font-interRegular"
-                } text-center text-sm`}
+                } text-center text-[14px]`}
               >
                 Daily
               </Text>
@@ -196,7 +190,7 @@ const CustomNavBar: React.FC = () => {
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
-      </SafeAreaView>
+      </View>
     </FontsLoader>
   );
 };

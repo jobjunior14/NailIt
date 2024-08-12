@@ -1,7 +1,7 @@
 import { SafeAreaView, ScrollView, View } from "react-native";
-import InboxHeader from "./inBoxComponents/header";
-import Message from "./inBoxComponents/message";
-import PriceDiscussion from "./inBoxComponents/priceDiscussion";
+import InboxHeader from "./header";
+import Message from "./message";
+import PriceDiscussion from "./priceDiscussion";
 import FontsLoader from "@/components/FontLoader/fontLoader";
 import InputMessage from "./inputComponent";
 

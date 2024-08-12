@@ -23,7 +23,7 @@ import {
 } from "@/assets/svg/home/mySvg";
 import ContentDetails from "./contentDetails";
 import FontsLoader from "@/components/FontLoader/fontLoader";
-import InputMessage from "@/components/messaging/components/inputComponent";
+import InputMessage from "@/components/messaging/components/inBoxComponents/inputComponent";
 
 export default function DailyPlublication() {
   // State to show or hide details

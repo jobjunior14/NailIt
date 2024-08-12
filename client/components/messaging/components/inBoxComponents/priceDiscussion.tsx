@@ -63,7 +63,7 @@ export default function PriceDiscussion() {
                 background={TouchableNativeFeedback.Ripple(
                   "rgba(0,0,0,0.1)",
                   true,
-                  15
+                  20
                 )}
                 onPress={() => {
                   handleToggleMessage();

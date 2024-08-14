@@ -9,7 +9,7 @@ const ServiceScreen: any = ({ route }: categorieProps) => {
     <ScrollView
       showsVerticalScrollIndicator={false}
       className="flex-1 bg-white"
-      contentContainerStyle={{ paddingBottom: 10 }}
+      contentContainerStyle={{ paddingBottom: 50 }}
     >
       <Publication screen="service" />
       <Publication screen="service" />

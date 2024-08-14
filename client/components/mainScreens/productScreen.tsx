@@ -14,7 +14,7 @@ const ProductScreen: any = ({ route }: categorieProps) => {
       onScroll={handleScroll}
       showsVerticalScrollIndicator={false}
       className="flex-1 bg-white"
-      contentContainerStyle={{ paddingBottom: 10, width: "100%" }}
+      contentContainerStyle={{ paddingBottom: 50, width: "100%" }}
     >
       <View className="w-full mt-2">
         <View className="h-fit flex-1">

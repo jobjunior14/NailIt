@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   counterContainer: {
     position: "absolute",
     bottom: 10,
-    left: "50%",
+    left: "46%",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     padding: 4,
     borderRadius: 5,

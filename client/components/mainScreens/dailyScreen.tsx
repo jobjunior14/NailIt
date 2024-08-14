@@ -23,7 +23,7 @@ const DailyScreen: any = ({ route }: categorieProps) => {
       // snapToInterval={dailyHeight}
       className="flex-1 bg-white"
       contentContainerStyle={{
-        paddingBottom: 10,
+        paddingBottom: 40,
         flexDirection: "column",
         justifyContent: "center",
       }}

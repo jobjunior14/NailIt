@@ -1,7 +1,13 @@
 import { View, Text, TouchableNativeFeedback, Image } from "react-native";
 import { rango } from "@/constants/image";
+import { useNavigation } from "expo-router";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+type RootDrawerParamList = {
+  inBox: { categorie: string | undefined };
+};
 
 export default function HomeMessageViewer() {
+  const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
   return (
     <View className="w-full mt-4">
       <View className="flex-row w-full">
@@ -13,7 +19,9 @@ export default function HomeMessageViewer() {
           />
         </View>
 
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback
+          onPress={() => navigation.navigate("inBox", { categorie: undefined })}
+        >
           <View className="pt-1 justify-between flex-col">
             {/* // name and status */}
             <View className="w-full justify-between flex-row">

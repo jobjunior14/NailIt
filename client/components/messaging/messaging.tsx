@@ -1,17 +1,37 @@
 import React from "react";
 import { SafeAreaView, View } from "react-native";
-import CustomNavBarMessaging from "./navigation/customNavBar";
+import CustomMessageFilter from "./navigation/customNavBar";
 import FontsLoader from "../FontLoader/fontLoader";
 import SearchBarMessaging from "./navigation/headingBarMessaging";
 import TemporaryUpdates from "./temporaryUpdates/temporaryUpdates";
+import { MotiView } from "moti";
+import HomeMessageViewer from "./components/home/homeMessageViewer";
+
 const MessagingScreen: React.FC = () => {
   return (
     <FontsLoader>
-      <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
+      <MotiView
+        from={{ transform: [{ translateX: 100 }] }}
+        animate={{ transform: [{ translateX: 0 }] }}
+        transition={{
+          loop: false,
+          type: "timing",
+          duration: 400,
+        }}
+        className="bg-white"
+        style={{ flex: 1, flexDirection: "column" }}
+      >
         <SearchBarMessaging />
-        <CustomNavBarMessaging />
+        <CustomMessageFilter />
         <TemporaryUpdates />
-      </SafeAreaView>
+
+        {/* //home shower messages  */}
+        <View className="w-full flex-col  px-3 mt-2">
+          <HomeMessageViewer />
+          <HomeMessageViewer />
+          <HomeMessageViewer />
+        </View>
+      </MotiView>
     </FontsLoader>
   );
 };

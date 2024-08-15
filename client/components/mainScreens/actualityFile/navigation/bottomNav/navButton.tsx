@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 import {
   ArrowUp1,
   HomeSvg,
@@ -8,12 +9,22 @@ import {
   PlusSvg,
   CogSvg,
 } from "@/assets/svg/home/mySvg";
+import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { MotiView } from "moti";
 import FontsLoader from "@/components/FontLoader/fontLoader";
 import { rango } from "@/constants/image";
+import useHideNavigations from "@/hooks/useHideNavigations";
 
+type RootDrawerParamList = {
+  MessagingStack: { categorie: string | undefined };
+  Service: { categorie: string | undefined };
+};
 const NavButton = () => {
   const [isOn, setIsOn] = useState<boolean>(false);
+
+  const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+
+  const currentRoute = useHideNavigations();
 
   const handleIsOn = (): any => {
     setIsOn((prev) => !prev);
@@ -22,7 +33,11 @@ const NavButton = () => {
   return (
     <FontsLoader>
       <View
-        style={{ flexDirection: "row", columnGap: 35 }}
+        style={{
+          flexDirection: "row",
+          columnGap: 35,
+          display: currentRoute ? "none" : undefined,
+        }}
         className={`w-full justify-center items-center absolute bottom-0 pb-1 pt-1 ${
           isOn ? "bg-white" : ""
         }`}
@@ -47,17 +62,24 @@ const NavButton = () => {
         {/* home  and shoppingCard*/}
         <Pressable className="flex-col h-10 items-center">
           {/* home  */}
-          <MotiView
-            style={{ elevation: 3 }}
-            from={{ transform: [{ translateY: 0 }], opacity: 1 }}
-            animate={{
-              transform: [{ translateY: isOn ? -30 : 0 }],
-              opacity: isOn ? 0 : 1,
-            }}
-            className="w-10 h-10 rounded-full flex justify-center items-center bg-mainGray"
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+              navigation.navigate("Service", { categorie: undefined })
+            }
           >
-            <HomeSvg className="w-6 h-6 text-white" />
-          </MotiView>
+            <MotiView
+              style={{ elevation: 3 }}
+              from={{ transform: [{ translateY: 0 }], opacity: 1 }}
+              animate={{
+                transform: [{ translateY: isOn ? -30 : 0 }],
+                opacity: isOn ? 0 : 1,
+              }}
+              className="w-10 h-10 rounded-full flex justify-center items-center bg-mainGray"
+            >
+              <HomeSvg className="w-6 h-6 text-white" />
+            </MotiView>
+          </TouchableOpacity>
 
           {/* shopping card  */}
           <MotiView
@@ -94,35 +116,44 @@ const NavButton = () => {
               isOn ? "border-[2px] border-white" : ""
             } justify-center items-center bg-mainGray`}
           >
-            <ArrowUp1 className="w-5 h-5 text-white" />
+            <ArrowUp1
+              className={`w-5 h-5 text-white ${isOn ? "rotate-180" : ""}`}
+            />
           </MotiView>
         </Pressable>
 
         {/* messages  and profil*/}
-        <Pressable className="flex-col h-10">
+        <View className="flex-col h-10">
           {/* // messages */}
-          <MotiView
-            style={{ elevation: 3 }}
-            from={{ transform: [{ translateY: 0 }], opacity: 1 }}
-            animate={{
-              transform: [{ translateY: isOn ? -30 : 0 }],
-              opacity: isOn ? 0 : 1,
-            }}
-            className="w-10 h-10 rounded-full flex justify-center items-center bg-mainGray"
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+              navigation.navigate("MessagingStack", { categorie: undefined })
+            }
           >
-            <ChatBubbleFillSvg
-              style={{ elevation: 10 }}
-              className="w-6 h-6  text-white"
-            />
+            <MotiView
+              style={{ elevation: 3 }}
+              from={{ transform: [{ translateY: 0 }], opacity: 1 }}
+              animate={{
+                transform: [{ translateY: isOn ? -30 : 0 }],
+                opacity: isOn ? 0 : 1,
+              }}
+              className="w-10 h-10 rounded-full flex justify-center items-center bg-mainGray"
+            >
+              <ChatBubbleFillSvg
+                style={{ elevation: 10 }}
+                className="w-6 h-6  text-white"
+              />
 
-            <View className="bg-mainRed left-5 -top-1 z-50 rounded-full flex justify-center items-center absolute w-[20px] h-[20px]">
-              <View className="flex justify-center  items-center relative">
-                <Text className="text-center font-interRegular text-[10px] relative text-white ">
-                  20
-                </Text>
+              <View className="bg-mainRed left-5 -top-1 z-50 rounded-full flex justify-center items-center absolute w-[20px] h-[20px]">
+                <View className="flex justify-center  items-center relative">
+                  <Text className="text-center font-interRegular text-[10px] relative text-white ">
+                    20
+                  </Text>
+                </View>
               </View>
-            </View>
-          </MotiView>
+            </MotiView>
+          </TouchableOpacity>
 
           {/* profil  */}
           <MotiView
@@ -148,7 +179,7 @@ const NavButton = () => {
               <Text className="text-[8px]">Profil</Text>
             </View>
           </MotiView>
-        </Pressable>
+        </View>
 
         {/* publier  */}
         <Pressable className={`${isOn ? "" : "hidden"} flex-col items-center`}>

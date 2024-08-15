@@ -4,6 +4,7 @@ import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { TimeSvg } from "@/assets/svg/home/mySvg";
 import FontsLoader from "@/components/FontLoader/fontLoader";
+import useHideNavigations from "@/hooks/useHideNavigations";
 
 type RootDrawerParamList = {
   Service: { categorie: string | undefined };
@@ -21,6 +22,10 @@ const CustomNavBar: React.FC = () => {
   const currentRoute = useNavigationState(
     (state) => state?.routes[state.index]?.name ?? "Service"
   );
+
+  const hideNav = useHideNavigations();
+
+  console.log(currentRoute);
 
   const [categories] = useState<string[]>([
     "Tous",
@@ -80,7 +85,11 @@ const CustomNavBar: React.FC = () => {
 
   return (
     <FontsLoader>
-      <View className="flex-col justify-between items-center bg-white py-2 px-3">
+      <View
+        className={`flex-col justify-between items-center bg-white py-2 px-3 ${
+          hideNav ? "hidden" : ""
+        } `}
+      >
         <View className="flex-row justify-between items-center bg-white py-2 px-3 w-full">
           <TouchableOpacity
             className={`w-[30%] h-6 rounded-full flex justify-center items-center ${
@@ -190,6 +199,7 @@ const CustomNavBar: React.FC = () => {
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
+        <View className="w-full h-[0.5px] bg-dailyColor "></View>
       </View>
     </FontsLoader>
   );

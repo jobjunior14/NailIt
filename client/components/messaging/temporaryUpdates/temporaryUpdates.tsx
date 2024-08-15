@@ -54,13 +54,6 @@ export default function TemporaryUpdates() {
 
       {/* separated line  */}
       <View className="w-full h-[0.5px] bg-mainGray opacity-30"></View>
-
-      {/* //home shower messages  */}
-      <View className="w-full flex-col  px-3 mt-2">
-        <HomeMessageViewer />
-        <HomeMessageViewer />
-        <HomeMessageViewer />
-      </View>
     </View>
   );
 }

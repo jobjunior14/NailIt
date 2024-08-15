@@ -10,19 +10,36 @@ import {
 import { useEffect } from "react";
 import { router } from "expo-router";
 import FontsLoader from "@/components/FontLoader/fontLoader";
-
+import { useNavigationState } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { BellSvg, MySpaceSvg, SearchSvg } from "@/assets/svg/home/mySvg";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
+import useHideNavigations from "@/hooks/useHideNavigations";
+
+type RootDrawerParamList = {
+  MySpaceStack: { categorie: string | undefined };
+};
 
 export default function SearchBar() {
+  const currentRoute = useHideNavigations();
+
+  const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+
   return (
     <FontsLoader>
       {/* heading of the application  */}
       {/* search bar, my space and notification view  */}
-      <View className=" flex-row justify-between items-center px-6">
+      <View
+        className={`${
+          currentRoute ? "hidden" : ""
+        } flex-row justify-between items-center px-6 bg-white`}
+      >
         {/* my space  */}
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => router.push("/mySpace")}
+          onPress={() =>
+            navigation.navigate("MySpaceStack", { categorie: undefined })
+          }
           className="relative w-[10%]"
         >
           <MySpaceSvg className=" text-mainGray w-[30px] h-[30px]" />

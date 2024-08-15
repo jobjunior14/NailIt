@@ -1,14 +1,18 @@
 import { View, TextInput, Text, TouchableOpacity } from "react-native";
-import { useEffect } from "react";
-import { router } from "expo-router";
-
 import { Ellips, SearchSvg } from "@/assets/svg/home/mySvg";
 import { ArrowLeftSvg } from "@/assets/svg/messaging/messagingSvg";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SearchBarMessaging() {
+  const navigaton = useNavigation();
+
   return (
     <View className=" flex-row justify-between items-center  px-3 mb-3">
-      <TouchableOpacity activeOpacity={0.7} className=" w-fit">
+      <TouchableOpacity
+        onPress={() => navigaton.goBack()}
+        activeOpacity={0.7}
+        className=" w-fit"
+      >
         <ArrowLeftSvg className=" text-mainGray w-[20px] h-[20px] " />
       </TouchableOpacity>
 

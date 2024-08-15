@@ -1,23 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Animated,
-} from "react-native";
-import { useNavigation, useNavigationState } from "@react-navigation/native";
-import FontsLoader from "@/components/FontLoader/fontLoader";
+import { Text, TouchableOpacity, Animated } from "react-native";
 
 interface filterInterface {
   [index: string]: boolean;
 }
 
-const CustomNavBarMessaging: React.FC = () => {
-  const currentRoute = useNavigationState(
-    (state) => state?.routes[state.index]?.name ?? "Service"
-  );
-
+const CustomMessageFilter: React.FC = () => {
+  //
   const [filter] = useState<string[]>(["Tous", "Contacts", "No Contacts"]);
 
   const [activeFilter, setActiveFilter] = useState<filterInterface>({});
@@ -96,4 +85,4 @@ const CustomNavBarMessaging: React.FC = () => {
   );
 };
 
-export default CustomNavBarMessaging;
+export default CustomMessageFilter;

@@ -9,34 +9,37 @@ import SearchBar from "@/components/mainScreens/actualityFile/navigation/header/
 import DailyScreen from "@/components/mainScreens/dailyScreen";
 import ProductScreen from "@/components/mainScreens/productScreen";
 import ServiceScreen from "@/components/mainScreens/serviceScreen";
-import SeparationLine from "@/components/mainScreens/actualityFile/navigation/header/sepationLine";
-import NavButton from "@/components/mainScreens/actualityFile/navigation/bottomNav/swipBtn";
-
+import NavButton from "@/components/mainScreens/actualityFile/navigation/bottomNav/navButton";
+import { MessagingStack } from "./messaging";
+import { MySpaceStack } from "./mySpace";
 const Tab = createMaterialTopTabNavigator();
 
 const App: React.FC = () => {
   return (
     <NavigationContainer independent={true}>
-      <SafeAreaView className="flex-1 w-full pt-10 ">
+      <SafeAreaView className="flex-1 w-full pt-14 ">
         <SearchBar />
         <CustomNavBar />
-        <SeparationLine />
         <Tab.Navigator
-          // initialRouteName="Service"
-          backBehavior="order"
+          initialRouteName="Service"
+          backBehavior="history"
           screenOptions={{
             swipeEnabled: false,
             tabBarShowLabel: false,
             tabBarStyle: {
               height: 0,
             },
+            animationEnabled: false,
           }}
         >
-          <Tab.Group>
+          <Tab.Group screenOptions={{ lazy: true, animationEnabled: true }}>
             <Tab.Screen name="Service" component={ServiceScreen} />
             <Tab.Screen name="Product" component={ProductScreen} />
             <Tab.Screen name="Daily" component={DailyScreen} />
           </Tab.Group>
+
+          <Tab.Screen name="MessagingStack" component={MessagingStack} />
+          <Tab.Screen name="MySpaceStack" component={MySpaceStack} />
         </Tab.Navigator>
         <NavButton />
       </SafeAreaView>

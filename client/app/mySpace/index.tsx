@@ -1,20 +1,26 @@
-// import { Stack } from "expo-router";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  TouchableNativeFeedback,
-} from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 import MySpace from "@/components/mySpace/mySpace";
+
 import ProfilPresentationProfil from "@/components/profil/profilPresentationProfil";
 import BanqueHistories from "@/components/mySpace/banqueHistories/banqueHistories";
 import Inbox from "@/components/messaging/components/inBoxComponents/inBox";
-import MessagingScreen from "@/components/messaging/messaging";
+import MySpaceScreen from "@/components/mySpace/mySpace";
+
+const Stack = createStackNavigator();
+
+export const MySpaceStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="MySpace" component={MySpaceScreen} />
+    </Stack.Navigator>
+  );
+};
+
 export default function Home() {
   return (
-    <SafeAreaView style={{ flex: 1, paddingTop: 40 }}>
-      <MessagingScreen />
-    </SafeAreaView>
+    <NavigationContainer independent={true}>
+      <MySpaceStack />
+    </NavigationContainer>
   );
 }

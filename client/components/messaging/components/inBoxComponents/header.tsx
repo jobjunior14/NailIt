@@ -12,14 +12,17 @@ import {
   PhoneSvg,
 } from "@/assets/svg/messaging/messagingSvg";
 import { Ellips } from "@/assets/svg/home/mySvg";
-
+import { useNavigation } from "@react-navigation/native";
 export default function InboxHeader() {
+  const navigation = useNavigation();
+
   return (
     <View className="w-full flex-row justify-between items-center">
       {/* picture and status  */}
       <View className="flex-row items-center w-[70%] ">
         {/* // arrow left  */}
         <TouchableNativeFeedback
+          onPress={() => navigation.goBack()}
           background={TouchableNativeFeedback.Ripple(
             "rgba(0,0,0,0.1)",
             true,

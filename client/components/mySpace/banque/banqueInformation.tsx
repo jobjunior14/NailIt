@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Pressable } from "react-native";
 import MySpaceProfilPresentation from "./mySpaceProfilPresentation";
 import { useEffect } from "react";
 import FontsLoader from "@/components/FontLoader/fontLoader";
@@ -27,9 +27,11 @@ export default function BanqueInformation() {
 
             <View className="flex-col items-start justify-start">
               <Text className=" font-interRegular">Balance:</Text>
-              <View className="flex-row items-center gap-x-2">
-                <Text className="font-black text-[12px]l">22.5 $</Text>
-                <EyeSlahSvg className="w-5 h-4 text-textGray" />
+              <View className="flex-row items-center gap-x-4">
+                <Text className="font-black text-[20px]">22.5 $</Text>
+                <TouchableOpacity activeOpacity={0.6}>
+                  <EyeSlahSvg className="w-5 h-5 text-textGray" />
+                </TouchableOpacity>
               </View>
             </View>
           </View>

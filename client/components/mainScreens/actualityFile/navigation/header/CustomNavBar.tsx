@@ -199,6 +199,8 @@ const CustomNavBar: React.FC = () => {
             </TouchableOpacity>
           ))}
         </Animated.ScrollView>
+
+        {/* separated line  */}
         <View className="w-full h-[0.5px] bg-dailyColor "></View>
       </View>
     </FontsLoader>

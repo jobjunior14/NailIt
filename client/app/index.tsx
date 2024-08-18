@@ -12,6 +12,8 @@ import ServiceScreen from "@/components/mainScreens/serviceScreen";
 import NavButton from "@/components/mainScreens/actualityFile/navigation/bottomNav/navButton";
 import { MessagingStack } from "./messaging";
 import { MySpaceStack } from "./mySpace";
+import LoginScreen from "@/components/auth/login";
+import { AuthStack } from "./auth";
 const Tab = createMaterialTopTabNavigator();
 
 const App: React.FC = () => {
@@ -40,9 +42,10 @@ const App: React.FC = () => {
 
           <Tab.Screen name="MessagingStack" component={MessagingStack} />
           <Tab.Screen name="MySpaceStack" component={MySpaceStack} />
+          <Tab.Screen name="Auth" component={AuthStack} />
         </Tab.Navigator>
-        <NavButton />
       </SafeAreaView>
+      <NavButton />
     </NavigationContainer>
   );
 };

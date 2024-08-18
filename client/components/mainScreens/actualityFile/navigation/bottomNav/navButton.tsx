@@ -1,5 +1,13 @@
-import React, { useState, useRef } from "react";
-import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Keyboard,
+} from "react-native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import {
   ArrowUp1,
@@ -9,7 +17,7 @@ import {
   PlusSvg,
   CogSvg,
 } from "@/assets/svg/home/mySvg";
-import { useNavigation, useNavigationState } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { MotiView } from "moti";
 import FontsLoader from "@/components/FontLoader/fontLoader";
 import { rango } from "@/constants/image";
@@ -21,6 +29,29 @@ type RootDrawerParamList = {
 };
 const NavButton = () => {
   const [isOn, setIsOn] = useState<boolean>(false);
+  const [keyboardState, setKeyboardState] = useState<boolean>(false);
+
+  //track the keyBoard state
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardState(true);
+      }
+    );
+
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardState(false);
+      }
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
@@ -36,7 +67,8 @@ const NavButton = () => {
         style={{
           flexDirection: "row",
           columnGap: 35,
-          display: currentRoute ? "none" : undefined,
+          flex: 1,
+          display: currentRoute || keyboardState ? "none" : undefined,
         }}
         className={`w-full justify-center items-center absolute bottom-0 pb-1 pt-1 ${
           isOn ? "bg-white" : ""
@@ -137,6 +169,7 @@ const NavButton = () => {
               animate={{
                 transform: [{ translateY: isOn ? -30 : 0 }],
                 opacity: isOn ? 0 : 1,
+                display: isOn ? "none" : undefined,
               }}
               className="w-10 h-10 rounded-full flex justify-center items-center bg-mainGray"
             >

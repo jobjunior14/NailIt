@@ -7,5 +7,5 @@ export default function useHideNavigations () {
 
     
 
-    return currentRoute === "MessagingStack" || currentRoute === "inBox" || currentRoute === "MessagingStack" || currentRoute === "MySpaceStack" ? true : false;
+    return currentRoute === "MessagingStack" || currentRoute === "inBox" || currentRoute === "MessagingStack" || currentRoute === "MySpaceStack" || currentRoute === "Auth" ? true : false;
 }

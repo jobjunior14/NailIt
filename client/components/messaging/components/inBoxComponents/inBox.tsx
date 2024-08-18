@@ -8,7 +8,7 @@ import InputMessage from "./inputComponent";
 export default function Inbox() {
   return (
     <FontsLoader>
-      <SafeAreaView className=" px-3 w-full flex-1 pb-4">
+      <SafeAreaView className=" px-3 w-full flex-1 pb-4 bg-white">
         {/* header  */}
         <InboxHeader />
 

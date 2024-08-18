@@ -77,6 +77,8 @@ export default function Publication({ screen }: PublicationProps) {
               </TouchableOpacity>
             </View>
           </View>
+
+          {/* //image and video display  */}
           <ContentDisplay screen={screen} />
           <View className="w-full h-[0.4px] bg-textGray mt-4" />
         </View>

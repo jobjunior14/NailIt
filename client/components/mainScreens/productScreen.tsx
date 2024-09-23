@@ -6,7 +6,6 @@ interface categorieProps {
 const ProductScreen: any = ({ route }: categorieProps) => {
   const handleScroll = (event: any) => {
     const { contentOffset } = event.nativeEvent;
-    console.log("Scroll Y Offset:", contentOffset.y);
   };
 
   return (

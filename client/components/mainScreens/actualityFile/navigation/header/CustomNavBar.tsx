@@ -17,15 +17,12 @@ interface categorieInterface {
 }
 
 const CustomNavBar: React.FC = () => {
+  const currentRoute = useNavigationState(
+    (state) => state?.routes[state.index]?.name
+  );
   const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
-  const currentRoute = useNavigationState(
-    (state) => state?.routes[state.index]?.name ?? "Service"
-  );
-
   const hideNav = useHideNavigations();
-
-  console.log(currentRoute);
 
   const [categories] = useState<string[]>([
     "Tous",

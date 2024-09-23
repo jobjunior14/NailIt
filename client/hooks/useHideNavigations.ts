@@ -1,11 +1,17 @@
 import { useNavigationState } from "@react-navigation/native";
 
-export default function useHideNavigations () {
-    const currentRoute = useNavigationState(
-        (state) => state?.routes[state.index]?.name
-    );
+export default function useHideNavigations() {
+  const currentRoute = useNavigationState(
+    (state) => state?.routes[state.index]?.name ?? "Auth"
+  );
 
-    
+  console.log(currentRoute);
 
-    return currentRoute === "MessagingStack" || currentRoute === "inBox" || currentRoute === "MessagingStack" || currentRoute === "MySpaceStack" || currentRoute === "Auth" ? true : false;
+  return currentRoute === "MessagingStack" ||
+    currentRoute === "inBox" ||
+    currentRoute === "MessagingStack" ||
+    currentRoute === "MySpaceStack" ||
+    currentRoute === "Auth"
+    ? true
+    : false;
 }

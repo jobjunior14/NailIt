@@ -14,11 +14,16 @@ import FontsLoader from "../FontLoader/fontLoader";
 import { GoogleSvg } from "@/assets/svg/auth/authSvg";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 interface FieldsErrors {
   email: boolean;
   password: boolean;
 }
+
+type RouteNavigationProps = {
+  SignUp: { name: string | undefined };
+};
 
 export default function LoginScreen() {
   const [email, setEmail] = useState<string>("");
@@ -35,7 +40,8 @@ export default function LoginScreen() {
     //chechk if all the field all fill
   }
 
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<DrawerNavigationProp<RouteNavigationProps>>();
 
   return (
     <FontsLoader>
@@ -122,7 +128,7 @@ export default function LoginScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => navigation.navigate("SignUp")}
+              onPress={() => navigation.navigate("SignUp", { name: undefined })}
               activeOpacity={0.7}
             >
               <Text className="font-InterSemiBold text-mainRed">

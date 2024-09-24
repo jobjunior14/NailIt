@@ -9,7 +9,7 @@ import {
   StyleSheet,
 } from "react-native";
 import FontsLoader from "@/components/FontLoader/fontLoader";
-import { Video } from "expo-av";
+import { ResizeMode, Video } from "expo-av";
 import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
 import {
@@ -20,10 +20,15 @@ import {
   ChatBubbleSvg,
 } from "@/assets/svg/home/mySvg";
 import { useNavigation } from "@react-navigation/native";
+import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 interface ContentDisplayProps {
   screen: "product" | "service";
 }
+
+type RouteNavigationProps = {
+  Auth: { name: string | undefined };
+};
 
 export default function ContentDisplay({ screen }: ContentDisplayProps) {
   const content = [
@@ -37,7 +42,8 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const player = useRef<any>(null);
 
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<DrawerNavigationProp<RouteNavigationProps>>();
 
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
@@ -76,7 +82,7 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
                     source={item.source}
                     style={styles.video}
                     useNativeControls
-                    resizeMode="contain"
+                    resizeMode={ResizeMode.CONTAIN}
                     isLooping
                   />
                 )}
@@ -130,7 +136,7 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
             <TouchableOpacity
               activeOpacity={0.8}
               className=" flex-row bg-mainBlack rounded-lg gap-x-1"
-              onPress={() => navigation.navigate("Auth")}
+              onPress={() => navigation.navigate("Auth", { name: undefined })}
             >
               {/* add in basket btn  */}
               <View className="flex-row gap-x-[4px] items-center px-3 py-[6px]">

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
-import { Video } from "expo-av";
+import { ResizeMode, Video } from "expo-av";
 import ProgressBar from "./ProgressBar";
 import {
   MapPin,
@@ -86,7 +86,7 @@ export default function DailyPlublication() {
                     source={item.source}
                     style={styles.video}
                     useNativeControls
-                    resizeMode="contain"
+                    resizeMode={ResizeMode.CONTAIN}
                     isLooping
                   />
                 )}

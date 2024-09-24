@@ -33,6 +33,10 @@ export class SignUpDto {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
+  @Matches(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    { message: 'Password too weak' },
+  )
   password: string;
 
   @IsNotEmpty()
@@ -48,7 +52,7 @@ export class SignUpDto {
   @IsNotEmpty()
   @MinLength(12)
   @MaxLength(16)
-  telephone_number: string;
+  phone_number: string;
 
   @IsNotEmpty()
   @IsString()

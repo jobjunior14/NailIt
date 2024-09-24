@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FontsLoader from "@/components/FontLoader/fontLoader";
-import { Video } from "expo-av";
+import { ResizeMode, Video } from "expo-av";
 import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
 import {
@@ -81,7 +81,7 @@ export default function ContentDisplayDaily() {
                     source={item.source}
                     style={style.video}
                     useNativeControls
-                    resizeMode="contain"
+                    resizeMode={ResizeMode.CONTAIN}
                     isLooping
                   />
                 )}

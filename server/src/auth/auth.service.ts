@@ -4,9 +4,11 @@ import { UserRepository } from './user.repository';
 import { SignUpDto } from './dto/signUp.dto';
 import { User } from './user.entity';
 import {
+  comparePasswords,
   hashPassword,
   verifyPasswordAndPasswordConfirm,
 } from './password.utility';
+import { SignInDto } from './dto/signIn.dto';
 
 @Injectable()
 export class AuthService {
@@ -45,5 +47,20 @@ export class AuthService {
     const createdUser = await this.userRepository.signUp(userData);
 
     return createdUser;
+  }
+
+  async signIn(userData: SignInDto): Promise<User[]> {
+    const user: User[] = await this.userRepository.SignIn(userData);
+
+    // const correct_password =
+
+    if (
+      user.length === 0 ||
+      !(await comparePasswords(userData.password, user[0].password))
+    ) {
+      throw new BadRequestException('Wrong mail or password');
+    }
+
+    return user;
   }
 }

@@ -52,9 +52,12 @@ export default function LoginScreen() {
         {/* //image */}
         <View className="w-full items-center flex-col mt-10">
           <Image className="w-20 h-20" source={nailit} />
-          <Text className="font-interBold text-[20px] text-mainBlack mt-2">
-            Nailit
-          </Text>
+          <View className="flex flex-row mt-2">
+            <Text className="font-interBold text-[20px] text-mainBlack">
+              Nail
+            </Text>
+            <Text className="font-interBold text-[20px] text-mainRed">IT</Text>
+          </View>
         </View>
 
         {/* //separated line and google svg  */}

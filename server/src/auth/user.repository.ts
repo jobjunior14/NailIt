@@ -7,7 +7,6 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { SignUpDto } from './dto/signUp.dto';
-import { SignInDto } from './dto/signIn.dto';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
@@ -54,9 +53,9 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async SignIn(userData: SignInDto): Promise<User[]> {
+  async SignIn(emailData: string): Promise<User[]> {
     try {
-      const { email } = userData;
+      const email = emailData;
 
       const findUser: User[] = await this.dataSource.query(
         `SELECT * FROM users WHERE email = $1`,

@@ -11,7 +11,7 @@ import { User } from './user.entity';
 dotenv.config();
 
 @Injectable()
-export class JwtStategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     @InjectRepository(UserRepository)
     private userRepository: UserRepository,
@@ -22,13 +22,23 @@ export class JwtStategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(paylod: JwtPayloadInterface): Promise<User[]> {
-    const { email } = paylod;
+  async validate(payload: JwtPayloadInterface): Promise<User> {
+    const { email, iat } = payload;
 
-    const user: User[] = await this.userRepository.SignIn(email);
+    // Fetch user from the repository
+    const user: User = await this.userRepository.findOne({ where: { email } });
 
-    if (user.length === 0) {
-      throw new UnauthorizedException('');
+    if (!user) {
+      throw new UnauthorizedException('Invalid Token');
+    }
+
+    // Check if password has been changed after the JWT was issued
+    const isPasswordChanged = await user.changePasswordAfterIsued(iat);
+
+    if (isPasswordChanged) {
+      throw new UnauthorizedException(
+        'Password has been changed, please login again.',
+      );
     }
 
     return user;

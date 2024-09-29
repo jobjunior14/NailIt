@@ -5,8 +5,6 @@ export default function useHideNavigations() {
     (state) => state?.routes[state.index]?.name ?? "Auth"
   );
 
-  console.log(currentRoute);
-
   return currentRoute === "MessagingStack" ||
     currentRoute === "inBox" ||
     currentRoute === "MessagingStack" ||

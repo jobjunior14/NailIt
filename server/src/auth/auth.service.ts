@@ -16,6 +16,8 @@ import { SignInDto } from './dto/signIn.dto';
 import { JwtService } from '@nestjs/jwt';
 import { SignInInterface } from './interfaces/singIn-return.interface';
 import { JwtPayloadInterface } from './interfaces/jwt-interface.payload.interface';
+import { UpdatePasswordDto } from './dto/updatePassword.dto';
+import { passwordType } from './interfaces/password.type';
 
 @Injectable()
 export class AuthService {
@@ -74,5 +76,39 @@ export class AuthService {
       userData: user,
       token,
     };
+  }
+
+  async updatePassword(
+    id: number,
+    updatePasswordDto: UpdatePasswordDto,
+  ): Promise<string> {
+    let { newPassword } = updatePasswordDto;
+    const { oldPassword, newConfirmPassword } = updatePasswordDto;
+
+    if (newConfirmPassword !== newPassword)
+      throw new BadRequestException(
+        'Password and confirmation password do not match',
+      );
+
+    const userPassowrd: passwordType[] =
+      await this.userRepository.getUserPasswordById(id);
+
+    if (userPassowrd.length === 0) {
+      throw new BadRequestException(`no user with this id ${id}`);
+    }
+
+    if (!(await comparePasswords(oldPassword, userPassowrd[0].password)))
+      throw new UnauthorizedException('Wrong old password');
+
+    //call the function to save the new hashed password with the timestanmp
+
+    const updatePasswordTimeStamp = new Date();
+    newPassword = await hashPassword(newPassword);
+
+    return await this.userRepository.updatePassword(
+      id,
+      newPassword,
+      updatePasswordTimeStamp,
+    );
   }
 }

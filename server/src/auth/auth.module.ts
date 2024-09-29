@@ -7,7 +7,7 @@ import { UserRepository } from './user.repository';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import * as dotenv from 'dotenv';
-import { JwtStategy } from './jwt.strategy';
+import { JwtStrategy } from './jwt.strategy';
 
 // Load environment variables
 dotenv.config();
@@ -24,7 +24,7 @@ dotenv.config();
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserRepository, JwtStategy],
-  exports: [JwtStategy, PassportModule],
+  providers: [AuthService, UserRepository, JwtStrategy],
+  exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

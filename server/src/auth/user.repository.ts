@@ -7,11 +7,20 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { SignUpDto } from './dto/signUp.dto';
+import { passwordType } from './interfaces/password.type';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
-  constructor(private dataSource: DataSource) {
-    super(User, dataSource.createEntityManager());
+  constructor(
+    private dataSource: DataSource,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {
+    super(
+      userRepository.target,
+      userRepository.manager,
+      userRepository.queryRunner,
+    );
   }
 
   async signUp(signUpDto: SignUpDto): Promise<User> {
@@ -63,6 +72,36 @@ export class UserRepository extends Repository<User> {
       );
 
       return findUser;
+    } catch (error) {
+      throw new InternalServerErrorException('Ouups try again');
+    }
+  }
+
+  async getUserPasswordById(id: number): Promise<passwordType[]> {
+    try {
+      const user: passwordType[] = await this.dataSource.query(
+        'SELECT password FROM users WHERE id = $1',
+        [id],
+      );
+
+      return user;
+    } catch (error) {
+      throw new InternalServerErrorException('Ouups try again');
+    }
+  }
+
+  async updatePassword(
+    id: number,
+    newPassword: string,
+    timestanmp: Date,
+  ): Promise<string> {
+    try {
+      await this.dataSource.query(
+        'UPDATE users SET password = $1, password_updated_at = $2 WHERE id = $3',
+        [newPassword, timestanmp, id],
+      );
+
+      return 'Password updated';
     } catch (error) {
       throw new InternalServerErrorException('Ouups try again');
     }

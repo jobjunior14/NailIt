@@ -22,6 +22,7 @@ import { MotiView } from "moti";
 import FontsLoader from "@/components/FontLoader/fontLoader";
 import { rango } from "@/constants/image";
 import useHideNavigations from "@/hooks/useHideNavigations";
+import { useRoute } from "@react-navigation/native";
 
 type RootDrawerParamList = {
   MessagingStack: { categorie: string | undefined };

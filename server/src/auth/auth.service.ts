@@ -1,40 +1,46 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from './user.repository';
+import { UserRepository } from './repositories/user.repository';
 import { SignUpDto } from './dto/signUp.dto';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import {
   comparePasswords,
   hashPassword,
   verifyPasswordAndPasswordConfirm,
-} from './password.utility';
+} from './utils/password.util';
 import { SignInDto } from './dto/signIn.dto';
 import { JwtService } from '@nestjs/jwt';
-import { SignInInterface } from './interfaces/singIn-return.interface';
-import { JwtPayloadInterface } from './interfaces/jwt-interface.payload.interface';
+import { SignInInterface } from './interfaces_and_types/singIn-return.interface';
+import { JwtPayloadInterface } from './interfaces_and_types/jwt-interface.payload.interface';
 import { UpdatePasswordDto } from './dto/updatePassword.dto';
-import { passwordType } from './interfaces/password.type';
-
+import { passwordType } from './interfaces_and_types/password.type';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { normalizeName } from './utils/normalizeName.util';
+import { updateUserDto } from './dto/updateUser.dto';
+import { Website } from './entities/website.entiy';
+import { HasLinks } from './entities/hasLink.entity';
+import { WebsiteRepository } from './repositories/website.repository';
+import { hasLinksRepository } from './repositories/hasLink.repository';
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(UserRepository)
+    @InjectRepository(Website)
+    @InjectRepository(HasLinks)
     private userRepository: UserRepository,
+    private websiteRepository: WebsiteRepository,
+    private hasLinksRepository: hasLinksRepository,
     private jwtService: JwtService,
   ) {}
 
   async signUp(user_data: SignUpDto): Promise<User> {
-    //concat the user name and surname to be saved in the database
-    const normalize_name = (name: string): string => {
-      return name[0].toUpperCase() + name.slice(1).toLowerCase();
-    };
-
-    user_data.name =
-      normalize_name(user_data.name) + ' ' + normalize_name(user_data.surname);
+    //normalyze the localisation column
+    const localisation = `POINT(${user_data.localisation.coordinates[0]} ${user_data.localisation.coordinates[1]})`;
 
     //verify the confirmation password and the password
     if (
@@ -51,10 +57,17 @@ export class AuthService {
     //hash the password
     user_data.password = await hashPassword(user_data.password);
 
+    //Normalize name and Prename data
+    user_data.name = normalizeName(user_data.name);
+    user_data.prename = normalizeName(user_data.prename);
+
     //hash the secret answer
     user_data.secret_answer = await hashPassword(user_data.secret_answer);
 
-    const createdUser = await this.userRepository.signUp(user_data);
+    const createdUser = await this.userRepository.signUp(
+      user_data,
+      localisation,
+    );
 
     return createdUser;
   }
@@ -79,36 +92,92 @@ export class AuthService {
   }
 
   async updatePassword(
-    id: number,
+    user_name_id: string,
     updatePasswordDto: UpdatePasswordDto,
   ): Promise<string> {
-    let { newPassword } = updatePasswordDto;
-    const { oldPassword, newConfirmPassword } = updatePasswordDto;
+    let { new_password } = updatePasswordDto;
+    const { old_password, new_password_confirm } = updatePasswordDto;
 
-    if (newConfirmPassword !== newPassword)
+    if (new_password_confirm !== new_password)
       throw new BadRequestException(
         'Password and confirmation password do not match',
       );
 
-    const userPassowrd: passwordType[] =
-      await this.userRepository.getUserPasswordById(id);
+    const user_password: passwordType[] =
+      await this.userRepository.getUserPasswordById(user_name_id);
 
-    if (userPassowrd.length === 0) {
-      throw new BadRequestException(`no user with this id ${id}`);
+    if (user_password.length === 0) {
+      throw new BadRequestException(
+        `no user with this user name ${user_name_id}`,
+      );
     }
 
-    if (!(await comparePasswords(oldPassword, userPassowrd[0].password)))
+    if (!(await comparePasswords(old_password, user_password[0].password)))
       throw new UnauthorizedException('Wrong old password');
 
     //call the function to save the new hashed password with the timestanmp
 
-    const updatePasswordTimeStamp = new Date();
-    newPassword = await hashPassword(newPassword);
+    const update_password_time_stamp = new Date();
+    new_password = await hashPassword(new_password);
 
     return await this.userRepository.updatePassword(
-      id,
-      newPassword,
-      updatePasswordTimeStamp,
+      user_name_id,
+      new_password,
+      update_password_time_stamp,
     );
+  }
+
+  async resetPasswordWithSecretAnswer(
+    user_data: ResetPasswordDto,
+  ): Promise<string> {
+    const { new_password_confirm, email, secret_answer, new_password } =
+      user_data;
+
+    if (new_password !== new_password_confirm)
+      throw new BadRequestException(
+        'Password and confirmation password do not match',
+      );
+
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (!user)
+      throw new BadRequestException(
+        `There is no user with this email ${email}`,
+      );
+
+    if (!comparePasswords(secret_answer, user.secret_answer))
+      throw new UnauthorizedException('Wrong secret answer');
+
+    user_data.new_password = await hashPassword(new_password);
+
+    return await this.userRepository.resetPasswordWithSecretAnswer(user_data);
+  }
+
+  async updateUser(user_data: updateUserDto): Promise<string> {
+    //see if the user with the user_name provided is exist
+    const { user_name_id } = user_data;
+    const user = await this.userRepository.findOne({ where: { user_name_id } });
+
+    if (user)
+      throw new ConflictException(
+        `You can not pick this user name ${user_name_id} because it already exist`,
+      );
+    //normalize names
+    user_data.name = normalizeName(user_data.name);
+    user_data.prename = normalizeName(user_data.name);
+
+    if (user_data.websites) {
+      //check if website name exist or not and retrieve the id
+      for (let i = 0; i < user_data.websites.length; i++) {
+        const websiteName = await this.websiteRepository.findOne({
+          where: { name: user_data.websites[i].name },
+        });
+
+        if (!websiteName) {
+        }
+      }
+    }
+
+    return await this.userRepository.updateUser(user_data);
   }
 }

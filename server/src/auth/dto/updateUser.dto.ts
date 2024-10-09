@@ -4,10 +4,11 @@ import {
   IsString,
   MinLength,
   MaxLength,
-  Matches,
 } from 'class-validator';
 import { localisationType } from '../interfaces_and_types/localisation.type';
-export class SignUpDto {
+import { websiteInterface } from '../interfaces_and_types/website.interface';
+
+export class updateUserDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(5)
@@ -30,37 +31,9 @@ export class SignUpDto {
   email: string;
 
   @IsNotEmpty()
-  @IsString()
-  @MinLength(4)
-  @MaxLength(20)
-  @Matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    { message: 'Password too weak' },
-  )
-  password: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(4)
-  @MaxLength(20)
-  @Matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    { message: 'Password too weak' },
-  )
-  password_confirm: string;
-
-  @IsNotEmpty()
   @MinLength(10)
   @MaxLength(16)
   phone_number: string;
-
-  @IsNotEmpty()
-  @IsString()
-  secret_word: string;
-
-  @IsNotEmpty()
-  @IsString()
-  secret_answer: string;
 
   @IsNotEmpty()
   @IsString()
@@ -72,4 +45,8 @@ export class SignUpDto {
 
   @IsNotEmpty()
   localisation: localisationType;
+
+  about: string;
+
+  websites: websiteInterface[] | null;
 }

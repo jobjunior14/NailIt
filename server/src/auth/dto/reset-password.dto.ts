@@ -1,14 +1,19 @@
 import {
-  IsString,
+  IsEmail,
   IsNotEmpty,
-  MaxLength,
+  IsString,
   MinLength,
+  MaxLength,
   Matches,
 } from 'class-validator';
 
-export class UpdatePasswordDto {
+export class ResetPasswordDto {
+  @IsEmail()
   @IsNotEmpty()
-  old_password: string;
+  email: string;
+
+  @IsNotEmpty()
+  secret_answer?: string;
 
   @IsNotEmpty()
   @IsString()

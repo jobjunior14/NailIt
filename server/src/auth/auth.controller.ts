@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Param,
+  Patch,
   Post,
   UseGuards,
   ValidationPipe,
@@ -13,10 +14,8 @@ import { SignInInterface } from './interfaces_and_types/singIn-return.interface'
 import { AuthGuard } from '@nestjs/passport';
 import { UpdatePasswordDto } from './dto/updatePassword.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { updateUserDto } from './dto/updateUser.dto';
 
-interface jobJuniir {
-  i: string;
-}
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -31,7 +30,7 @@ export class AuthController {
     return this.authService.signIn(user_data);
   }
 
-  @Post('updatePassword/:userName')
+  @Patch('updatePassword/:userName')
   @UseGuards(AuthGuard())
   updatePassword(
     @Param('userName') user_name_id: string,
@@ -40,18 +39,19 @@ export class AuthController {
     return this.authService.updatePassword(user_name_id, updatePassword);
   }
 
-  @Post('resetPasswordWithSecretAnswer')
+  @Patch('resetPasswordWithSecretAnswer')
   resetPasswordWithSecretAnswer(
     @Body(ValidationPipe) user_data: ResetPasswordDto,
   ): Promise<string> {
     return this.authService.resetPasswordWithSecretAnswer(user_data);
   }
 
-  // @Post('updateUser/:userName')
-  // @UseGuards(AuthGuard())
-  // updateUser(
-  //   @Body(ValidationPipe) user_data: UpdatePasswordDto,
-  // ): Promise<string> {
-  //   return
-  // }
+  @Patch('updateUser/:userName')
+  @UseGuards(AuthGuard())
+  updateUser(
+    @Body(ValidationPipe) user_data: updateUserDto,
+    @Param('userName') currentUserName: string,
+  ): Promise<string> {
+    return this.authService.updateUser(user_data, currentUserName);
+  }
 }

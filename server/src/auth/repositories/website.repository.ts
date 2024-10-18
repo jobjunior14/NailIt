@@ -16,4 +16,9 @@ export class WebsiteRepository extends Repository<Website> {
       websiteRepository.queryRunner,
     );
   }
+
+  // async getWebsiteId (name: string): Promise<number> {
+
+  //   try
+  // }
 }

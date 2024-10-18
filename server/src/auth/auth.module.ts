@@ -8,13 +8,17 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import * as dotenv from 'dotenv';
 import { JwtStrategy } from './jwt.strategy';
+import { WebsiteRepository } from './repositories/website.repository';
+import { HasLinksRepository } from './repositories/hasLink.repository';
+import { HasLinks } from './entities/hasLink.entity';
+import { Website } from './entities/website.entiy';
 
 // Load environment variables
 dotenv.config();
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, HasLinks, Website]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
@@ -24,7 +28,13 @@ dotenv.config();
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserRepository, JwtStrategy],
+  providers: [
+    AuthService,
+    UserRepository,
+    JwtStrategy,
+    WebsiteRepository,
+    HasLinksRepository,
+  ],
   exports: [JwtStrategy, PassportModule],
 })
 export class AuthModule {}

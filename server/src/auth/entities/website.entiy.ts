@@ -3,7 +3,7 @@ import {
   Column,
   Entity,
   OneToMany,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
 import { HasLinks } from './hasLink.entity';
@@ -11,7 +11,7 @@ import { HasLinks } from './hasLink.entity';
 @Entity('websites')
 @Unique(['name'])
 export class Website extends BaseEntity {
-  @PrimaryColumn({ type: 'int' })
+  @PrimaryGeneratedColumn({ type: 'smallint' })
   id: number;
 
   @Column({ type: 'varchar', length: 20 })

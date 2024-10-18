@@ -11,12 +11,17 @@ import { passwordType } from '../interfaces_and_types/password.type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { updateUserDto } from '../dto/updateUser.dto';
+import { HasLinks } from '../entities/hasLink.entity';
+import { HasLinksRepository } from './hasLink.repository';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User)
+    @InjectRepository(HasLinks)
+    private readonly userRepository: Repository<User>,
+    private hasLinksRepository: HasLinksRepository,
   ) {
     super(
       userRepository.target,
@@ -132,8 +137,58 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async updateUser(user_data: updateUserDto): Promise<string> {
+  async updateUser(
+    user_data: updateUserDto,
+    currentUserName: string,
+  ): Promise<string> {
     try {
+      const query =
+        'UPDATE users SET user_name_id = $1, name = $2, prename = $3, localisation = $4, country = $5, city = $6 WHERE user_name_id = $7';
+      await this.dataSource.query(query, [
+        user_data.user_name_id,
+        user_data.name,
+        user_data.prename,
+        user_data.localisation,
+        user_data.country,
+        user_data.city,
+        currentUserName,
+      ]);
+
+      // update or insert data in the hasLink Table
+      if (user_data.websites) {
+        for (const i of user_data.websites) {
+          try {
+            const dataInHasLink: HasLinks[] =
+              await this.hasLinksRepository.query(
+                'SELECT * FROM has_links WHERE user_id = $1 AND website_id = $2',
+                [user_data.user_name_id, i.id],
+              );
+
+            if (dataInHasLink.length === 0) {
+              await this.dataSource.query(
+                'INSERT INTO has_links (user_id, website_id, link) VALUES ($1, $2, $3)',
+                [user_data.user_name_id, i.id, i.link],
+              );
+            } else {
+              await this.hasLinksRepository.query(
+                'UPDATE has_links SET link = $1 WHERE user_id = $2 AND website_id = $3',
+                [i.link, user_data.user_name_id, i.id],
+              );
+            }
+          } catch (error) {
+            if (error.code === '23505') {
+              throw new ConflictException(
+                'User already has this profile link for this link name.',
+              );
+            }
+            throw new BadRequestException(
+              'Failed to create one of your link, try later',
+            );
+          }
+        }
+      }
+
+      return 'User data updated';
     } catch (error) {
       // Check if it's a QueryFailedError from TypeORM
       if (error.code === '23505') {
@@ -142,6 +197,7 @@ export class UserRepository extends Repository<User> {
         );
       }
 
+      console.log(error);
       throw new BadRequestException('Failed to update the user.');
     }
   }

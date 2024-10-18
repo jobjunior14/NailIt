@@ -1,10 +1,4 @@
-import {
-  IsNotEmpty,
-  IsEmail,
-  IsString,
-  MinLength,
-  MaxLength,
-} from 'class-validator';
+import { IsNotEmpty, IsString, MinLength, MaxLength } from 'class-validator';
 import { localisationType } from '../interfaces_and_types/localisation.type';
 import { websiteInterface } from '../interfaces_and_types/website.interface';
 
@@ -25,10 +19,10 @@ export class updateUserDto {
   @MaxLength(20)
   prename: string;
 
-  @IsNotEmpty()
-  @IsEmail()
-  @IsString()
-  email: string;
+  // @IsNotEmpty()
+  // @IsEmail()
+  // @IsString()
+  // email: string;
 
   @IsNotEmpty()
   @MinLength(10)

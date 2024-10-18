@@ -2,6 +2,7 @@ import {
   BadRequestException,
   ConflictException,
   Injectable,
+  InternalServerErrorException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -25,7 +26,7 @@ import { updateUserDto } from './dto/updateUser.dto';
 import { Website } from './entities/website.entiy';
 import { HasLinks } from './entities/hasLink.entity';
 import { WebsiteRepository } from './repositories/website.repository';
-import { hasLinksRepository } from './repositories/hasLink.repository';
+import { localisationType } from './interfaces_and_types/localisation.type';
 @Injectable()
 export class AuthService {
   constructor(
@@ -34,7 +35,6 @@ export class AuthService {
     @InjectRepository(HasLinks)
     private userRepository: UserRepository,
     private websiteRepository: WebsiteRepository,
-    private hasLinksRepository: hasLinksRepository,
     private jwtService: JwtService,
   ) {}
 
@@ -153,18 +153,29 @@ export class AuthService {
     return await this.userRepository.resetPasswordWithSecretAnswer(user_data);
   }
 
-  async updateUser(user_data: updateUserDto): Promise<string> {
+  async updateUser(
+    user_data: updateUserDto,
+    currentUserName: string,
+  ): Promise<string> {
     //see if the user with the user_name provided is exist
     const { user_name_id } = user_data;
-    const user = await this.userRepository.findOne({ where: { user_name_id } });
+    if (user_name_id != currentUserName) {
+      const user = await this.userRepository.findOne({
+        where: { user_name_id },
+      });
 
-    if (user)
-      throw new ConflictException(
-        `You can not pick this user name ${user_name_id} because it already exist`,
-      );
+      if (user)
+        throw new ConflictException(
+          `You can not pick this user name ${user_name_id} because it already exist`,
+        );
+    }
+
+    //normalize the localisation point
+    const localisation = `POINT(${user_data.localisation.coordinates[0]} ${user_data.localisation.coordinates[1]})`;
     //normalize names
     user_data.name = normalizeName(user_data.name);
     user_data.prename = normalizeName(user_data.name);
+    user_data.localisation = localisation as unknown as localisationType;
 
     if (user_data.websites) {
       //check if website name exist or not and retrieve the id
@@ -173,11 +184,25 @@ export class AuthService {
           where: { name: user_data.websites[i].name },
         });
 
-        if (!websiteName) {
+        if (websiteName) {
+          user_data.websites[i].id = websiteName.id;
+        } else {
+          try {
+            const websiteName = new Website();
+            websiteName.name = user_data.websites[i].name;
+
+            const newWebsiteName =
+              await this.websiteRepository.save(websiteName);
+
+            user_data.websites[i].id = newWebsiteName.id;
+          } catch (error) {
+            throw new InternalServerErrorException(
+              'Ouups an error occured saving the website name',
+            );
+          }
         }
       }
     }
-
-    return await this.userRepository.updateUser(user_data);
+    return await this.userRepository.updateUser(user_data, currentUserName);
   }
 }

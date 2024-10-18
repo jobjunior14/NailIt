@@ -4,16 +4,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { HasLinks } from '../entities/hasLink.entity';
 
 @Injectable()
-export class hasLinksRepository extends Repository<HasLinks> {
+export class HasLinksRepository extends Repository<HasLinks> {
   constructor(
     private dataSource: DataSource,
     @InjectRepository(HasLinks)
-    private readonly websiteRepository: Repository<HasLinks>,
+    private readonly hasLinkRepository: Repository<HasLinks>,
   ) {
     super(
-      websiteRepository.target,
-      websiteRepository.manager,
-      websiteRepository.queryRunner,
+      hasLinkRepository.target,
+      hasLinkRepository.manager,
+      hasLinkRepository.queryRunner,
     );
   }
 }

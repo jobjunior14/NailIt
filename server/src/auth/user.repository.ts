@@ -7,7 +7,7 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { SignUpDto } from './dto/signUp.dto';
-import { passwordType } from './interfaces/password.type';
+import { passwordType } from './interfaces_and_types/password.type';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -26,11 +26,11 @@ export class UserRepository extends Repository<User> {
   async signUp(signUpDto: SignUpDto): Promise<User> {
     try {
       const {
-        user_name,
+        user_name_id,
         name,
         email,
         phone_number,
-        secret_question,
+        secret_word,
         secret_answer,
         password,
       } = signUpDto;
@@ -39,11 +39,11 @@ export class UserRepository extends Repository<User> {
         'INSERT INTO users (user_name, name, email, phone_number, secret_question, secret_answer, password) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
 
       const createdUser = await this.dataSource.query(query, [
-        user_name,
+        user_name_id,
         name,
         email,
         phone_number,
-        secret_question,
+        secret_word,
         secret_answer,
         password,
       ]);

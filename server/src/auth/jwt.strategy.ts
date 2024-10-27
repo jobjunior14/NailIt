@@ -2,10 +2,10 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import * as dotenv from 'dotenv';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtPayloadInterface } from './interfaces/jwt-interface.payload.interface';
+import { JwtPayloadInterface } from './interfaces_and_types/jwt-interface.payload.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { UserRepository } from './user.repository';
-import { User } from './user.entity';
+import { UserRepository } from './repositories/user.repository';
+import { User } from './entities/user.entity';
 
 // Load environment variables
 dotenv.config();
@@ -35,9 +35,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     // Check if password has been changed after the JWT was issued
     const isPasswordChanged = await user.changePasswordAfterIsued(iat);
 
-    if (isPasswordChanged) {
+    const isEmailChanged = await user.changeEmailAfterIsued(iat);
+
+    const isSecretAnswerChanged = await user.changeSecreteAnswer(iat);
+
+    if (isPasswordChanged || isEmailChanged || isSecretAnswerChanged) {
       throw new UnauthorizedException(
-        'Password has been changed, please login again.',
+        'Password or Email or Secret answer has been changed, please login again.',
       );
     }
 

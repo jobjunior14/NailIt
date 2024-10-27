@@ -18,7 +18,7 @@ interface categorieInterface {
 
 const CustomNavBar: React.FC = () => {
   const currentRoute = useNavigationState(
-    (state) => state?.routes[state.index]?.name
+    (state) => state?.routes[state.index]?.name ?? "Service"
   );
   const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 

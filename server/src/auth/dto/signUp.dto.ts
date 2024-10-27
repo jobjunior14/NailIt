@@ -6,13 +6,13 @@ import {
   MaxLength,
   Matches,
 } from 'class-validator';
-
+import { localisationType } from '../interfaces_and_types/localisation.type';
 export class SignUpDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(5)
   @MaxLength(20)
-  user_name: string;
+  user_name_id: string;
 
   @IsNotEmpty()
   @IsString()
@@ -22,7 +22,7 @@ export class SignUpDto {
   @IsNotEmpty()
   @IsString()
   @MaxLength(20)
-  surname: string;
+  prename: string;
 
   @IsNotEmpty()
   @IsEmail()
@@ -50,15 +50,26 @@ export class SignUpDto {
   password_confirm: string;
 
   @IsNotEmpty()
-  @MinLength(12)
+  @MinLength(10)
   @MaxLength(16)
   phone_number: string;
 
   @IsNotEmpty()
   @IsString()
-  secret_question: string;
+  secret_word: string;
 
   @IsNotEmpty()
   @IsString()
   secret_answer: string;
+
+  @IsNotEmpty()
+  @IsString()
+  country: string;
+
+  @IsNotEmpty()
+  @IsString()
+  city: string;
+
+  @IsNotEmpty()
+  localisation: localisationType;
 }

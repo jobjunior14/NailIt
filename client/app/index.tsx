@@ -23,7 +23,7 @@ const App: React.FC = () => {
         <SearchBar />
         <CustomNavBar />
         <Tab.Navigator
-          initialRouteName="Auth"
+          initialRouteName="Service"
           backBehavior="history"
           screenOptions={{
             swipeEnabled: false,
@@ -36,13 +36,33 @@ const App: React.FC = () => {
         >
           <Tab.Screen name="Auth" component={AuthStack} />
           <Tab.Group screenOptions={{ lazy: true, animationEnabled: true }}>
-            <Tab.Screen name="Service" component={ServiceScreen} />
-            <Tab.Screen name="Product" component={ProductScreen} />
-            <Tab.Screen name="Daily" component={DailyScreen} />
+            <Tab.Screen
+              name="Service"
+              component={ServiceScreen}
+              initialParams={{ user_name: "guest" }}
+            />
+            <Tab.Screen
+              name="Product"
+              component={ProductScreen}
+              initialParams={{ user_name: "guest" }}
+            />
+            <Tab.Screen
+              name="Daily"
+              component={DailyScreen}
+              initialParams={{ user_name: "guest" }}
+            />
           </Tab.Group>
 
-          <Tab.Screen name="MessagingStack" component={MessagingStack} />
-          <Tab.Screen name="MySpaceStack" component={MySpaceStack} />
+          <Tab.Screen
+            name="MessagingStack"
+            component={MessagingStack}
+            initialParams={{ user_name: "guest" }}
+          />
+          <Tab.Screen
+            name="MySpaceStack"
+            component={MySpaceStack}
+            initialParams={{ user_name: "guest" }}
+          />
         </Tab.Navigator>
       </SafeAreaView>
       <NavButton />

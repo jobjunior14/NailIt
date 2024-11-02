@@ -7,7 +7,14 @@ import {
   Matches,
 } from 'class-validator';
 
-export class ResetPasswordDto {
+export class ResetPassworWithSecretAnswerdDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsNotEmpty()
+  secret_answer?: string;
+
   @IsNotEmpty()
   @IsString()
   @MinLength(4)

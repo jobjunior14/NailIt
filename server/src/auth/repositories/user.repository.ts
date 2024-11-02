@@ -1,5 +1,5 @@
 import { DataSource, Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
 import {
   BadRequestException,
   ConflictException,
@@ -9,18 +9,18 @@ import {
 import { SignUpDto } from '../dto/signUp.dto';
 import { passwordType } from '../interfaces_and_types/password.type';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ResetPasswordDto } from '../dto/reset-password.dto';
+import { ResetPassworWithSecretAnswerdDto } from '../dto/reset-passwordWithSercreAnswer.dto';
 import { updateUserDto } from '../dto/updateUser.dto';
-import { HasLinks } from '../entities/hasLink.entity';
+import { HasLinksEntity } from '../entities/hasLink.entity';
 import { HasLinksRepository } from './hasLink.repository';
 
 @Injectable()
-export class UserRepository extends Repository<User> {
+export class UserRepository extends Repository<UserEntity> {
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(User)
-    @InjectRepository(HasLinks)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(UserEntity)
+    @InjectRepository(HasLinksEntity)
+    private readonly userRepository: Repository<UserEntity>,
     private hasLinksRepository: HasLinksRepository,
   ) {
     super(
@@ -30,7 +30,10 @@ export class UserRepository extends Repository<User> {
     );
   }
 
-  async signUp(signUpDto: SignUpDto, localisation: string): Promise<User> {
+  async signUp(
+    signUpDto: SignUpDto,
+    localisation: string,
+  ): Promise<UserEntity> {
     try {
       const {
         user_name_id,
@@ -76,11 +79,11 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async SignIn(emailData: string): Promise<User[]> {
+  async SignIn(emailData: string): Promise<UserEntity[]> {
     try {
       const email = emailData;
 
-      const findUser: User[] = await this.dataSource.query(
+      const findUser: UserEntity[] = await this.dataSource.query(
         `SELECT * FROM users WHERE email = $1`,
         [email],
       );
@@ -122,7 +125,7 @@ export class UserRepository extends Repository<User> {
   }
 
   async resetPasswordWithSecretAnswer(
-    user_data: ResetPasswordDto,
+    user_data: ResetPassworWithSecretAnswerdDto,
     timestamp: Date = new Date(),
   ): Promise<string> {
     try {
@@ -158,7 +161,7 @@ export class UserRepository extends Repository<User> {
       if (user_data.websites) {
         for (const i of user_data.websites) {
           try {
-            const dataInHasLink: HasLinks[] =
+            const dataInHasLink: HasLinksEntity[] =
               await this.hasLinksRepository.query(
                 'SELECT * FROM has_links WHERE user_id = $1 AND website_id = $2',
                 [user_data.user_name_id, i.id],

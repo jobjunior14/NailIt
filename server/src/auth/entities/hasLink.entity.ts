@@ -7,21 +7,23 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { Website } from './website.entiy';
-import { User } from './user.entity';
+import { WebsiteEntity } from './website.entiy';
+import { UserEntity } from './user.entity';
 
 @Entity('has_links')
 @Unique(['website', 'link', 'user'])
-export class HasLinks extends BaseEntity {
+export class HasLinksEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
-  @ManyToOne(() => User, (user) => user.links, { onUpdate: 'CASCADE' })
+  @ManyToOne(() => UserEntity, (user) => user.links, { onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'user_name_id' })
-  user: User;
+  user: UserEntity;
 
-  @ManyToOne(() => Website, (website) => website.links, { onUpdate: 'CASCADE' })
+  @ManyToOne(() => WebsiteEntity, (website) => website.links, {
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn({ name: 'website_id', referencedColumnName: 'id' })
-  website: Website;
+  website: WebsiteEntity;
 
   @Column({ nullable: false })
   link: string;

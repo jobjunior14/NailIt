@@ -1,5 +1,5 @@
 import { DataSource, Repository } from 'typeorm';
-import { User } from './user.entity';
+import { UserEntity } from './entities/user.entity';
 import {
   BadRequestException,
   ConflictException,
@@ -11,10 +11,11 @@ import { passwordType } from './interfaces_and_types/password.type';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class UserRepository extends Repository<User> {
+export class UserRepository extends Repository<UserEntity> {
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
   ) {
     super(
       userRepository.target,
@@ -23,7 +24,7 @@ export class UserRepository extends Repository<User> {
     );
   }
 
-  async signUp(signUpDto: SignUpDto): Promise<User> {
+  async signUp(signUpDto: SignUpDto): Promise<UserEntity> {
     try {
       const {
         user_name_id,
@@ -62,11 +63,11 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async SignIn(emailData: string): Promise<User[]> {
+  async SignIn(emailData: string): Promise<UserEntity[]> {
     try {
       const email = emailData;
 
-      const findUser: User[] = await this.dataSource.query(
+      const findUser: UserEntity[] = await this.dataSource.query(
         `SELECT * FROM users WHERE email = $1`,
         [email],
       );

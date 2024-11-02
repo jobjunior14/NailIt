@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { Website } from '../entities/website.entiy';
+import { WebsiteEntity } from '../entities/website.entiy';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
-export class WebsiteRepository extends Repository<Website> {
+export class WebsiteRepository extends Repository<WebsiteEntity> {
   constructor(
     private dataSource: DataSource,
-    @InjectRepository(Website)
-    private readonly websiteRepository: Repository<Website>,
+    @InjectRepository(WebsiteEntity)
+    private readonly websiteRepository: Repository<WebsiteEntity>,
   ) {
     super(
       websiteRepository.target,

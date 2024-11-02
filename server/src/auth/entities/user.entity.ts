@@ -9,13 +9,15 @@ import {
   BaseEntity,
   OneToMany,
 } from 'typeorm';
-import { HasLinks } from './hasLink.entity';
+import * as crypto from 'crypto';
+import { HasLinksEntity } from './hasLink.entity';
+import { NailitVerificationStatus } from '../interfaces_and_types/nailit-verification-status.type';
 @Entity('users')
 @Unique(['phone_number'])
 @Unique(['email'])
 @Check(`"premium_subscription_expire_at" > NOW()`)
 @Check(`"balance" >= 0`)
-export class User extends BaseEntity {
+export class UserEntity extends BaseEntity {
   @PrimaryColumn({ type: 'varchar', length: 50 })
   user_name_id: string;
 
@@ -30,11 +32,10 @@ export class User extends BaseEntity {
 
   @Column({
     type: 'enum',
-    enum: ['not_verified', 'verified', 'pending'],
-    default: 'not_verified',
-    nullable: false,
+    enum: NailitVerificationStatus,
+    default: NailitVerificationStatus.NOT_VERIFIED,
   })
-  nailit_verification: 'not_verified' | 'verified' | 'pending';
+  nailit_verification: NailitVerificationStatus;
 
   @Column({ type: 'varchar', length: 40, nullable: false })
   country: string;
@@ -95,8 +96,14 @@ export class User extends BaseEntity {
   @Column({ type: 'timestamp', nullable: true })
   secret_answer_updated_at: Date | null;
 
-  @OneToMany(() => HasLinks, (hasLinks) => hasLinks.user)
-  links: HasLinks[];
+  @OneToMany(() => HasLinksEntity, (hasLinks) => hasLinks.user)
+  links: HasLinksEntity[];
+
+  @Column({ type: 'varchar', length: 250, nullable: true })
+  password_resetToken: string | null;
+
+  @Column({ type: 'varchar', length: 15, nullable: true })
+  password_reset_expires: string | null;
 
   async changePasswordAfterIsued(JWTTimestamp: number): Promise<boolean> {
     if (this.password_updated_at) {
@@ -129,5 +136,27 @@ export class User extends BaseEntity {
       return JWTTimestamp < changeTimeStamp;
     }
     return false;
+  }
+
+  createPasswordResetToken(): string {
+    const resetToken: string = crypto.randomBytes(32).toString('hex');
+
+    this.password_resetToken = crypto
+      .createHash('sha256')
+      .update(resetToken)
+      .digest('hex');
+    this.password_reset_expires = (Date.now() + 10 * 60 * 1000).toString();
+
+    console.log(
+      crypto
+        .createHash('sha256')
+        .update(
+          '$88b8615d2073833dba1ea34cdf3e87830f107cba18be2165ceff0611f2aed05d',
+        )
+        .digest('hex'),
+    );
+    this.save();
+
+    return resetToken;
   }
 }

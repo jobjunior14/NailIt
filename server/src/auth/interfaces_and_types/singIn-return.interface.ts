@@ -1,5 +1,5 @@
-import { User } from '../entities/user.entity';
+import { UserEntity } from '../entities/user.entity';
 export interface SignInInterface {
-  userData: User[];
+  userData: UserEntity[];
   token: string;
 }

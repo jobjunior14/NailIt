@@ -76,7 +76,7 @@ export default function SignUpScreen() {
         console.log(response.data);
 
         if (response) {
-          console.log("User signed up successfully", response.data);
+          console.log("UserEntity signed up successfully", response.data);
         }
       } catch (error: any) {
         // Handle the error response from the server

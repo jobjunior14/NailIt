@@ -228,29 +228,27 @@ export class AuthService {
     // save the current entity in the database
     user.save();
 
-    const resetUrl = `http://localhost:3000/auth/resetPassword/$${resetToken}`; //to modify
-
-    console.log(resetUrl);
+    const resetUrl = `http://localhost:3000/auth/resetPassword/${resetToken}`; //to modify
 
     const message = `Forget password?  Please provide your new password to: ${resetUrl}.\n Thanks to do not share the link and your new password 
     <b>and if you didn't forget your password ignore this email</b>.`;
 
-    // try {
-    //   await this.mailService.sendMail({
-    //     to: user.email,
-    //     subject: 'Your password reset link (VALID FOR 10 MIN) ',
-    //     message: 'Try to not share this link',
-    //     html: message,
-    //   });
-    // } catch (error) {
-    //   (user.password_reset_expires = null), (user.password_resetToken = null);
+    try {
+      await this.mailService.sendMail({
+        to: user.email,
+        subject: 'Your password reset link (VALID FOR 10 MIN) ',
+        message: 'Try to not share this link',
+        html: message,
+      });
+    } catch (error) {
+      (user.password_reset_expires = null), (user.password_resetToken = null);
 
-    //   await user.save();
+      await user.save();
 
-    //   throw new InternalServerErrorException(
-    //     'There was an error sending the Email. Try Again Later!',
-    //   );
-    // }
+      throw new InternalServerErrorException(
+        'There was an error sending the Email. Try Again Later!',
+      );
+    }
 
     return 'Email for reset password, was sent succefully';
   }
@@ -264,19 +262,8 @@ export class AuthService {
       .digest('hex');
 
     const user = await this.userRepository.findOne({
-      where: { password_resetToken: password_resetToken },
+      where: { password_resetToken },
     });
-
-    // console.log(user/);
-    // console.log(password_resetToken, '2');
-    console.log(
-      crypto
-        .createHash('sha256')
-        .update(
-          '$88b8615d2073833dba1ea34cdf3e87830f107cba18be2165ceff0611f2aed05d',
-        )
-        .digest('hex'),
-    );
 
     if (!user && Number(user.password_reset_expires) > Date.now()) {
       throw new BadRequestException(

@@ -147,14 +147,6 @@ export class UserEntity extends BaseEntity {
       .digest('hex');
     this.password_reset_expires = (Date.now() + 10 * 60 * 1000).toString();
 
-    console.log(
-      crypto
-        .createHash('sha256')
-        .update(
-          '$88b8615d2073833dba1ea34cdf3e87830f107cba18be2165ceff0611f2aed05d',
-        )
-        .digest('hex'),
-    );
     this.save();
 
     return resetToken;

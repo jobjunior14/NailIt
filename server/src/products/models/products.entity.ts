@@ -9,6 +9,7 @@ import {
   BaseEntity,
   JoinTable,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { CategoriesEntity } from 'src/categories/categories.entity';
 
@@ -39,6 +40,7 @@ export class ProductEntity extends BaseEntity {
   views: number;
 
   @ManyToOne(() => UserEntity, (users) => users.products)
+  @JoinColumn({ name: 'user_id' })
   users: UserEntity[];
 
   @ManyToMany(() => CategoriesEntity, (category) => category.products)

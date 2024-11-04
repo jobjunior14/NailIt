@@ -1,4 +1,4 @@
-import { ProductEntity } from 'src/products/schema_entity/products.entity';
+import { ProductEntity } from 'src/products/products.entity';
 import {
   BaseEntity,
   Column,

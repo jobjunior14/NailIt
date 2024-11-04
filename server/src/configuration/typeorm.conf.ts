@@ -4,7 +4,7 @@ import { HasLinksEntity } from 'src/auth/entities/hasLink.entity';
 import { UserEntity } from 'src/auth/entities/user.entity';
 import { WebsiteEntity } from 'src/auth/entities/website.entiy';
 import { CategoriesEntity } from 'src/categories/categories.entity';
-import { ProductEntity } from 'src/products/schema_entity/products.entity';
+import { ProductEntity } from 'src/products/products.entity';
 
 // Load environment variables
 dotenv.config();

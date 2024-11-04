@@ -1,5 +1,5 @@
 import { Resolver, Query } from '@nestjs/graphql';
-import { UserEntity } from './entities/user.entity';
+import { UserEntity } from './models/user.entity';
 import UserSchema from './graphql/user.schema';
 import { AuthService } from './auth.service';
 import { UseGuards } from '@nestjs/common';

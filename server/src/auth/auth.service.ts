@@ -8,7 +8,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './repositories/user.repository';
 import { SignUpDto } from './dto/signUp.dto';
-import { UserEntity } from './entities/user.entity';
+import { UserEntity } from './models/user.entity';
 import {
   comparePasswords,
   hashPassword,
@@ -23,8 +23,8 @@ import { passwordType } from './interfaces_and_types/password.type';
 import { ResetPassworWithSecretAnswerdDto } from './dto/reset-passwordWithSercreAnswer.dto';
 import { normalizeName } from './utils/normalizeName.util';
 import { updateUserDto } from './dto/updateUser.dto';
-import { WebsiteEntity } from './entities/website.entiy';
-import { HasLinksEntity } from './entities/hasLink.entity';
+import { WebsiteEntity } from './models/website.entiy';
+import { HasLinksEntity } from './models/hasLink.entity';
 import { WebsiteRepository } from './repositories/website.repository';
 import { localisationType } from './interfaces_and_types/localisation.type';
 import { EmailDto } from './dto/email.dto';

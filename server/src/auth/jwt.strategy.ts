@@ -5,7 +5,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtPayloadInterface } from './interfaces_and_types/jwt-interface.payload.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './repositories/user.repository';
-import { UserEntity } from './entities/user.entity';
+import { UserEntity } from './models/user.entity';
 
 //for graphql
 import { ExecutionContext } from '@nestjs/common';

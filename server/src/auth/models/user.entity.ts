@@ -15,7 +15,7 @@ import {
 import * as crypto from 'crypto';
 import { HasLinksEntity } from './hasLink.entity';
 import { NailitVerificationStatus } from '../interfaces_and_types/nailit-verification-status.type';
-import { ProductEntity } from 'src/products/products.entity';
+import { ProductEntity } from 'src/products/models/products.entity';
 @Entity('users')
 @Unique(['phone_number'])
 @Unique(['email'])

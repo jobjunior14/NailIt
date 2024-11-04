@@ -1,4 +1,4 @@
-import { ProductEntity } from 'src/products/products.entity';
+import { ProductEntity } from 'src/products/models/products.entity';
 import {
   BaseEntity,
   Column,

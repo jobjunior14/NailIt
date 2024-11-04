@@ -1,5 +1,5 @@
 import { DataSource, Repository } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
+import { UserEntity } from '../models/user.entity';
 import {
   BadRequestException,
   ConflictException,
@@ -11,7 +11,7 @@ import { passwordType } from '../interfaces_and_types/password.type';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ResetPassworWithSecretAnswerdDto } from '../dto/reset-passwordWithSercreAnswer.dto';
 import { updateUserDto } from '../dto/updateUser.dto';
-import { HasLinksEntity } from '../entities/hasLink.entity';
+import { HasLinksEntity } from '../models/hasLink.entity';
 import { HasLinksRepository } from './hasLink.repository';
 
 @Injectable()

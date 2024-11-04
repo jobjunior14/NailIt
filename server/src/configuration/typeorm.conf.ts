@@ -1,10 +1,10 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
-import { HasLinksEntity } from 'src/auth/entities/hasLink.entity';
-import { UserEntity } from 'src/auth/entities/user.entity';
-import { WebsiteEntity } from 'src/auth/entities/website.entiy';
+import { HasLinksEntity } from 'src/auth/models/hasLink.entity';
+import { UserEntity } from 'src/auth/models/user.entity';
+import { WebsiteEntity } from 'src/auth/models/website.entiy';
 import { CategoriesEntity } from 'src/categories/categories.entity';
-import { ProductEntity } from 'src/products/products.entity';
+import { ProductEntity } from 'src/products/models/products.entity';
 
 // Load environment variables
 dotenv.config();

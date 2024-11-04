@@ -1,5 +1,5 @@
 import { DataSource, Repository } from 'typeorm';
-import { UserEntity } from './entities/user.entity';
+import { UserEntity } from './models/user.entity';
 import {
   BadRequestException,
   ConflictException,

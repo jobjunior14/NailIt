@@ -152,10 +152,41 @@ export class AuthService {
         `There is no user with this email ${email}`,
       );
 
+    const resetToken = user.createPasswordResetToken(
+      Date.now() + 24 * 10 * 60 * 1000,
+    );
+
+    // save the current entity in the database
+    user.save();
+
+    const resetUrl = `http://localhost:3000/auth/resetPassword/${resetToken}`; //to modify
+
+    const message = `Someone just change your password if isn't you, click on this link: ${resetUrl}.\n Thanks to do not share the link and your new password 
+    <b>and if you didn't forget your password ignore this email</b>.`;
+
+    try {
+      await this.mailService.sendMail({
+        to: user.email,
+        subject: 'Your password reset link (VALID FOR 1 DAY) ',
+        message: 'Try to not share this link',
+        html: message,
+      });
+    } catch (error) {
+      (user.password_reset_expires = null), (user.password_resetToken = null);
+
+      await user.save();
+
+      throw new InternalServerErrorException(
+        'There was an error sending the Email. Try Again Later!',
+      );
+    }
+
     if (!comparePasswords(secret_answer, user.secret_answer))
       throw new UnauthorizedException('Wrong secret answer');
 
     user_data.new_password = await hashPassword(new_password);
+
+    //send email when somone that is not the owner of the account try to change the password
 
     return await this.userRepository.resetPasswordWithSecretAnswer(user_data);
   }
@@ -223,7 +254,9 @@ export class AuthService {
         `There is no user with this email ${email}`,
       );
 
-    const resetToken = user.createPasswordResetToken();
+    const resetToken = user.createPasswordResetToken(
+      Date.now() + 10 * 60 * 1000,
+    );
 
     // save the current entity in the database
     user.save();

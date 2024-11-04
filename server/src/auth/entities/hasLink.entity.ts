@@ -15,12 +15,16 @@ import { UserEntity } from './user.entity';
 export class HasLinksEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
-  @ManyToOne(() => UserEntity, (user) => user.links, { onUpdate: 'CASCADE' })
+  @ManyToOne(() => UserEntity, (user) => user.links, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'user_name_id' })
   user: UserEntity;
 
   @ManyToOne(() => WebsiteEntity, (website) => website.links, {
     onUpdate: 'CASCADE',
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'website_id', referencedColumnName: 'id' })
   website: WebsiteEntity;

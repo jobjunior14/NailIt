@@ -8,10 +8,14 @@ import {
   Check,
   BaseEntity,
   OneToMany,
+  ManyToMany,
+  JoinTable,
+  ManyToOne,
 } from 'typeorm';
 import * as crypto from 'crypto';
 import { HasLinksEntity } from './hasLink.entity';
 import { NailitVerificationStatus } from '../interfaces_and_types/nailit-verification-status.type';
+import { ProductEntity } from 'src/products/schema_entity/products.entity';
 @Entity('users')
 @Unique(['phone_number'])
 @Unique(['email'])
@@ -105,6 +109,9 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 15, nullable: true })
   password_reset_expires: string | null;
 
+  @OneToMany(() => ProductEntity, (product) => product.users)
+  products: ProductEntity[];
+
   async changePasswordAfterIsued(JWTTimestamp: number): Promise<boolean> {
     if (this.password_updated_at) {
       const changeTimeStamp = Math.floor(
@@ -138,14 +145,14 @@ export class UserEntity extends BaseEntity {
     return false;
   }
 
-  createPasswordResetToken(): string {
+  createPasswordResetToken(date: number): string {
     const resetToken: string = crypto.randomBytes(32).toString('hex');
 
     this.password_resetToken = crypto
       .createHash('sha256')
       .update(resetToken)
       .digest('hex');
-    this.password_reset_expires = (Date.now() + 10 * 60 * 1000).toString();
+    this.password_reset_expires = date.toString();
 
     this.save();
 

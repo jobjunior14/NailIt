@@ -19,7 +19,7 @@ export class ProductEntity extends BaseEntity {
   id: number;
 
   @Column({ length: 255 })
-  title: string;
+  title: String;
 
   @CreateDateColumn({ type: 'timestamptz', default: 'NOW()' })
   created_at: Date;
@@ -30,7 +30,7 @@ export class ProductEntity extends BaseEntity {
   @Column({ type: 'decimal', precision: 2 })
   price: number;
 
-  @Column({ type: 'decimal', precision: 2 })
+  @Column({ type: 'decimal', precision: 2, nullable: true })
   discount: number;
 
   @Column({ type: 'smallint', nullable: true })

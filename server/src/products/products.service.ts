@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductRepositoryPostgresql } from './repositories/product.repository.postgresql';
 // import { InjectModel } from '@nestjs/mongoose';
@@ -8,6 +8,7 @@ import {
   CreateProductInput,
   ProductSchemaGraphQl,
 } from './graphql/product.graphql';
+import { createProductMongoDbDto } from './dto/createProduct-MongoDB.dto';
 
 @Injectable()
 export class ProductsService {
@@ -21,7 +22,30 @@ export class ProductsService {
   async createProduct(
     createProductInput: CreateProductInput,
   ): Promise<ProductSchemaGraphQl> {
-    // console.log(data);
+    try {
+      //data in postgresql
+      const userDataPostGresql =
+        this.productRepositoryPostgresql.create(createProductInput);
+
+      // save the current entity
+      this.productRepositoryPostgresql.save(userDataPostGresql);
+
+      //data in mongoDb
+
+      const productMongoDbData: createProductMongoDbDto = {
+        product_id: userDataPostGresql.id,
+        avantages: createProductInput.avantages,
+        detail: createProductInput.details,
+        medias: createProductInput.medias,
+        comments: createProductInput.comments,
+      };
+      const userDataMongoDB =
+        this.productRepositoryMongoDB.createProductsData(productMongoDbData);
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'An error occured while creating your publication ',
+      );
+    }
 
     return createProductInput;
   }

@@ -65,7 +65,7 @@ export class CreateProductInput {
   updated_at?: Date;
 
   @Field(() => [CreateMediaInput], { nullable: true })
-  medias: CreateMediaInput[];
+  medias?: CreateMediaInput[];
 
   @Field(() => [CreateCommentInput], { nullable: true })
   comments?: CreateCommentInput[];
@@ -80,7 +80,7 @@ export class Media {
   type: string;
 
   @Field(() => String)
-  url: string;
+  path: string;
 }
 
 @InputType()
@@ -89,7 +89,7 @@ export class CreateMediaInput {
   type: string;
 
   @Field(() => String)
-  url: string;
+  path: string;
 }
 
 @ObjectType()
@@ -99,6 +99,9 @@ export class Comment {
 
   @Field(() => String)
   comment: string;
+
+  @Field(() => Media)
+  media: Media;
 }
 
 @InputType()

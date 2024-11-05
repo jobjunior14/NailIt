@@ -6,25 +6,29 @@ export class ProductSchemaMongoDb extends Document {
   @Prop({ required: [true, 'You must provide a product id'], unique: true })
   product_id: number;
 
-  @Prop(() => [String])
+  @Prop({ default: [] })
   avantages: string[];
 
-  @Prop()
+  @Prop({ default: '' })
   detail: string;
 
   @Prop({ required: [true, 'You must provide at least one media'] })
   medias: [
     {
-      type: String;
-      url: string;
+      type: string;
+      path: string;
     },
   ];
 
   @Prop()
   comments: [
     {
-      user_id: { type: String; ref: 'UserEntity' }; // Reference to the User model
+      user_id: { type: string; ref: 'UserEntity' }; // Reference to the User model
       comment: string;
+      media: {
+        path: string;
+        type: string;
+      };
     },
   ];
 }

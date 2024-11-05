@@ -8,6 +8,7 @@ import { ProductRepositoryPostgresql } from './repositories/product.repository.p
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from './models/products.entity';
 import { CategoriesEntity } from 'src/categories/categories.entity';
+import { ProductsController } from './products.controller';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'products', schema: ProductSchema }]),
@@ -19,5 +20,6 @@ import { CategoriesEntity } from 'src/categories/categories.entity';
     ProductRepositoryMongoDB,
     ProductRepositoryPostgresql,
   ],
+  controllers: [ProductsController],
 })
 export class ProductsModule {}

@@ -4,7 +4,10 @@ import { ProductRepositoryPostgresql } from './repositories/product.repository.p
 // import { InjectModel } from '@nestjs/mongoose';
 import { ProductRepositoryMongoDB } from './repositories/product.repository.mongodb';
 import { Args } from '@nestjs/graphql';
-import { CreateProductInput } from './graphql/product.graphql';
+import {
+  CreateProductInput,
+  ProductSchemaGraphQl,
+} from './graphql/product.graphql';
 
 @Injectable()
 export class ProductsService {
@@ -15,9 +18,11 @@ export class ProductsService {
     private productRepositoryPostgresql: ProductRepositoryPostgresql,
   ) {}
 
-  async createProduct(data) {
-    console.log(data);
+  async createProduct(
+    createProductInput: CreateProductInput,
+  ): Promise<ProductSchemaGraphQl> {
+    // console.log(data);
 
-    return '';
+    return createProductInput;
   }
 }

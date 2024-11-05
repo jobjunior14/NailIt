@@ -1,6 +1,6 @@
 import { Field, ObjectType, ID, Float, Int, InputType } from '@nestjs/graphql';
-// import { Media, Comments } from '../type_interface/media.type';
-import { Scalar } from '@nestjs/graphql';
+import { GraphQLUpload } from 'graphql-upload';
+import { FileUpload } from '../type_interface/fileupload.interface';
 
 @ObjectType()
 export class ProductSchemaGraphQl {
@@ -65,7 +65,7 @@ export class CreateProductInput {
   updated_at?: Date;
 
   @Field(() => [CreateMediaInput], { nullable: true })
-  medias?: CreateMediaInput[];
+  medias: CreateMediaInput[];
 
   @Field(() => [CreateCommentInput], { nullable: true })
   comments?: CreateCommentInput[];
@@ -108,4 +108,7 @@ export class CreateCommentInput {
 
   @Field(() => String)
   comment: string;
+
+  @Field(() => CreateMediaInput)
+  media: CreateMediaInput;
 }

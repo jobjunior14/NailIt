@@ -14,8 +14,8 @@ export class ProductsResolver {
   async createProduct(
     @Args('createProductInput') createProductInput: CreateProductInput,
   ): Promise<ProductSchemaGraphQl> {
-    // return this.productService.createProduct(input);
-    console.log(createProductInput);
+    return this.productService.createProduct(createProductInput);
+    // console.log(createProductInput);
 
     return createProductInput;
   }

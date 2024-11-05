@@ -17,7 +17,7 @@ export class UploadController {
   @UseInterceptors(
     FilesInterceptor('files', 10, {
       storage: diskStorage({
-        destination: '../uploads', // Folder where files are saved
+        destination: './uploads', // Folder where files are saved
         filename: (req, file, callback) => {
           const uniqueSuffix =
             Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -47,7 +47,7 @@ export class UploadController {
 
       // Map file paths and return them
       const filePaths = files.map((file) => ({
-        path: `../uploads/${file.filename}`,
+        path: `./uploads/${file.filename}`,
         type: file.mimetype,
       }));
 

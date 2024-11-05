@@ -3,8 +3,9 @@ import * as dotenv from 'dotenv';
 import { HasLinksEntity } from 'src/auth/models/hasLink.entity';
 import { UserEntity } from 'src/auth/models/user.entity';
 import { WebsiteEntity } from 'src/auth/models/website.entiy';
-import { CategoriesEntity } from 'src/categories/categories.entity';
-import { ProductEntity } from 'src/products/models/products.entity';
+import { CategoriesEntity } from 'src/publications/products/models/categories.entity';
+import { ProductsCategoriesEntity } from 'src/publications/products/models/productCategories.entity';
+import { ProductEntity } from 'src/publications/products/models/products.entity';
 
 // Load environment variables
 dotenv.config();
@@ -23,6 +24,7 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     HasLinksEntity,
     CategoriesEntity,
     ProductEntity,
+    ProductsCategoriesEntity,
   ],
   synchronize: true,
   logging: true,

@@ -8,10 +8,12 @@ import {
   ManyToMany,
   BaseEntity,
   JoinTable,
+  OneToMany,
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { CategoriesEntity } from 'src/categories/categories.entity';
+import { CategoriesEntity } from 'src/publications/products/models/categories.entity';
+import { ProductsCategoriesEntity } from './productCategories.entity';
 
 @Entity('products')
 export class ProductEntity extends BaseEntity {
@@ -43,7 +45,9 @@ export class ProductEntity extends BaseEntity {
   @JoinColumn({ name: 'user_id' })
   users: UserEntity[];
 
-  @ManyToMany(() => CategoriesEntity, (category) => category.products)
-  @JoinTable({ name: 'products_categories' })
-  categories: CategoriesEntity[];
+  @OneToMany(
+    () => ProductsCategoriesEntity,
+    (productsCategoriesEntity) => productsCategoriesEntity.product,
+  )
+  categories: ProductsCategoriesEntity[];
 }

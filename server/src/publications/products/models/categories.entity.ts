@@ -1,12 +1,12 @@
-import { ProductEntity } from 'src/products/models/products.entity';
 import {
   BaseEntity,
   Column,
   Entity,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
+import { ProductsCategoriesEntity } from './productCategories.entity';
 
 @Entity('categories')
 @Unique(['name', 'id'])
@@ -17,6 +17,9 @@ export class CategoriesEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 50 })
   name: string;
 
-  @ManyToMany(() => ProductEntity, (product) => product.categories)
-  products: ProductEntity[];
+  @OneToMany(
+    () => ProductsCategoriesEntity,
+    (productsCategories) => productsCategories.category,
+  )
+  productsCategories: ProductsCategoriesEntity[];
 }

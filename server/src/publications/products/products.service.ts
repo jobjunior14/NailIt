@@ -1,15 +1,14 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductRepositoryPostgresql } from './repositories/product.repository.postgresql';
-// import { InjectModel } from '@nestjs/mongoose';
+import fs from 'fs';
 import { ProductRepositoryMongoDB } from './repositories/product.repository.mongodb';
-import { Args } from '@nestjs/graphql';
 import {
   CreateProductInput,
   ProductSchemaGraphQl,
 } from './graphql/product.graphql';
 import { createProductMongoDbDto } from './dto/createProduct-MongoDB.dto';
-
+import { deletingFile } from 'src/utils/checkFileExists';
 @Injectable()
 export class ProductsService {
   constructor(
@@ -42,6 +41,10 @@ export class ProductsService {
       const userDataMongoDB =
         this.productRepositoryMongoDB.createProductsData(productMongoDbData);
     } catch (error) {
+      for (let i of createProductInput.medias) {
+        //if an error occured, deleting the created files
+        deletingFile(i.path);
+      }
       throw new InternalServerErrorException(
         'An error occured while creating your publication ',
       );

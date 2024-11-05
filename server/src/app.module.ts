@@ -7,7 +7,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MailModule } from './mail/mail.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductsModule } from './products/products.module';
+import { ProductsModule } from './publications/products/products.module';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { UploadModule } from './upload/upload.module';
 import * as dotenv from 'dotenv';

@@ -7,12 +7,17 @@ import { ProductRepositoryMongoDB } from './repositories/product.repository.mong
 import { ProductRepositoryPostgresql } from './repositories/product.repository.postgresql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from './models/products.entity';
-import { CategoriesEntity } from 'src/categories/categories.entity';
+import { CategoriesEntity } from 'src/publications/products/models/categories.entity';
 import { ProductsController } from './products.controller';
+import { ProductsCategoriesEntity } from './models/productCategories.entity';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'products', schema: ProductSchema }]),
-    TypeOrmModule.forFeature([ProductEntity, CategoriesEntity]),
+    TypeOrmModule.forFeature([
+      ProductEntity,
+      CategoriesEntity,
+      ProductsCategoriesEntity,
+    ]),
   ],
   providers: [
     ProductsResolver,

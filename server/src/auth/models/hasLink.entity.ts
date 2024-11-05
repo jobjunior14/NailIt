@@ -15,6 +15,7 @@ import { UserEntity } from './user.entity';
 export class HasLinksEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int' })
   id: number;
+
   @ManyToOne(() => UserEntity, (user) => user.links, {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',

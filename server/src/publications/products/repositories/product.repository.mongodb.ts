@@ -22,7 +22,7 @@ export class ProductRepositoryMongoDB {
         'You can not  create the same product twice',
       );
     } else {
-      const newProductData = this.productModel.create(data);
+      const newProductData = new this.productModel(data);
 
       (await newProductData).save();
     }

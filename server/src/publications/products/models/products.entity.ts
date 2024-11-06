@@ -12,7 +12,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { CategoriesEntity } from 'src/publications/products/models/categories.entity';
 import { ProductsCategoriesEntity } from './productCategories.entity';
 
 @Entity('products')

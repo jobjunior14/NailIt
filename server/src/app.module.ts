@@ -20,11 +20,6 @@ dotenv.config();
       driver: ApolloDriver,
       autoSchemaFile: true,
       playground: true,
-      // uploads: {
-      //   maxFileSize: 24000000, // 10 MB
-      //   maxFiles: 10,
-      // },
-      // plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     MongooseModule.forRoot(process.env.DATABASE_LOCAL_MONGODB),
     ConfigModule.forRoot({

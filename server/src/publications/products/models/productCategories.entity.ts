@@ -5,11 +5,12 @@ import {
   ManyToOne,
   JoinColumn,
   BaseEntity,
+  Unique,
 } from 'typeorm';
 import { ProductEntity } from './products.entity';
-import { CategoriesEntity } from 'src/publications/products/models/categories.entity';
-
+import { CategoriesEntity } from './categories.entity';
 @Entity('products_categories')
+@Unique(['product', 'category'])
 export class ProductsCategoriesEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;

@@ -7,9 +7,9 @@ import FontsLoader from "@/components/FontLoader/fontLoader";
 import useHideNavigations from "@/hooks/useHideNavigations";
 
 type RootDrawerParamList = {
-  Service: { categorie: string | undefined };
-  Product: { categorie: string | undefined };
-  Daily: { categorie: string | undefined };
+  Service: { category: string | undefined };
+  Product: { category: string | undefined };
+  Daily: { category: string | undefined };
 };
 
 interface categorieInterface {
@@ -59,12 +59,12 @@ const CustomNavBar: React.FC = () => {
     setActiveCategorie(handleCategorieState(false) as categorieInterface);
   }, []);
 
-  const handleCategorieState = (index: boolean, categorie?: string): object => {
+  const handleCategorieState = (index: boolean, category?: string): object => {
     let obj: categorieInterface = {};
     for (let i = 0; i < categories.length; i++) {
       obj[categories[i]] = i === 0 && !index;
     }
-    if (categorie) obj[categorie] = true;
+    if (category) obj[category] = true;
     return obj;
   };
 
@@ -96,7 +96,7 @@ const CustomNavBar: React.FC = () => {
             }`}
             onPress={() =>
               navigation.navigate("Service", {
-                categorie: searchActiveCategorie(activeCategorie),
+                category: searchActiveCategorie(activeCategorie),
               })
             }
           >
@@ -119,7 +119,7 @@ const CustomNavBar: React.FC = () => {
             }`}
             onPress={() =>
               navigation.navigate("Product", {
-                categorie: searchActiveCategorie(activeCategorie),
+                category: searchActiveCategorie(activeCategorie),
               })
             }
           >
@@ -143,7 +143,7 @@ const CustomNavBar: React.FC = () => {
             }`}
             onPress={() =>
               navigation.navigate("Daily", {
-                categorie: searchActiveCategorie(activeCategorie),
+                category: searchActiveCategorie(activeCategorie),
               })
             }
           >
@@ -179,7 +179,7 @@ const CustomNavBar: React.FC = () => {
               onPress={() => {
                 handleCategorie(li);
                 navigation.navigate(currentRoute as keyof RootDrawerParamList, {
-                  categorie: li,
+                  category: li,
                 });
               }}
             >

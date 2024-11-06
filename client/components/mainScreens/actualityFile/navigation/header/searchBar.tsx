@@ -17,7 +17,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import useHideNavigations from "@/hooks/useHideNavigations";
 
 type RootDrawerParamList = {
-  MySpaceStack: { categorie: string | undefined };
+  MySpaceStack: { category: string | undefined };
 };
 
 export default function SearchBar() {
@@ -38,7 +38,7 @@ export default function SearchBar() {
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() =>
-            navigation.navigate("MySpaceStack", { categorie: undefined })
+            navigation.navigate("MySpaceStack", { category: undefined })
           }
           className="relative w-[10%]"
         >

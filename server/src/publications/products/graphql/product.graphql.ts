@@ -1,6 +1,5 @@
 import { Field, ObjectType, ID, Float, Int, InputType } from '@nestjs/graphql';
 import { GraphQLUpload } from 'graphql-upload';
-import { FileUpload } from '../type_interface/fileupload.interface';
 
 @ObjectType()
 export class ProductSchemaGraphQl {
@@ -36,6 +35,30 @@ export class ProductSchemaGraphQl {
 
   @Field(() => [String], { nullable: true })
   avantages?: String[];
+
+  @Field(() => [Categorie])
+  categories?: Categorie[];
+
+  @Field(() => String)
+  user_id: String;
+}
+
+@ObjectType()
+class Categorie {
+  @Field(() => String)
+  name: String;
+
+  @Field(() => ID, { nullable: true })
+  id?: number;
+}
+
+@InputType()
+class CreateCategorieInput {
+  @Field(() => String)
+  name: String;
+
+  @Field(() => ID, { nullable: true })
+  id?: number;
 }
 
 @InputType()
@@ -64,7 +87,7 @@ export class CreateProductInput {
   @Field(() => Date, { nullable: true })
   updated_at?: Date;
 
-  @Field(() => [CreateMediaInput], { nullable: true })
+  @Field(() => [CreateMediaInput])
   medias?: CreateMediaInput[];
 
   @Field(() => [CreateCommentInput], { nullable: true })
@@ -72,6 +95,12 @@ export class CreateProductInput {
 
   @Field(() => [String], { nullable: true })
   avantages?: String[];
+
+  @Field(() => [CreateCategorieInput])
+  categories?: CreateCategorieInput[];
+
+  @Field(() => String)
+  user_id: String;
 }
 
 @ObjectType()

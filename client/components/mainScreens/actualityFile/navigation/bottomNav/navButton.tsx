@@ -25,8 +25,8 @@ import useHideNavigations from "@/hooks/useHideNavigations";
 import { useRoute } from "@react-navigation/native";
 
 type RootDrawerParamList = {
-  MessagingStack: { categorie: string | undefined };
-  Service: { categorie: string | undefined };
+  MessagingStack: { category: string | undefined };
+  Service: { category: string | undefined };
 };
 const NavButton = () => {
   const [isOn, setIsOn] = useState<boolean>(false);
@@ -98,7 +98,7 @@ const NavButton = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
-              navigation.navigate("Service", { categorie: undefined })
+              navigation.navigate("Service", { category: undefined })
             }
           >
             <MotiView
@@ -161,7 +161,7 @@ const NavButton = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
-              navigation.navigate("MessagingStack", { categorie: undefined })
+              navigation.navigate("MessagingStack", { category: undefined })
             }
           >
             <MotiView

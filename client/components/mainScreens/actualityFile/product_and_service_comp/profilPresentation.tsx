@@ -32,7 +32,7 @@ export default function ProfilPresentation({
             />
           </TouchableOpacity>
 
-          {/* name, date, categorie */}
+          {/* name, date, category */}
           <View className=" flex-col gap-y-[1px] w-[70%]">
             <TouchableOpacity>
               <Text className=" font-interBold ">Job Junior</Text>

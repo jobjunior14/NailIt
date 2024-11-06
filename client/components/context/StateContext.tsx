@@ -1,8 +1,8 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
 
 interface GlobalState {
-  categorie?: string;
-  setCategorie: (categorie?: string) => void;
+  category?: string;
+  setCategorie: (category?: string) => void;
 }
 
 const StateContext = createContext<GlobalState | undefined>(undefined);
@@ -10,10 +10,10 @@ const StateContext = createContext<GlobalState | undefined>(undefined);
 export const StateProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [categorie, setCategorie] = useState<string | undefined>(undefined);
+  const [category, setCategorie] = useState<string | undefined>(undefined);
 
   return (
-    <StateContext.Provider value={{ categorie, setCategorie }}>
+    <StateContext.Provider value={{ category, setCategorie }}>
       {children}
     </StateContext.Provider>
   );

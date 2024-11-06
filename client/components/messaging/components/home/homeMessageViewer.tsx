@@ -3,7 +3,7 @@ import { rango } from "@/constants/image";
 import { useNavigation } from "expo-router";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 type RootDrawerParamList = {
-  inBox: { categorie: string | undefined };
+  inBox: { category: string | undefined };
 };
 
 export default function HomeMessageViewer() {
@@ -20,7 +20,7 @@ export default function HomeMessageViewer() {
         </View>
 
         <TouchableNativeFeedback
-          onPress={() => navigation.navigate("inBox", { categorie: undefined })}
+          onPress={() => navigation.navigate("inBox", { category: undefined })}
         >
           <View className="pt-1 justify-between flex-col">
             {/* // name and status */}

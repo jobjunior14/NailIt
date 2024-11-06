@@ -1,15 +1,15 @@
 import { Document } from 'mongoose';
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
-@Schema()
+@Schema({ collection: 'products' })
 export class ProductSchemaMongoDb extends Document {
   @Prop({ required: [true, 'You must provide a product id'], unique: true })
   product_id: number;
 
-  @Prop({ default: [] })
+  @Prop({ default: [], required: false })
   avantages: string[];
 
-  @Prop({ default: '' })
+  @Prop({ default: '', required: false })
   detail: string;
 
   @Prop({ required: [true, 'You must provide at least one media'] })
@@ -20,10 +20,10 @@ export class ProductSchemaMongoDb extends Document {
     },
   ];
 
-  @Prop()
+  @Prop({ required: false })
   comments: [
     {
-      user_id: { type: string; ref: 'UserEntity' }; // Reference to the User model
+      user_id: { type: string };
       comment: string;
       media: {
         path: string;

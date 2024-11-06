@@ -15,7 +15,7 @@ export class CategoriesEntity extends BaseEntity {
   id: number;
 
   @Column({ type: 'varchar', length: 50 })
-  name: string;
+  name: String;
 
   @OneToMany(
     () => ProductsCategoriesEntity,

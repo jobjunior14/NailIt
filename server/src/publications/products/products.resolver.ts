@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt.strategy';
 import { checkFileExists } from 'src/utils/checkFileExists';
-import { getRepository } from 'typeorm';
 
 @UseGuards(JwtAuthGuard)
 @Resolver()
@@ -26,9 +25,9 @@ export class ProductsResolver {
       throw new BadRequestException('No file uploaded');
     } else {
       for (let i of createProductInput.medias) {
-        if (!checkFileExists(i.path)) {
+        if (checkFileExists(i.path)) {
           throw new InternalServerErrorException(
-            'there was an error while uploading your files, verify the provided file',
+            "there was an error while uploading your files, it'is always exist",
           );
         }
       }

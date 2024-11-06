@@ -7,13 +7,15 @@ import { ProductRepositoryMongoDB } from './repositories/product.repository.mong
 import { ProductRepositoryPostgresql } from './repositories/product.repository.postgresql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from './models/products.entity';
-import { ProductsController } from './products.controller';
 import { ProductsCategoriesEntity } from './models/productCategories.entity';
 import { CategoriesEntity } from './models/categories.entity';
 import { CategoriesRepository } from './repositories/categories.repository';
 import { ProductsCategoriesRepository } from './repositories/productCategories.repository';
+import { AuthModule } from 'src/auth/auth.module';
+import { UserEntity } from 'src/auth/models/user.entity';
 @Module({
   imports: [
+    AuthModule,
     MongooseModule.forFeature([
       {
         name: ProductSchemaMongoDb.name,
@@ -25,6 +27,7 @@ import { ProductsCategoriesRepository } from './repositories/productCategories.r
       ProductEntity,
       CategoriesEntity,
       ProductsCategoriesEntity,
+      UserEntity,
     ]),
   ],
   providers: [
@@ -35,6 +38,5 @@ import { ProductsCategoriesRepository } from './repositories/productCategories.r
     CategoriesRepository,
     ProductsCategoriesRepository,
   ],
-  controllers: [ProductsController],
 })
 export class ProductsModule {}

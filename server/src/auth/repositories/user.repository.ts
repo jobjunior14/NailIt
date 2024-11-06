@@ -163,18 +163,18 @@ export class UserRepository extends Repository<UserEntity> {
           try {
             const dataInHasLink: HasLinksEntity[] =
               await this.hasLinksRepository.query(
-                'SELECT * FROM has_links WHERE user_id = $1 AND website_id = $2',
+                'SELECT * FROM has_links WHERE user_name_id = $1 AND website_id = $2',
                 [user_data.user_name_id, i.id],
               );
 
             if (dataInHasLink.length === 0) {
               await this.dataSource.query(
-                'INSERT INTO has_links (user_id, website_id, link) VALUES ($1, $2, $3)',
+                'INSERT INTO has_links (user_name_id, website_id, link) VALUES ($1, $2, $3)',
                 [user_data.user_name_id, i.id, i.link],
               );
             } else {
               await this.hasLinksRepository.query(
-                'UPDATE has_links SET link = $1 WHERE user_id = $2 AND website_id = $3',
+                'UPDATE has_links SET link = $1 WHERE user_name_id = $2 AND website_id = $3',
                 [i.link, user_data.user_name_id, i.id],
               );
             }
@@ -200,7 +200,6 @@ export class UserRepository extends Repository<UserEntity> {
         );
       }
 
-      console.log(error);
       throw new BadRequestException('Failed to update the user.');
     }
   }

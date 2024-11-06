@@ -1,10 +1,12 @@
+import { UserEntity } from 'src/auth/models/user.entity';
+
 type media = {
   type: string;
   path: string;
 };
 
 type comment = {
-  user_id: string;
+  user_name_id: string;
   comment: string;
   media: media;
 };

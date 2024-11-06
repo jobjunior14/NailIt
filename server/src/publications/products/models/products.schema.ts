@@ -23,7 +23,7 @@ export class ProductSchemaMongoDb extends Document {
   @Prop({ required: false })
   comments: [
     {
-      user_id: { type: string };
+      user_name_id: { type: string };
       comment: string;
       media: {
         path: string;

@@ -11,6 +11,7 @@ import {
   ManyToMany,
   JoinTable,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import * as crypto from 'crypto';
 import { HasLinksEntity } from './hasLink.entity';
@@ -109,7 +110,7 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 15, nullable: true })
   password_reset_expires: string | null;
 
-  @OneToMany(() => ProductEntity, (product) => product.users)
+  @OneToMany(() => ProductEntity, (product) => product.user_name_id)
   products: ProductEntity[];
 
   async changePasswordAfterIsued(JWTTimestamp: number): Promise<boolean> {

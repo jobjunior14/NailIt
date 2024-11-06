@@ -10,7 +10,7 @@ import {
 import { ProductEntity } from './products.entity';
 import { CategoriesEntity } from './categories.entity';
 @Entity('products_categories')
-@Unique(['product', 'category'])
+@Unique(['category_id', 'product_id'])
 export class ProductsCategoriesEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -20,7 +20,7 @@ export class ProductsCategoriesEntity extends BaseEntity {
     onUpdate: 'CASCADE',
   })
   @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
-  product: ProductEntity;
+  product_id: ProductEntity;
 
   @ManyToOne(
     () => CategoriesEntity,
@@ -31,5 +31,5 @@ export class ProductsCategoriesEntity extends BaseEntity {
     },
   )
   @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
-  category: CategoriesEntity;
+  category_id: CategoriesEntity;
 }

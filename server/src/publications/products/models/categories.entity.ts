@@ -19,7 +19,7 @@ export class CategoriesEntity extends BaseEntity {
 
   @OneToMany(
     () => ProductsCategoriesEntity,
-    (productsCategories) => productsCategories.category,
+    (productsCategories) => productsCategories.category_id,
   )
   productsCategories: ProductsCategoriesEntity[];
 }

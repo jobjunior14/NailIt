@@ -40,6 +40,6 @@ dotenv.config();
     HasLinksRepository,
     UserResolver,
   ],
-  exports: [JwtStrategy, PassportModule, JwtAuthGuard],
+  exports: [JwtStrategy, PassportModule, JwtAuthGuard, UserRepository],
 })
 export class AuthModule {}

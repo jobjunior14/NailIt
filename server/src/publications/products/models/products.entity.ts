@@ -41,12 +41,12 @@ export class ProductEntity extends BaseEntity {
   views: number;
 
   @ManyToOne(() => UserEntity, (users) => users.products)
-  @JoinColumn({ name: 'user_id' })
-  users: UserEntity[];
+  @JoinColumn({ name: 'user_name_id', referencedColumnName: 'user_name_id' })
+  user_name_id: UserEntity;
 
   @OneToMany(
     () => ProductsCategoriesEntity,
-    (productsCategoriesEntity) => productsCategoriesEntity.product,
+    (productsCategoriesEntity) => productsCategoriesEntity.product_id,
   )
   categories: ProductsCategoriesEntity[];
 }

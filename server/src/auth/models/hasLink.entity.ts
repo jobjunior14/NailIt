@@ -20,7 +20,7 @@ export class HasLinksEntity extends BaseEntity {
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'user_name_id' })
+  @JoinColumn({ name: 'user_name_id', referencedColumnName: 'user_name_id' })
   user: UserEntity;
 
   @ManyToOne(() => WebsiteEntity, (website) => website.links, {

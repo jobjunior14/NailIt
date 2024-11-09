@@ -39,7 +39,13 @@ $ npm install
 $ npm run start
 
 # watch mode
+
 $ npm run start:dev
+
+or
+
+$ nest start --watch
+
 
 # production mode
 $ npm run start:prod

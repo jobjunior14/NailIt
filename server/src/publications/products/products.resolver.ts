@@ -17,7 +17,7 @@ import { UpdateProductInput } from './graphql/product-update.graphql';
 export class ProductsResolver {
   constructor(private readonly productService: ProductsService) {}
 
-  //create a product
+  //create a product publication
   @Mutation(() => ProductSchemaGraphQl)
   async createProduct(
     @Args('createProductInput') createProductInput: CreateProductInput,
@@ -37,7 +37,7 @@ export class ProductsResolver {
     return this.productService.createProduct(createProductInput);
   }
 
-  //update the product
+  //update the product publication
   @Mutation(() => ProductSchemaGraphQl)
   async updateProduct(
     @Args('updateProductInput') updateProductInput: UpdateProductInput,

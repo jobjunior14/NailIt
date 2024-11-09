@@ -112,7 +112,7 @@ export class ProductsService {
         );
       }
 
-      //////////data in mongoDb////////////
+      //////////unstructured data in mongoDb////////////
       const productMongoDbData: createProductMongoDb = {
         product_id: newUserDataPostGresql.id,
         avantages: createProductInput.avantages,
@@ -128,12 +128,21 @@ export class ProductsService {
         created_at: newUserDataPostGresql.created_at,
       };
     } catch (error) {
+      //error from mongo DB duplicate files
+      console.log(error);
+      if (error?.status === 400) {
+        throw new BadRequestException(error?.response.message);
+      }
+
+      // for other errors
       for (let i of createProductInput.medias) {
         // if an error occured, deleting the created files
         deletingFile(i.path);
       }
+
       throw new InternalServerErrorException(
         'An error occured while creating your publication ',
+        error?.reponse?.message,
       );
     }
   }
@@ -161,9 +170,15 @@ export class ProductsService {
         return 'product details saved';
       }
     } catch (error) {
-      throw new InternalServerErrorException(
-        'An error occured while save the details of your products',
-      );
+      //if it a duplicated files
+      if (error?.code === 11000) {
+        throw new BadRequestException("You can't upload the same files twice");
+      }
+
+      //if an error occured while saved the details, we delete the created product in Postgresql
+      await this.productRepositoryPostgresql.deleteProduct(data.product_id);
+
+      throw new Error(error?.message);
     }
   }
 

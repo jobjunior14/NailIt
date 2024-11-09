@@ -4,6 +4,10 @@
 /build
 /src/uploads
 
+.png
+.jpg
+.mp4
+
 
 # Logs
 logs

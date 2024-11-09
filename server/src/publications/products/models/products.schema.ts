@@ -12,7 +12,10 @@ export class ProductSchemaMongoDb extends Document {
   @Prop({ default: '', required: false })
   detail: string;
 
-  @Prop({ required: [true, 'You must provide at least one media'] })
+  @Prop({
+    required: [true, 'You must provide at least one media'],
+    unique: true,
+  })
   medias: [
     {
       type: string;
@@ -23,7 +26,7 @@ export class ProductSchemaMongoDb extends Document {
   @Prop({ required: false })
   comments: [
     {
-      user_name_id: { type: string };
+      user_name_id: string;
       comment: string;
       media: {
         path: string;

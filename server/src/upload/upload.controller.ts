@@ -14,6 +14,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname, join } from 'path';
 import * as fs from 'fs';
+import { Kind } from './upload.kind.enum';
 
 @UseGuards(AuthGuard())
 @Controller('upload')
@@ -24,11 +25,18 @@ export class UploadController {
       storage: diskStorage({
         destination: async (req, file, callback) => {
           const username = req.params.username;
+          //////////////////////////////
+          /////////////////////////////
+          ///////////////////////////
+          //must define enum type of the req kind and request path/
+          ////////////////////////////////
+          // if (req.query.kind ===)
           const uploadPath = join(
             __dirname,
             '..',
             '..',
             'uploads',
+            // req.query.
             username,
             'publications',
             'products',

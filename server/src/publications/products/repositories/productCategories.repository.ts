@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductsCategoriesEntity } from '../models/productCategories.entity';
@@ -30,6 +30,10 @@ export class ProductsCategoriesRepository extends Repository<ProductsCategoriesE
       }
 
       return 'product with the belong categie created';
-    } catch (error) {}
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Oupps an error occured while creating a product',
+      );
+    }
   }
 }

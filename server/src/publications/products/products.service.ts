@@ -21,6 +21,7 @@ import { ProductSchemaMongoDb } from './models/products.schema';
 import { UpdateProductPostgreSqlType } from './type_interface/updateProduct-Postgresql.type';
 import { UpdateProductInput } from './graphql/product-update.graphql';
 import { UserRepository } from 'src/auth/repositories/user.repository';
+import { findDeletedElements } from '../../utils/findDeletedElements';
 
 @Injectable()
 export class ProductsService {
@@ -120,6 +121,8 @@ export class ProductsService {
         medias: createProductInput.medias,
       };
 
+      //if an error occured in this methode, the created product will be deleted too
+      // not for duplicated files
       await this.createProductsDataMongoDB(productMongoDbData);
 
       return {
@@ -129,7 +132,6 @@ export class ProductsService {
       };
     } catch (error) {
       //error from mongo DB duplicate files
-      console.log(error);
       if (error?.status === 400) {
         throw new BadRequestException(error?.response.message);
       }
@@ -172,6 +174,7 @@ export class ProductsService {
     } catch (error) {
       //if it a duplicated files
       if (error?.code === 11000) {
+        await this.productRepositoryPostgresql.deleteProduct(data.product_id);
         throw new BadRequestException("You can't upload the same files twice");
       }
 
@@ -184,7 +187,25 @@ export class ProductsService {
 
   async updateProductMongo(data: createProductMongoDb): Promise<string> {
     try {
-      const product = await this.productModel.findOneAndUpdate(
+      //verify deleted picture and added one
+      const product = await this.productModel.findOne({
+        product_id: data.product_id,
+      });
+
+      if (!product) {
+        throw new BadRequestException('This products does not exist');
+      }
+
+      ////// update element in the disk //////////
+      const deletedElemts = findDeletedElements(
+        product.medias.map((el) => el.path),
+        data.medias.map((el) => el.path),
+      );
+
+      //delete the old that no belong to the publication
+      deletedElemts.forEach((el) => deletingFile(el));
+
+      await this.productModel.findOneAndUpdate(
         { product_id: data.product_id },
         {
           medias: [...data.medias],
@@ -194,10 +215,6 @@ export class ProductsService {
         { new: false },
       );
 
-      if (!product) {
-        throw new BadRequestException('This products does not exist');
-      }
-
       return 'Data updated';
     } catch (error) {
       throw new InternalServerErrorException(
@@ -206,7 +223,6 @@ export class ProductsService {
     }
   }
 
-  //////////must update the update user files
   async updateProduct(
     updateProductInput: UpdateProductInput,
   ): Promise<ProductSchemaGraphQl> {

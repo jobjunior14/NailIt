@@ -33,6 +33,7 @@ export class UpdateProductInput {
   @Field(() => [String], { nullable: true })
   avantages?: String[];
 
+  //for now this cannot be updated
   @Field(() => [CreateCategorieInput], { nullable: true })
   categories?: CreateCategorieInput[];
 

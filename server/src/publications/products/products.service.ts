@@ -228,41 +228,6 @@ export class ProductsService {
   ): Promise<ProductSchemaGraphQl> {
     try {
       //save the category of the upd product
-      // if (updateProductInput.categories.length === 0 && updateProductInput.categories.length > 3) {
-      //   throw new BadRequestException(
-      //     'A product must belong to at least one category or must be inferior to 3',
-      //   );
-      // } else {
-      //   //check if website name exist or not and retrieve the id
-      //   for (let i = 0; i < updateProductInput.categories.length; i++) {
-      //     if (
-      //       updateProductInput.categories[i].name !== '' ||
-      //       updateProductInput.categories[i].name !== ' '
-      //     ) {
-      //       const existCategorie = await this.categoriesRepository.findOne({
-      //         where: { name: updateProductInput.categories[i].name },
-      //       });
-
-      //       if (existCategorie) {
-      //         updateProductInput.categories[i].id = existCategorie.id;
-      //       } else {
-      //         try {
-      //           const category = new CategoriesEntity();
-      //           category.name = updateProductInput.categories[i].name;
-
-      //           const newCategorie =
-      //             await this.categoriesRepository.save(category);
-
-      //           updateProductInput.categories[i].id = newCategorie.id;
-      //         } catch (error) {
-      //           throw new InternalServerErrorException(
-      //             'Ouups an error occured saving the selected category',
-      //           );
-      //         }
-      //       }
-      //     }
-      //   }
-      // }
 
       //data in postgresql
       const updateProductPostgreSql: UpdateProductPostgreSqlType = {
@@ -298,5 +263,19 @@ export class ProductsService {
         'An error occured while updating your publication ',
       );
     }
+  }
+
+  async deleteProduct(product_id: number): Promise<string> {
+    try {
+      await this.productRepositoryPostgresql.delete({ id: product_id });
+
+      const unstructuredData = await this.productModel.findOne({ product_id });
+
+      unstructuredData.medias.forEach((el) => deletingFile(el.path));
+
+      await this.productModel.deleteOne({ product_id });
+
+      return 'Product Deleted';
+    } catch (error) {}
   }
 }

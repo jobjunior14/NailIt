@@ -12,6 +12,7 @@ import {
 import { JwtAuthGuard } from 'src/auth/jwt.strategy';
 import { checkFileExists } from 'src/utils/checkFileExists';
 import { UpdateProductInput } from './graphql/product-update.graphql';
+import { DeleteProductInput } from './graphql/deleteProduct.graphql';
 @UseGuards(JwtAuthGuard)
 @Resolver()
 export class ProductsResolver {
@@ -47,5 +48,12 @@ export class ProductsResolver {
     }
 
     return this.productService.updateProduct(updateProductInput);
+  }
+
+  @Mutation(() => String)
+  async deleteProduct(
+    @Args('deleteProductInput') deleteProductInput: DeleteProductInput,
+  ): Promise<string> {
+    return this.productService.deleteProduct(deleteProductInput.product_id);
   }
 }

@@ -12,6 +12,8 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "components/FontLoader",
-    "declarations.d.ts"
+
+    "declarations.d.ts",
+    "nativewind-env.d.ts"
   ]
 }

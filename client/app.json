@@ -1,23 +1,19 @@
 {
   "expo": {
-    "name": "Nailit",
-    "slug": "Nailit",
+    "name": "client",
+    "slug": "client",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "Nailit",
+    "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/home.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/nailit.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -26,24 +22,18 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [ 
+    "plugins": [
       "expo-router",
       [
-        "expo-font",
+        "expo-splash-screen",
         {
-          "fonts": ["./assets/fonts/Inter-Black.ttf", 
-            "./assets/fonts/Inter-Bold.ttf",
-            "./assets/fonts/Inter-ExtraBold.ttf",
-            "./assets/fonts/Inter-ExtraLight.ttf",
-            "./assets/fonts/Inter-Light.ttf",
-            "./assets/fonts/Inter-Medium.ttf",
-            "./assets/fonts/Inter-Regular.ttf",
-            "./assets/fonts/Inter-SemiBold.ttf",
-            "./assets/fonts/Inter-Thin.ttf"
-
-          ]
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
         }
-      ]
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true

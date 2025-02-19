@@ -5,9 +5,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
   BaseEntity,
-  JoinTable,
   OneToMany,
   ManyToOne,
   JoinColumn,
@@ -39,6 +37,9 @@ export class ProductEntity extends BaseEntity {
 
   @Column({ type: 'int', default: 0 })
   views: number;
+
+  @Column({ type: 'boolean', default: true })
+  discutable: boolean;
 
   @ManyToOne(() => UserEntity, (users) => users.products)
   @JoinColumn({ name: 'user_name_id', referencedColumnName: 'user_name_id' })

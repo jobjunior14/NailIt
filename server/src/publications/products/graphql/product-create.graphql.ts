@@ -96,6 +96,9 @@ export class CreateProductInput {
 
   @Field(() => String)
   user_name_id: string;
+
+  @Field(() => Boolean, { defaultValue: true })
+  discutable: boolean;
 }
 
 @ObjectType()

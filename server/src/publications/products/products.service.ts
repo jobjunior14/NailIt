@@ -88,6 +88,7 @@ export class ProductsService {
         discount: createProductInput.discount,
         quantity: createProductInput.quantity,
         user_name_id: user,
+        discutable: createProductInput.discutable,
       };
 
       const userDataPostGresql = this.productRepositoryPostgresql.create(

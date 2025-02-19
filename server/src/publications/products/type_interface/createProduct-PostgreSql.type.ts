@@ -18,4 +18,6 @@ export type CreateProductPostgreSql = {
   views?: number;
 
   user_name_id: UserEntity;
+
+  discutable?: boolean;
 };

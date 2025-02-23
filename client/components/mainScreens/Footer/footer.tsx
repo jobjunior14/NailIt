@@ -23,7 +23,7 @@ import { rango } from "@/constants/image";
 import useHideNavigations from "@/hooks/useHideNavigations";
 
 type RootDrawerParamList = {
-  MessagingStack: { categorie: string | undefined };
+  Messages: { categorie: string | undefined };
   Service: { categorie: string | undefined };
 };
 const Footer = () => {
@@ -173,7 +173,7 @@ const Footer = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() =>
-              navigation.navigate("MessagingStack", { categorie: undefined })
+              navigation.navigate("Messages", { categorie: undefined })
             }
           >
             <MotiView

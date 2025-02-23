@@ -52,7 +52,7 @@ export const TimeSvg = (props: SvgProps) => (
     height={props.height || 24}
     fill={props.color || "#666"}
     stroke={props.stroke || "#666"}
-    strokeWidth={2}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -240,7 +240,7 @@ export const ChatBubbleSvg = (props: SvgProps) => (
     fill={props.color || "white"}
     viewBox="0 0 24 24"
     strokeWidth={1.5}
-    stroke="white"
+    stroke={props.stroke || "black"}
     {...props}
   >
     <Path
@@ -252,7 +252,15 @@ export const ChatBubbleSvg = (props: SvgProps) => (
 );
 
 export const ArrowUp = (props: SvgProps) => (
-  <Svg viewBox="0 0 20 20" fill="white" {...props} strokeWidth={3}>
+  <Svg
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "white"}
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={props.stroke || "black"}
+    {...props}
+  >
     <Path
       fillRule="evenodd"
       d="M10 17a.75.75 0 0 1-.75-.75V5.612L5.29 9.77a.75.75 0 0 1-1.08-1.04l5.25-5.5a.75.75 0 0 1 1.08 0l5.25 5.5a.75.75 0 1 1-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0 1 10 17Z"
@@ -281,10 +289,12 @@ export const ArrowUp1 = (props: SvgProps) => (
 
 export const SmileEmojiSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "white"}
     viewBox="0 0 24 24"
     strokeWidth={1.5}
-    stroke="white"
+    stroke={props.stroke || "black"}
     {...props}
   >
     <Path
@@ -296,7 +306,15 @@ export const SmileEmojiSvg = (props: SvgProps) => (
 );
 
 export const PaperPlanSvg = (props: SvgProps) => (
-  <Svg viewBox="0 0 24 24" fill="white" {...props}>
+  <Svg
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={2.5}
+    width={props.width || 24}
+    height={props.height || 24}
+    stroke="white"
+    {...props}
+  >
     <Path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z" />
   </Svg>
 );

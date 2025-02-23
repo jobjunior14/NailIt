@@ -8,6 +8,8 @@ import {
 import { useRef, useState, useEffect } from "react";
 import { ArrowUp } from "@/assets/svg/home/mySvg";
 import FontsLoader from "@/components/FontLoader/fontLoader";
+import { Colors } from "@/constants/Colors";
+import { MotiView } from "moti";
 interface ContentDetailsProps {
   maxHeight: number;
 }
@@ -46,6 +48,7 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
           justifyContent: "space-between",
           width: "100%",
           height: detailHeightAnim,
+          position: "absolute",
         }}
         className="flex-row pt-2 px-2 absolute  bottom-0  bg-transparentBlack"
       >
@@ -54,16 +57,14 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
           <ScrollView nestedScrollEnabled className="w-full h-full flex-col">
             {/* price and */}
             <View className="flex-row items-center w-[90%]">
-              <View className="flex-row items-end pb-0 gap-x-2">
-                <Text className="font-bold text-white text-[12px]l">
-                  9.99 $
-                </Text>
-                <Text className="font-light mb-[3px] text-white line-through">
+              <View className="flex-row items-center pb-0 gap-x-2">
+                <Text className="font-bold text-white text-[14px]">9.99 $</Text>
+                <Text className="font-light text-white text-[14px] line-through">
                   15.9$
                 </Text>
               </View>
 
-              <Text className="font-interRegular text-white text-[12px]s pl-4 text-ellipsis">
+              <Text className="font-interRegular text-white text-[12px] pl-4 text-ellipsis">
                 + livraison gratuite
               </Text>
             </View>
@@ -102,13 +103,24 @@ export default function ContentDetails({ maxHeight }: ContentDetailsProps) {
 
             !showDetails ? showDetailAnim() : hideDetailAnim();
           }}
-          className=" absolute right-4 h-6 w-6 rounded-full bg-white bottom-2 flex-row justify-center items-center"
+          className=" absolute right-4 h-6 w-6 rounded-full bg-white bottom-2"
         >
-          <ArrowUp
-            className={`${
-              showDetails ? "rotate-180" : ""
-            } text-mainBlack w-5 h-5`}
-          />
+          <View
+            className={`w-full h-full flex flex-row justify-center items-center  relative ${
+              showDetails ? "right-[8%]" : "left-[8%]"
+            } `}
+          >
+            <ArrowUp
+              width={20}
+              height={20}
+              color={Colors.light.mainBlack}
+              fill={Colors.light.mainBlack}
+              strokeWidth={0.5}
+              style={{
+                transform: [{ rotate: showDetails ? "180deg" : "0deg" }],
+              }}
+            />
+          </View>
         </TouchableOpacity>
       </Animated.View>
     </FontsLoader>

@@ -5,10 +5,10 @@ export default function useHideNavigations() {
     (state) => state?.routes[state.index]?.name ?? "Service"
   );
 
-  return currentRoute === "MessagingStack" ||
+  return currentRoute === "Messages" ||
     currentRoute === "inBox" ||
-    currentRoute === "MessagingStack" ||
-    currentRoute === "MySpaceStack" ||
+    currentRoute === "Messages" ||
+    currentRoute === "Messages" ||
     currentRoute === "Auth"
     ? true
     : false;

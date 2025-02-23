@@ -11,7 +11,6 @@ import {
   MicrophoneSvg,
 } from "@/assets/svg/home/mySvg";
 import { useState } from "react";
-import { Colors } from "@/constants/Colors";
 
 interface InputMessagePros {
   nameComponent: "inBox" | "daily";
@@ -20,8 +19,8 @@ export default function InputMessage({ nameComponent }: InputMessagePros) {
   const [text, setText] = useState<string>("");
 
   return (
-    <View className="w-full flex-row  justify-between ite mt-5">
-      <View className="w-[85%] min-h-8 max-h-24 relative flex-row">
+    <View className="w-full flex-row justify-between mt-5">
+      <View className="w-[85%] min-h-10 max-h-14 relative flex-row">
         <TextInput
           onChangeText={setText}
           multiline
@@ -47,7 +46,7 @@ export default function InputMessage({ nameComponent }: InputMessagePros) {
             <MicrophoneSvg className="w-5 h-5 text-white" />
           )
         ) : (
-          <PaperPlanSvg color={Colors.light.white} strokeWidth={1.2} />
+          <PaperPlanSvg className="w-5 h-5 text-white" />
         )}
       </TouchableOpacity>
     </View>

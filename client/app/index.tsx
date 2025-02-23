@@ -11,6 +11,7 @@ import Footer from "@/components/mainScreens/Footer/footer";
 import ServiceScreen from "@/components/mainScreens/sreens/services";
 import ProductScreen from "@/components/mainScreens/sreens/products";
 import DailyScreen from "@/components/mainScreens/sreens/daily";
+import MessagesScreen from "./messages";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -58,6 +59,12 @@ export default function Index() {
                 initialParams={{ user_name: "guest" }}
               />
             </Tab.Group>
+
+            <Tab.Screen
+              name="Messages"
+              component={MessagesScreen}
+              initialParams={{ user_name: "guest" }}
+            />
           </Tab.Navigator>
 
           <Footer />

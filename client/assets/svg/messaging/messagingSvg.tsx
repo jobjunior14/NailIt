@@ -2,10 +2,12 @@ import Svg, { Path, SvgProps } from "react-native-svg";
 
 export const ArrowLeftSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={2.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "#666"}
+    stroke={props.stroke || "#666"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path

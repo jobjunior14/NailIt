@@ -7,7 +7,7 @@ import TemporaryUpdates from "./temporaryUpdates/temporaryUpdates";
 import { MotiView } from "moti";
 import HomeMessageViewer from "./components/home/homeMessageViewer";
 
-const Messages: React.FC = () => {
+const AllMessages: React.FC = () => {
   return (
     <FontsLoader>
       <MotiView
@@ -36,4 +36,4 @@ const Messages: React.FC = () => {
   );
 };
 
-export default Messages;
+export default AllMessages;

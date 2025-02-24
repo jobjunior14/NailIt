@@ -17,17 +17,23 @@ export default function SearchBarMessaging() {
         <ArrowLeftSvg width={20} height={20} color={Colors.light.mainGray} />
       </TouchableOpacity>
 
-      <View className="w-[80%] items-center flex ">
+      <View className="w-[80%] flex ">
         <SearchSvg
           color={Colors.light.mainGray}
           width={25}
           height={25}
-          style={{ position: "absolute", zIndex: 50, opacity: 0.7, top: 3 }}
+          style={{
+            position: "absolute",
+            zIndex: 50,
+            opacity: 0.7,
+            top: 3,
+            right: 5,
+          }}
         />
         <TextInput
           keyboardType="web-search"
           placeholder="faites une recherche"
-          className="pl-3 h-[30px] font-interRegular w-full text-[14px]   outline-none  rounded-[10px] bg-secondGray appearance-none "
+          className="pl-3 pb-1 h-[30px]  font-interRegular w-full text-[14px]   outline-none  rounded-[10px] bg-secondGray appearance-none "
         />
       </View>
 

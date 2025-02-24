@@ -33,12 +33,12 @@ export default function Index() {
             initialRouteName="Service"
             backBehavior="history"
             screenOptions={{
-              swipeEnabled: false,
+              swipeEnabled: true,
               tabBarShowLabel: false,
               tabBarStyle: {
                 height: 0,
               },
-              animationEnabled: false,
+              animationEnabled: true,
             }}
           >
             <Tab.Group screenOptions={{ lazy: true, animationEnabled: true }}>

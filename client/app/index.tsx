@@ -11,7 +11,7 @@ import Footer from "@/components/mainScreens/Footer/footer";
 import ServiceScreen from "@/components/mainScreens/sreens/services";
 import ProductScreen from "@/components/mainScreens/sreens/products";
 import DailyScreen from "@/components/mainScreens/sreens/daily";
-import MessagesScreen from "./messages";
+import { MessagesScreen } from "./messages";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -41,7 +41,16 @@ export default function Index() {
               animationEnabled: true,
             }}
           >
-            <Tab.Group screenOptions={{ lazy: true, animationEnabled: true }}>
+            <Tab.Group
+              screenOptions={{
+                lazy: true,
+                tabBarStyle: {
+                  height: 0,
+                },
+                animationEnabled: true,
+                swipeEnabled: true,
+              }}
+            >
               <Tab.Screen
                 name="Service"
                 component={ServiceScreen}

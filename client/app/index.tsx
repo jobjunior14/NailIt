@@ -38,7 +38,7 @@ export default function Index() {
               tabBarStyle: {
                 height: 0,
               },
-              animationEnabled: true,
+              animationEnabled: false,
             }}
           >
             <Tab.Group
@@ -47,7 +47,7 @@ export default function Index() {
                 tabBarStyle: {
                   height: 0,
                 },
-                animationEnabled: true,
+                animationEnabled: false,
                 swipeEnabled: true,
               }}
             >

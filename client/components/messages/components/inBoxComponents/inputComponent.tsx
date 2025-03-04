@@ -43,10 +43,10 @@ export default function InputMessage({ nameComponent }: InputMessagePros) {
           nameComponent === "daily" ? (
             <InBoxSvg className="w-5 h-5 text-white" />
           ) : (
-            <MicrophoneSvg className="w-5 h-5 text-white" />
+            <MicrophoneSvg />
           )
         ) : (
-          <PaperPlanSvg className="w-5 h-5 text-white" />
+          <PaperPlanSvg strokeWidth={1} />
         )}
       </TouchableOpacity>
     </View>

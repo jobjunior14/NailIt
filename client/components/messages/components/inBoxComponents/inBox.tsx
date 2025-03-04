@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, View } from "react-native";
+import { SafeAreaView, ScrollView, View, Text } from "react-native";
 import InboxHeader from "./header";
 import Message from "./message";
 import PriceDiscussion from "./priceDiscussion";
@@ -8,13 +8,12 @@ import InputMessage from "./inputComponent";
 export default function Inbox() {
   return (
     <FontsLoader>
-      <SafeAreaView className=" px-3 w-full flex-1 pb-4 bg-white">
+      <SafeAreaView className="  w-full flex-1 pb-4 bg-white relative">
         {/* header  */}
         <InboxHeader />
 
         {/* //all messages  */}
-
-        <ScrollView
+        {/* <ScrollView
           bounces={true}
           stickyHeaderHiddenOnScroll={true}
           className="w-full mt-2 "
@@ -27,9 +26,11 @@ export default function Inbox() {
           <Message from_me={true} priceDiscussion={false} />
           <Message from_me={false} priceDiscussion={false} />
           <PriceDiscussion />
-        </ScrollView>
+        </ScrollView> */}
 
-        <InputMessage nameComponent="inBox" />
+        <View className="absolute bottom-4 px-3">
+          <InputMessage nameComponent="inBox" />
+        </View>
       </SafeAreaView>
     </FontsLoader>
   );

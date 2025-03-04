@@ -13,11 +13,12 @@ import {
 } from "@/assets/svg/messaging/messagingSvg";
 import { Ellips } from "@/assets/svg/home/mySvg";
 import { useNavigation } from "@react-navigation/native";
+import { Colors } from "@/constants/Colors";
 export default function InboxHeader() {
   const navigation = useNavigation();
 
   return (
-    <View className="w-full flex-row justify-between items-center">
+    <View className="w-full h-fit flex-row justify-between items-center">
       {/* picture and status  */}
       <View className="flex-row items-center w-[70%] ">
         {/* // arrow left  */}
@@ -29,7 +30,12 @@ export default function InboxHeader() {
             20
           )}
         >
-          <ArrowLeftSvg className="w-5 h-5 text-mainBlack mr-4" />
+          <ArrowLeftSvg
+            height={20}
+            width={20}
+            color={Colors.light.mainBlack}
+            style={{ marginRight: 16 }}
+          />
         </TouchableNativeFeedback>
         {/* image  */}
         <View className=" aspect-square">
@@ -46,15 +52,29 @@ export default function InboxHeader() {
       {/* transaction histories, call, more option  */}
       <View className="w-[30%] flex-row justify-between">
         <TouchableOpacity activeOpacity={0.5}>
-          <ArrowUpDownSvg className="w-6 h-6 text-mainBlack mr-4" />
+          <ArrowUpDownSvg
+            height={24}
+            width={24}
+            color={Colors.light.mainBlack}
+            style={{ marginRight: 16 }}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity activeOpacity={0.5}>
-          <PhoneSvg className="w-6 h-6 text-mainBlack mr-4" />
+          <PhoneSvg
+            width={24}
+            color={Colors.light.mainBlack}
+            style={{ marginRight: 16 }}
+          />
         </TouchableOpacity>
 
         <TouchableOpacity activeOpacity={0.5}>
-          <Ellips className="w-6 h-6 text-mainBlack mr-4" />
+          <Ellips
+            height={24}
+            width={24}
+            color={Colors.light.mainGray}
+            style={{ marginRight: 16 }}
+          />
         </TouchableOpacity>
       </View>
     </View>

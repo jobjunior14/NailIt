@@ -33,7 +33,7 @@ export default function SearchBarMessaging() {
         <TextInput
           keyboardType="web-search"
           placeholder="faites une recherche"
-          className="pl-3 pb-1 h-[30px]  font-interRegular w-full text-[14px]   outline-none  rounded-[10px] bg-secondGray appearance-none "
+          className="pl-3 pb-1 h-[30px]  font-interRegular w-full text-[14px]   outline-none  rounded-3xl bg-secondGray appearance-none "
         />
       </View>
 

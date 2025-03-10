@@ -8,15 +8,15 @@ import InputMessage from "./inputComponent";
 export default function Inbox() {
   return (
     <FontsLoader>
-      <SafeAreaView className="  w-full flex-1 pb-4 bg-white relative">
+      <SafeAreaView className="  w-full  flex-1 pb-4 bg-white relative">
         {/* header  */}
         <InboxHeader />
 
         {/* //all messages  */}
-        {/* <ScrollView
+        <ScrollView
           bounces={true}
           stickyHeaderHiddenOnScroll={true}
-          className="w-full mt-2 "
+          className="w-full mt-4 mb-24 px-3"
         >
           <Message from_me={false} priceDiscussion={false} />
           <Message from_me={true} priceDiscussion={false} />
@@ -26,9 +26,9 @@ export default function Inbox() {
           <Message from_me={true} priceDiscussion={false} />
           <Message from_me={false} priceDiscussion={false} />
           <PriceDiscussion />
-        </ScrollView> */}
+        </ScrollView>
 
-        <View className="absolute bottom-4 px-3">
+        <View className="absolute bottom-4 px-3 bg-white">
           <InputMessage nameComponent="inBox" />
         </View>
       </SafeAreaView>

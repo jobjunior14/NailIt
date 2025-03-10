@@ -34,7 +34,7 @@ export default function InboxHeader() {
             height={20}
             width={20}
             color={Colors.light.mainBlack}
-            style={{ marginRight: 16 }}
+            style={{ marginInline: 12 }}
           />
         </TouchableNativeFeedback>
         {/* image  */}

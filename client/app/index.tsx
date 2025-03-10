@@ -74,6 +74,12 @@ export default function Index() {
               component={MessagesScreen}
               initialParams={{ user_name: "guest" }}
             />
+
+            <Tab.Screen
+              name="Messages"
+              component={MessagesScreen}
+              initialParams={{ user_name: "guest" }}
+            />
           </Tab.Navigator>
 
           <Footer />

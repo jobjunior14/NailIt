@@ -36,10 +36,12 @@ export const ArrowUpDownSvg = (props: SvgProps) => (
 
 export const PhoneSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -68,10 +70,12 @@ export const ChevronDownAndUp = (props: SvgProps) => (
 
 export const ArrowLongRight = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path

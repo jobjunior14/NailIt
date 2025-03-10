@@ -14,6 +14,7 @@ import {
 } from "@/assets/svg/messaging/messagingSvg";
 import { MapPin } from "@/assets/svg/home/mySvg";
 import Message from "./message";
+import { Colors } from "@/constants/Colors";
 
 export default function PriceDiscussion() {
   const messageHeightAnim = useRef(new Animated.Value(70)).current;
@@ -72,9 +73,14 @@ export default function PriceDiscussion() {
                 }}
               >
                 <ChevronDownAndUp
-                  className={` w-5 h-5 text-mainBlack ${
-                    toggleAllMessage ? "rotate-180" : ""
-                  }`}
+                  width={20}
+                  height={20}
+                  color={Colors.light.mainBlack}
+                  style={{
+                    transform: [
+                      { rotate: toggleAllMessage ? "180deg" : "0deg" },
+                    ],
+                  }}
                 />
               </TouchableNativeFeedback>
             </View>
@@ -110,7 +116,13 @@ export default function PriceDiscussion() {
             className="w-full justify-center gap-x-2 items-center flex-row"
           >
             <Text className="font-interRegular">Transferer la facture</Text>
-            <ArrowLongRight className=" w-5 h-5 text-mainBlack" />
+            <ArrowLongRight
+              width={20}
+              height={20}
+              color={Colors.light.mainBlack}
+              stroke={Colors.light.mainBlack}
+              className=" w-5 h-5 text-mainBlack"
+            />
           </TouchableOpacity>
 
           {/* confirmation and advices before doing anything  */}
@@ -135,7 +147,13 @@ export default function PriceDiscussion() {
                 15
               )}
             >
-              <MapPin className=" w-5 h-5 text-mainBlack" />
+              <MapPin
+                height={20}
+                width={20}
+                color="none"
+                stroke={Colors.light.mainBlack}
+                className=" w-5 h-5 text-mainBlack"
+              />
             </TouchableNativeFeedback>
           </View>
         </View>

@@ -1,6 +1,6 @@
 // import { Stack } from "expo-router";
 import { View, Text, ScrollView } from "react-native";
-import BanqueSpace from "@/components/mySpace/banque/banqueSpace";
+import BanqueSpace from "@/components/mySpace/bank/banqueSpace";
 import Basket from "@/components/mySpace/basket/basket";
 import { ArrowLeftSvg } from "@/assets/svg/messaging/messagingSvg";
 import FontsLoader from "../FontLoader/fontLoader";
@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "@/constants/Colors";
 
-export default function MySpaceScreen() {
+export default function MySpaceView() {
   const navigation = useNavigation();
 
   return (

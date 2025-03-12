@@ -12,6 +12,7 @@ import ServiceScreen from "@/components/mainScreens/sreens/services";
 import ProductScreen from "@/components/mainScreens/sreens/products";
 import DailyScreen from "@/components/mainScreens/sreens/daily";
 import { MessagesScreen } from "./messages";
+import MySpaceScreen from "./mySpace";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -33,7 +34,7 @@ export default function Index() {
             initialRouteName="Service"
             backBehavior="history"
             screenOptions={{
-              swipeEnabled: true,
+              // swipeEnabled: true,
               tabBarShowLabel: false,
               tabBarStyle: {
                 height: 0,
@@ -41,6 +42,12 @@ export default function Index() {
               animationEnabled: false,
             }}
           >
+            <Tab.Screen
+              name="MySpace"
+              component={MySpaceScreen}
+              initialParams={{ user_name: "guest" }}
+            />
+
             <Tab.Group
               screenOptions={{
                 lazy: true,
@@ -68,12 +75,6 @@ export default function Index() {
                 initialParams={{ user_name: "guest" }}
               />
             </Tab.Group>
-
-            <Tab.Screen
-              name="Messages"
-              component={MessagesScreen}
-              initialParams={{ user_name: "guest" }}
-            />
 
             <Tab.Screen
               name="Messages"

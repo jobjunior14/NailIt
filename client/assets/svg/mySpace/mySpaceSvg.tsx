@@ -1,7 +1,15 @@
 import Svg, { Path, SvgProps } from "react-native-svg";
 
 export const BanqueNoteSvg = (props: SvgProps) => (
-  <Svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+  <Svg
+    viewBox="0 0 24 24"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
+    {...props}
+  >
     <Path d="M12 7.5a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
     <Path
       fillRule="evenodd"
@@ -13,7 +21,15 @@ export const BanqueNoteSvg = (props: SvgProps) => (
 );
 
 export const EyeSlahSvg = (props: SvgProps) => (
-  <Svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+  <Svg
+    viewBox="0 0 24 24"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
+    {...props}
+  >
     <Path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
     <Path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0 1 15.75 12ZM12.53 15.713l-4.243-4.244a3.75 3.75 0 0 0 4.244 4.243Z" />
     <Path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 0 0-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 0 1 6.75 12Z" />
@@ -21,7 +37,15 @@ export const EyeSlahSvg = (props: SvgProps) => (
 );
 
 export const QRCodeSvg = (props: SvgProps) => (
-  <Svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+  <Svg
+    viewBox="0 0 24 24"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
+    {...props}
+  >
     <Path
       fillRule="evenodd"
       d="M3 4.875C3 3.839 3.84 3 4.875 3h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5A1.875 1.875 0 0 1 3 9.375v-4.5ZM4.875 4.5a.375.375 0 0 0-.375.375v4.5c0 .207.168.375.375.375h4.5a.375.375 0 0 0 .375-.375v-4.5a.375.375 0 0 0-.375-.375h-4.5Zm7.875.375c0-1.036.84-1.875 1.875-1.875h4.5C20.16 3 21 3.84 21 4.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5a1.875 1.875 0 0 1-1.875-1.875v-4.5Zm1.875-.375a.375.375 0 0 0-.375.375v4.5c0 .207.168.375.375.375h4.5a.375.375 0 0 0 .375-.375v-4.5a.375.375 0 0 0-.375-.375h-4.5ZM6 6.75A.75.75 0 0 1 6.75 6h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75A.75.75 0 0 1 6 7.5v-.75Zm9.75 0A.75.75 0 0 1 16.5 6h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75ZM3 14.625c0-1.036.84-1.875 1.875-1.875h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.035-.84 1.875-1.875 1.875h-4.5A1.875 1.875 0 0 1 3 19.125v-4.5Zm1.875-.375a.375.375 0 0 0-.375.375v4.5c0 .207.168.375.375.375h4.5a.375.375 0 0 0 .375-.375v-4.5a.375.375 0 0 0-.375-.375h-4.5Zm7.875-.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm6 0a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75ZM6 16.5a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm9.75 0a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm-3 3a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Zm6 0a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-.75.75h-.75a.75.75 0 0 1-.75-.75v-.75Z"
@@ -32,10 +56,12 @@ export const QRCodeSvg = (props: SvgProps) => (
 
 export const ArrowPathSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -48,10 +74,12 @@ export const ArrowPathSvg = (props: SvgProps) => (
 
 export const ArrowUpInSquareSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -64,10 +92,12 @@ export const ArrowUpInSquareSvg = (props: SvgProps) => (
 
 export const ArrowDownInSquareSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -80,10 +110,12 @@ export const ArrowDownInSquareSvg = (props: SvgProps) => (
 
 export const EllipsHorizontalSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -96,10 +128,12 @@ export const EllipsHorizontalSvg = (props: SvgProps) => (
 
 export const AdjustmentHorizontalSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -112,10 +146,12 @@ export const AdjustmentHorizontalSvg = (props: SvgProps) => (
 
 export const ChevroLeftSvg = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -128,10 +164,12 @@ export const ChevroLeftSvg = (props: SvgProps) => (
 
 export const ArrowTrendingDown = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "none"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path
@@ -144,10 +182,12 @@ export const ArrowTrendingDown = (props: SvgProps) => (
 
 export const ArrowTrendingUp = (props: SvgProps) => (
   <Svg
-    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
+    width={props.width || 24}
+    height={props.height || 24}
+    fill={props.color || "currentColor"}
+    stroke={props.stroke || "none"}
+    strokeWidth={props.strokeWidth || 2}
     {...props}
   >
     <Path

@@ -1,7 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationIndependentTree } from "@react-navigation/native";
-import { View, SafeAreaView } from "react-native";
 import Inbox from "@/components/messages/components/inBoxComponents/inBox";
 import AllMessages from "@/components/messages/allMessages";
 

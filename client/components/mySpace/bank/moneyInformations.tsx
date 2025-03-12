@@ -12,7 +12,7 @@ import {
   EllipsHorizontalSvg,
 } from "@/assets/svg/mySpace/mySpaceSvg";
 
-export default function BanqueInformation() {
+export default function MoneyInformation() {
   return (
     <FontsLoader>
       <View className="flex-col bg-banqueSpaceBg rounded-lg">
@@ -23,7 +23,11 @@ export default function BanqueInformation() {
         <View className="w-full flex-row justify-between items-center mt-8 px-3 py-2">
           {/* balance  */}
           <View className=" flex-row justify-start gap-x-2">
-            <BanqueNoteSvg className="w-6 h-6 text-mainGray" />
+            <BanqueNoteSvg
+              width={24}
+              height={24}
+              className="w-6 h-6 text-mainGray"
+            />
 
             <View className="flex-col items-start justify-start">
               <Text className=" font-interRegular">Balance:</Text>

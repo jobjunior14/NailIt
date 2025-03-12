@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import BanqueInformation from "./banqueInformation";
+import MoneyInformation from "./moneyInformations";
 export default function BanqueSpace() {
   return (
     <View
@@ -11,7 +11,7 @@ export default function BanqueSpace() {
       }}
       className="w-full h-fit  bg-banqueSpaceBg rounded-lg "
     >
-      <BanqueInformation />
+      <MoneyInformation />
     </View>
   );
 }

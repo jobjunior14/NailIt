@@ -9,6 +9,7 @@ export default function useHideNavigations() {
     currentRoute === "inBox" ||
     currentRoute === "Messages" ||
     currentRoute === "Messages" ||
+    currentRoute === "MySpace" ||
     currentRoute === "Auth"
     ? true
     : false;

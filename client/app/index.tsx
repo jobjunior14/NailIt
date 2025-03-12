@@ -34,7 +34,7 @@ export default function Index() {
             initialRouteName="Service"
             backBehavior="history"
             screenOptions={{
-              // swipeEnabled: true,
+              swipeEnabled: false,
               tabBarShowLabel: false,
               tabBarStyle: {
                 height: 0,
@@ -55,7 +55,7 @@ export default function Index() {
                   height: 0,
                 },
                 animationEnabled: false,
-                swipeEnabled: true,
+                swipeEnabled: false,
               }}
             >
               <Tab.Screen

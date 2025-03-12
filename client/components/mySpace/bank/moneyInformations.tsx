@@ -11,6 +11,7 @@ import {
   ArrowDownInSquareSvg,
   EllipsHorizontalSvg,
 } from "@/assets/svg/mySpace/mySpaceSvg";
+import { Colors } from "@/constants/Colors";
 
 export default function MoneyInformation() {
   return (
@@ -26,7 +27,7 @@ export default function MoneyInformation() {
             <BanqueNoteSvg
               width={24}
               height={24}
-              className="w-6 h-6 text-mainGray"
+              fill={Colors.light.mainGray}
             />
 
             <View className="flex-col items-start justify-start">
@@ -34,14 +35,18 @@ export default function MoneyInformation() {
               <View className="flex-row items-center gap-x-4">
                 <Text className="font-black text-[20px]">22.5 $</Text>
                 <TouchableOpacity activeOpacity={0.6}>
-                  <EyeSlahSvg className="w-5 h-5 text-textGray" />
+                  <EyeSlahSvg
+                    width={20}
+                    height={20}
+                    fill={Colors.light.textGray}
+                  />
                 </TouchableOpacity>
               </View>
             </View>
           </View>
 
           <TouchableOpacity activeOpacity={0.7}>
-            <QRCodeSvg className=" w-9 h-9 text-mainBlack" />
+            <QRCodeSvg height={36} width={36} fill={Colors.light.mainBlack} />
           </TouchableOpacity>
         </View>
 
@@ -58,8 +63,14 @@ export default function MoneyInformation() {
             accessibilityLabel="Transférer"
             className="flex-col items-center justify-center"
           >
-            <View className="w-8 h-8 bg-mainBlack rounded-full flex justify-center items-center">
-              <ArrowPathSvg className=" text-white w-6 h-6" />
+            <View className="w-10 h-10 bg-mainBlack rounded-full flex justify-center items-center">
+              <ArrowPathSvg
+                height={24}
+                width={24}
+                fill={"none"}
+                stroke={Colors.light.white}
+                strokeWidth={1.5}
+              />
             </View>
 
             <Text className=" text-[12px] font-interRegular text-mainBlack">
@@ -71,8 +82,14 @@ export default function MoneyInformation() {
             activeOpacity={0.7}
             className="flex-col items-center justify-center"
           >
-            <View className="w-8 h-8 bg-mainBlack rounded-full flex justify-center items-center">
-              <ArrowUpInSquareSvg className=" text-white w-6 h-6" />
+            <View className="w-10 h-10 bg-mainBlack rounded-full flex justify-center items-center">
+              <ArrowUpInSquareSvg
+                height={24}
+                width={24}
+                fill={"none"}
+                stroke={Colors.light.white}
+                strokeWidth={1.5}
+              />
             </View>
 
             <Text className=" text-[12px] font-interRegular text-mainBlack">
@@ -84,8 +101,14 @@ export default function MoneyInformation() {
             activeOpacity={0.7}
             className="flex-col items-center justify-center"
           >
-            <View className="w-8 h-8 bg-mainBlack rounded-full flex justify-center items-center">
-              <ArrowDownInSquareSvg className=" text-white w-6 h-6" />
+            <View className="w-10 h-10 bg-mainBlack rounded-full flex justify-center items-center">
+              <ArrowDownInSquareSvg
+                height={24}
+                width={24}
+                fill={"none"}
+                stroke={Colors.light.white}
+                strokeWidth={1.5}
+              />
             </View>
 
             <Text className=" text-[12px] font-interRegular text-mainBlack">
@@ -97,8 +120,14 @@ export default function MoneyInformation() {
             activeOpacity={0.7}
             className="flex-col items-center justify-center"
           >
-            <View className="w-8 h-8 bg-mainBlack rounded-full flex justify-center items-center">
-              <EllipsHorizontalSvg className=" text-white w-6 h-6" />
+            <View className="w-10 h-10 bg-mainBlack rounded-full flex justify-center items-center">
+              <EllipsHorizontalSvg
+                height={24}
+                width={24}
+                fill={"none"}
+                stroke={Colors.light.white}
+                strokeWidth={1.5}
+              />
             </View>
 
             <Text className=" text-[12px] font-interRegular text-mainBlack">

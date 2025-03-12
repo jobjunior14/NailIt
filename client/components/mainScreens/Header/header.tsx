@@ -6,7 +6,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer";
 import useHideNavigations from "@/hooks/useHideNavigations";
 
 type RootDrawerParamList = {
-  MySpaceStack: { categorie: string | undefined };
+  MySpace: { categorie: string | undefined };
 };
 
 export default function Headers() {
@@ -27,7 +27,7 @@ export default function Headers() {
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() =>
-            navigation.navigate("MySpaceStack", { categorie: undefined })
+            navigation.navigate("MySpace", { categorie: undefined })
           }
           className="relative w-[10%]"
         >

@@ -20,7 +20,7 @@ import {
   InBoxSvg,
   ChatBubbleSvg,
 } from "@/assets/svg/home/mySvg";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 interface ContentDisplayProps {
@@ -43,8 +43,8 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const player = useRef<any>(null);
 
-  const navigation =
-    useNavigation<DrawerNavigationProp<RouteNavigationProps>>();
+  // const navigation =
+  //   useNavigation<DrawerNavigationProp<RouteNavigationProps>>();
 
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;
@@ -142,7 +142,7 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
             <TouchableOpacity
               activeOpacity={0.8}
               className=" flex-row bg-mainBlack rounded-lg gap-x-1"
-              onPress={() => navigation.navigate("Auth", { name: undefined })}
+              // onPress={() => navigation.navigate("Auth", { name: undefined })}
             >
               {/* add in basket btn  */}
               <View className="flex-row gap-x-[4px] items-center px-3 py-[6px]">

@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from "react-native";
-import Publication from "../components/publication";
+import Publication from "../../components/mainScreens/components/publication";
 interface categorieProps {
   route: object;
 }

@@ -4,15 +4,16 @@ import { useNavigation } from "@react-navigation/native";
 import { BellSvg, MySpaceSvg, SearchSvg } from "@/assets/svg/home/mySvg";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import useHideNavigations from "@/hooks/useHideNavigations";
+import { Link, router } from "expo-router";
 
 type RootDrawerParamList = {
-  MySpace: { categorie: string | undefined };
+  mySpace: { categorie: string | undefined };
 };
 
 export default function Headers() {
   const currentRoute = useHideNavigations();
 
-  const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
+  // const navigation = useNavigation<DrawerNavigationProp<RootDrawerParamList>>();
 
   return (
     <FontsLoader>
@@ -24,10 +25,13 @@ export default function Headers() {
         } flex-row justify-between items-center px-6 bg-white flex h-auto `}
       >
         {/* my space  */}
+        {/* <Link push href="../mySpace"> */}
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() =>
-            navigation.navigate("MySpace", { categorie: undefined })
+            // navigation.navigate("mySpace", { categorie: undefined })
+
+            router.push("/mySpace")
           }
           className="relative w-[10%]"
         >
@@ -40,6 +44,7 @@ export default function Headers() {
             </View>
           </View>
         </TouchableOpacity>
+        {/* </Link> */}
 
         {/* search bar  */}
         <View className="w-[75%] h-8 relative pb-0">

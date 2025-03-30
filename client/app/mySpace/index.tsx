@@ -1,21 +1,21 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationIndependentTree } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  NavigationIndependentTree,
+} from "@react-navigation/native";
 import MySpaceView from "@/components/mySpace/mySpace";
+import { SafeAreaView } from "react-native";
 
 const Stack = createStackNavigator();
 
-export const MySpaceStack = () => {
+export default function Index() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="MySpaceScreen" component={MySpaceView} />
-    </Stack.Navigator>
-  );
-};
-
-export default function MySpaceScreen() {
-  return (
-    <NavigationIndependentTree>
-      <MySpaceStack />
-    </NavigationIndependentTree>
+    <NavigationContainer>
+      <SafeAreaView>
+        <Stack.Navigator initialRouteName="MySpace">
+          <Stack.Screen name="MySpace" component={MySpaceView} />
+        </Stack.Navigator>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }

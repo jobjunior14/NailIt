@@ -11,7 +11,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "components/FontLoader",
+    "components/fontLoader",
 
     "declarations.d.ts",
     "nativewind-env.d.ts"

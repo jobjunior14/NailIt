@@ -1,6 +1,6 @@
 import { View, ScrollView } from "react-native";
-import ProfilPresentationDaily from "../components/mainScreens/components/daily/profilPresentationDaily";
-import DailyPlublication from "../components/mainScreens/components/daily/publication";
+import ProfilPresentationDaily from "../../components/screens/home/daily/profilPresentationDaily";
+import DailyPlublication from "../../components/screens/home/daily/publication";
 import { useState } from "react";
 interface categorieProps {
   route: object;

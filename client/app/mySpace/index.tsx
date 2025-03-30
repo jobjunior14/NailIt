@@ -3,7 +3,7 @@ import {
   NavigationContainer,
   NavigationIndependentTree,
 } from "@react-navigation/native";
-import MySpaceView from "@/components/mySpace/mySpace";
+import MySpaceView from "@/components/screens/mySpace/mySpace";
 import { SafeAreaView } from "react-native";
 
 const Stack = createStackNavigator();

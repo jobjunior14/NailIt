@@ -2,7 +2,6 @@ import { View, Image, Text, Pressable, TouchableOpacity } from "react-native";
 import { rango } from "@/constants/image";
 import { Star, World, Plus } from "@/assets/svg/home/mySvg";
 import { useState, useEffect } from "react";
-// import FontsLoader from "@/components/FontLoader/fontLoader";
 
 interface ProfilPresentationPorps {
   screen: "service" | "product" | "daily";
@@ -17,7 +16,6 @@ export default function ProfilPresentation({
     setLinkBtn((prev: boolean) => !prev);
   };
   return (
-    // <FontsLoader>
     <View className={"flex-row justify-between items-center w-full mx-2 mt-2"}>
       {/* profil and publication info */}
       <View className="flex-row justify-start items-center w-[75%] gap-x-2 ">
@@ -117,6 +115,5 @@ export default function ProfilPresentation({
         </View>
       )}
     </View>
-    // </FontsLoader>
   );
 }

@@ -29,7 +29,7 @@ export default function Inbox() {
         </ScrollView>
 
         <View className="absolute bottom-4 px-3 bg-white">
-          <InputMessage nameComponent="inBox" />
+          <InputMessage componentName="inBox" />
         </View>
       </SafeAreaView>
     </FontsLoader>

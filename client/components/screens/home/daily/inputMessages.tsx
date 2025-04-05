@@ -14,9 +14,9 @@ import { useState } from "react";
 import { Colors } from "@/constants/Colors";
 
 interface InputMessagePros {
-  nameComponent: "inBox" | "daily";
+  componentName: "inBox" | "daily";
 }
-export default function InputMessage({ nameComponent }: InputMessagePros) {
+export default function InputMessage({ componentName }: InputMessagePros) {
   const [text, setText] = useState<string>("");
 
   return (
@@ -41,7 +41,7 @@ export default function InputMessage({ nameComponent }: InputMessagePros) {
         className="h-10 w-10 bg-mainBlack rounded-full flex justify-center items-center"
       >
         {text === "" ? (
-          nameComponent === "daily" ? (
+          componentName === "daily" ? (
             <InBoxSvg className="w-5 h-5 text-white" />
           ) : (
             <MicrophoneSvg className="w-5 h-5 text-white" />

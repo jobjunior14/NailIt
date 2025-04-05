@@ -21,7 +21,6 @@ import {
   ChatBubbleSvg,
 } from "@/assets/svg/home/mySvg";
 // import { useNavigation } from "@react-navigation/native";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
 
 interface ContentDisplayProps {
   screen: "product" | "service";
@@ -42,9 +41,6 @@ export default function ContentDisplay({ screen }: ContentDisplayProps) {
   const screenWidth: number = Dimensions.get("window").width;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const player = useRef<any>(null);
-
-  // const navigation =
-  //   useNavigation<DrawerNavigationProp<RouteNavigationProps>>();
 
   const handleScroll = (event: any) => {
     const contentOffsetX = event.nativeEvent.contentOffset.x;

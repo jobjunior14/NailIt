@@ -20,9 +20,9 @@ export default function Publication({ screen }: PublicationProps) {
   const handleSeeMore = () => setSeeMore((prev) => !prev);
 
   return (
-    <View className="w-full flex-col gap-y-4 mt-4">
-      <ProfilPresentation screen={screen} />
-      <FontsLoader>
+    <FontsLoader>
+      <View className="w-full flex-col gap-y-4 mt-4">
+        <ProfilPresentation screen={screen} />
         <View className="flex-col justify-center mx-2 mt-8">
           <View className="flex-row justify-between mb-2 items-center">
             <View className="flex-row items-center w-[90%]">
@@ -87,7 +87,7 @@ export default function Publication({ screen }: PublicationProps) {
           <ContentDisplay screen={screen} />
           <View className="w-full h-[0.4px] bg-textGray mt-4" />
         </View>
-      </FontsLoader>
-    </View>
+      </View>
+    </FontsLoader>
   );
 }

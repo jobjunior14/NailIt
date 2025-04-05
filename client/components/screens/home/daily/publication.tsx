@@ -13,15 +13,10 @@ import {
 } from "react-native";
 import { man1, man2, man3 } from "@/constants/image";
 import { video } from "@/constants/video";
-import { useVideoPlayer, VideoView } from "expo-video";
+import { VideoView } from "expo-video";
 import ProgressBar from "./progressBar";
 
-import {
-  MapPin,
-  InBoxSvg,
-  SmileEmojiSvg,
-  PaperPlanSvg,
-} from "@/assets/svg/home/mySvg";
+import { MapPin } from "@/assets/svg/home/mySvg";
 import FontsLoader from "@/components/fontLoader/fontLoader";
 import ContentDetails from "./contentDetails";
 import InputMessage from "./inputMessages";
@@ -105,7 +100,7 @@ export default function DailyPlublication() {
           </View>
 
           {/* //input message  */}
-          <InputMessage nameComponent="daily" />
+          <InputMessage componentName="daily" />
         </View>
       </View>
     </FontsLoader>
